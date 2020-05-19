@@ -1,0 +1,36 @@
+yii gii/crud --modelClass=app\modules\post\models\Post --searchModelClass=app\modules\post\models\search\PostSearch --controllerClass=app\modules\post\controllers\AdminController --viewPath=@app/modules/post/views/admin --enableI18N=1 --enablePjax=1  --indexWidgetType=grid --messageCategory=rabint --overwrite=1 --template=rabintBackendCrud
+ya
+y
+yii gii/crud --modelClass=app\modules\post\models\Category --searchModelClass=app\modules\post\models\search\CategorySearch --controllerClass=app\modules\post\controllers\AdminCategoryController --viewPath=@app/modules/post/views/admin-category --enableI18N=1 --enablePjax=1  --indexWidgetType=grid --messageCategory=rabint --overwrite=1 --template=rabintBackendCrud
+ya
+y
+yii gii/crud --modelClass=app\modules\post\models\Comment --searchModelClass=app\modules\post\models\search\CommentSearch --controllerClass=app\modules\post\controllers\AdminCommentController --viewPath=@app/modules/post/views/admin-comment --enableI18N=1 --enablePjax=1  --indexWidgetType=grid --messageCategory=rabint --overwrite=1 --template=rabintBackendCrud
+ya
+y
+yii gii/crud --modelClass=app\modules\post\models\Group --searchModelClass=app\modules\post\models\search\GroupSearch --controllerClass=app\modules\post\controllers\AdminGroupController --viewPath=@app/modules/post/views/admin-group --enableI18N=1 --enablePjax=1  --indexWidgetType=grid --messageCategory=rabint --overwrite=1 --template=rabintBackendCrud
+ya
+y
+yii gii/crud --modelClass=app\modules\post\models\Poll --searchModelClass=app\modules\post\models\search\PollSearch --controllerClass=app\modules\post\controllers\AdminPollController --viewPath=@app/modules/post/views/admin-poll --enableI18N=1 --enablePjax=1  --indexWidgetType=grid --messageCategory=rabint --overwrite=1 --template=rabintBackendCrud
+ya
+y
+yii gii/crud --modelClass=app\modules\post\models\PollTemplate --searchModelClass=app\modules\post\models\search\PollTemplateSearch --controllerClass=app\modules\post\controllers\AdminPollTemplateController --viewPath=@app/modules/post/views/admin-poll-template --enableI18N=1 --enablePjax=1  --indexWidgetType=grid --messageCategory=rabint --overwrite=1 --template=rabintBackendCrud
+ya
+y
+yii gii/crud --modelClass=app\modules\post\models\Tag --searchModelClass=app\modules\post\models\search\TagSearch --controllerClass=app\modules\post\controllers\AdminTagController --viewPath=@app/modules/post/views/admin-tag --enableI18N=1 --enablePjax=1  --indexWidgetType=grid --messageCategory=rabint --overwrite=1 --template=rabintBackendCrud
+ya
+y
+
+yii gii/crud --modelClass=app\modules\post\models\Category --searchModelClass=app\modules\post\models\search\CategorySearch --controllerClass=app\modules\post\controllers\CategoryController --viewPath=@app/modules/post/views/category --enableI18N=1 --enablePjax=1  --indexWidgetType=list --messageCategory=rabint --overwrite=1 --template=rabintFrontendCrud
+ya
+y
+yii gii/crud --modelClass=app\modules\post\models\Post --searchModelClass=app\modules\post\models\search\PostSearch --controllerClass=app\modules\post\controllers\DefaultController --viewPath=@app/modules/post/views/default --enableI18N=1 --enablePjax=1  --indexWidgetType=list --messageCategory=rabint --overwrite=1 --template=rabintFrontendCrud
+ya
+y
+yii gii/crud --modelClass=app\modules\post\models\Group --searchModelClass=app\modules\post\models\search\GroupSearch --controllerClass=app\modules\post\controllers\GroupController --viewPath=@app/modules/post/views/group --enableI18N=1 --enablePjax=1  --indexWidgetType=list --messageCategory=rabint --overwrite=1 --template=rabintFrontendCrud
+ya
+y
+yii gii/crud --modelClass=app\modules\post\models\Tag --searchModelClass=app\modules\post\models\search\TagSearch --controllerClass=app\modules\post\controllers\TagController --viewPath=@app/modules/post/views/tag --enableI18N=1 --enablePjax=1  --indexWidgetType=list --messageCategory=rabint --overwrite=1 --template=rabintFrontendCrud
+ya
+y
+
+

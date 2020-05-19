@@ -1,0 +1,21 @@
+@font-face {
+  font-family: 'naskh';
+  font-style: normal;
+  font-weight: 400;
+  src: url('DroidNaskh-Regular.eot');
+  src: url('DroidNaskh-Regular.eot?#iefix') format('embedded-opentype'),
+       url('DroidNaskh-Regular.woff2') format('x-woff2'),
+       url('DroidNaskh-Regular.woff') format('woff'),
+       url('DroidNaskh-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'naskh';
+  font-style: bold;
+  font-weight: 700;
+  src: url('DroidNaskh-Bold.eot');
+  src: url('DroidNaskh-Bold.eot?#iefix') format('embedded-opentype'),
+       url('DroidNaskh-Bold.woff2') format('x-woff2'),
+       url('DroidNaskh-Bold.woff') format('woff'),
+       url('DroidNaskh-Bold.ttf') format('truetype');
+}

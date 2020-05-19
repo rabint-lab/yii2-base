@@ -1,0 +1,7 @@
+@font-face {
+  font-family: 'kharazmi';
+  font-weight:normal;
+  src: url('IRANKharazmi.eot') format('eot'),
+       url('IRANKharazmi.ttf') format('truetype'),
+       url('IRANKharazmi.woff') format('woff');
+}

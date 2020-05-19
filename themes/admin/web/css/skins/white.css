@@ -1,0 +1,20 @@
+
+.navbar-inverse {
+    background-color: #eee !important;
+    border-color: #00497E !important;
+}
+.navbar-inverse .navbar-brand {
+    color: #00497e;
+}
+.navbar-inverse .navbar-brand:hover, .navbar-inverse .navbar-brand:focus {
+    color: #00497E;
+    background-color: transparent;
+}
+.navbar-inverse .navbar-nav > li > a {
+    color: #00497E;
+}
+
+.navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
+    color: #fff;
+    background-color: #00497E;
+}

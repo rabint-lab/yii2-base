@@ -1,0 +1,47 @@
+@charset 'utf8';
+
+.a_conversetion .conversetion_body {
+    background: #eee;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    min-height: 200px;
+}
+.a_conversetion.myConversation .conversetion_body {
+    background: #D7F8A3;
+}
+
+.conversetion_detail .cnv_author img {
+    width: 100%;
+}
+.conversetion_detail {
+    height: 190px;
+    margin-bottom: 10px;
+}
+.conversetion_detail .author_name {
+    clear: both;
+    text-align: center;
+    display: block;
+    margin-top: 7px;
+}
+.conversetion_detail .sent_date {
+    clear: both;
+    text-align: center;
+    display: block;
+    margin-top: 5px;
+    /* font-size: 12px; */
+    font-style: italic;
+    font-family: yekan;
+    color: rgb(140, 140, 140);
+}
+
+.NotReadConversetionSep {
+    height: 35px;
+    background: #CACACA;
+    margin-bottom: 25px;
+    border-radius: 10px;
+    text-align: center;
+    color: #fff;
+    line-height: 35px;
+    font-style: italic;
+}

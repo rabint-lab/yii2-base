@@ -1,0 +1,10 @@
+@font-face{
+    font-family:'yekanlite';
+    src:url('yekanLite.woff');
+    src:url('yekanLite.eot?#iefix') format("embedded-opentype"),
+    url('yekanLite.woff') format("woff"),
+    url('yekanLite.ttf') format("truetype"),
+    url('yekanLite.svg#BYekan') format("svg");
+    font-weight:normal;
+    font-style:normal
+}

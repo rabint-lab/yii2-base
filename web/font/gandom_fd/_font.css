@@ -1,0 +1,8 @@
+@font-face {
+  font-family: gandom_fd;
+  src: url('Gandom-FD.eot');
+  src: url('Gandom-FD.eot?#iefix') format('embedded-opentype'),
+       url('Gandom-FD.woff') format('woff'),
+       url('Gandom-FD.ttf') format('truetype');
+  font-weight: normal;
+}

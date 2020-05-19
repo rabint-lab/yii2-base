@@ -1,0 +1,14 @@
+==  rbac-migrate ===============================================================
+$ php yii rbac-migrate
+$ php yii rbac-migrate/down
+
+==  message/extract ============================================================
+$ php yii message/extract ../config/messages/rabint.php
+
+==  migrate ====================================================================
+$ php yii migrate --migrationPath=../vendor/sahifedp/impost/migrations
+$ php yii migrate --migrationPath=@vendor/rkit/filemanager-yii2/src/migrations/ --interactive=0
+    
+==  GII  =======================================================================
+$ php yii gii/crud --modelClass=app\modules\post\models\Post --searchModelClass=app\modules\post\models\search\PostSearch --controllerClass=app\modules\post\controllers\AdminController --viewPath=@app/modules/post/views/admin --enableI18N=1 --enablePjax=1  --indexWidgetType=grid --messageCategory=rabint --overwrite=1 --template=rabintBackendCrud
+

@@ -1,0 +1,33 @@
+{
+    "name": "rabint/base",
+    "type": "library",
+    "description": "",
+    "license": "rabint",
+    "require": {
+        "yiisoft/yii2-bootstrap": "~2.0.0",
+        "trntv/yii2-command-bus": "^3.0",
+        "guzzlehttp/guzzle": "^6.0",
+        "yiisoft/yii2-redis": "^2.0",
+        "kartik-v/yii2-widget-select2": "@dev",
+        "psr/http-message": "^1.0",
+        "geniusts/hijri-dates": "^1.1",
+        "yiisoft/yii2-bootstrap4": "^2.0",
+        "npm-asset/font-awesome": "^5.7",
+        "npm-asset/leaflet": "^1.4",
+        "npm-asset/chart.js": "^2.7",
+        "kartik-v/yii2-bootstrap4-dropdown": "@dev",
+        "bower-asset/bootstrap-rtl": "^3.0",
+        "bower-asset/video.js": "*",
+        "kartik-v/yii2-grid": "*",
+        "emojione/emojione": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "rabint\\": ""
+        }
+    },
+    "type": "yii2-extension",
+    "extra": {
+        "bootstrap": "rabint\\Bootstrap"
+    }
+}

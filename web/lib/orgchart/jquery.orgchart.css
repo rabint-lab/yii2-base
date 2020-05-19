@@ -1,0 +1,307 @@
+div.orgChart {
+    margin: 10px;
+    padding: 20px;
+    direction: ltr;
+}
+
+div.orgChart h2 {
+    margin: 0px;
+    font-size: 16px;
+    font-weight: normal;
+    min-height: 20px;
+}
+
+div.orgChart h2:hover {
+    background: #fcfaca;
+    cursor: text;
+}
+
+div.orgChart ul {
+    list-style: none;
+    margin: 4px;
+    padding: 0px;
+    font-size: 0.8em;
+    text-align: left;
+}
+
+div.orgChart ul.stack,
+div.orgChart ul.stack ul {
+    text-align: center;
+}
+
+div.orgChart table {
+    width: 100%;
+    direction: ltr;
+    table-layout: fixed;
+    border-collapse: inherit;
+}
+
+div.orgChart tr.lines td.line {
+    width: 1px;
+    height: 20px;
+}
+
+div.orgChart tr.lines td.top {
+    border-top: 1px dashed black;
+}
+
+div.orgChart tr.lines td.left {
+    border-right: 1px dashed black;
+}
+
+div.orgChart tr.lines td.right {
+    border-left: 0px dashed black;
+}
+
+div.orgChart tr.lines td.half {
+    width: 50%;
+}
+
+div.orgChart td {
+    text-align: center;
+    vertical-align: top;
+    padding: 0px 2px;
+}
+
+div.orgChart div.node {
+    cursor: default;
+    border: 1px solid #e7e7e7;
+    display: inline-block;
+    padding: 5px;
+    width: 96px;
+    height: 60px;
+    background: #ffffff;
+    /* Old browsers */
+    background: -moz-linear-gradient(top, #ffffff 0%, #fbfbfb 100%);
+    /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ffffff), color-stop(100%, #fbfbfb));
+    /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #ffffff 0%, #fbfbfb 100%);
+    /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #ffffff 0%, #fbfbfb 100%);
+    /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #ffffff 0%, #fbfbfb 100%);
+    /* IE10+ */
+    background: linear-gradient(to bottom, #ffffff 0%, #fbfbfb 100%);
+    /* W3C */
+    line-height: 1.3em;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    position: relative;
+    box-shadow: 1px 1px 0px #ddd;
+}
+
+.org-add-button,
+.org-del-button,
+.org-confirm-del-button {
+    position: absolute;
+    font-size: 12px;
+}
+
+.org-add-button {
+    bottom: -18px;
+    left: 50%;
+    margin-left: -9px;
+    padding: 0 5px 0 8px;
+    background: #fff url(./add.png) no-repeat center center;
+    border-radius: 100%;
+}
+
+.org-add-button:hover,
+.org-del-button:hover {
+    background-color: #eef;
+    border-radius: 100%;
+    cursor: pointer;
+}
+
+.org-del-button {
+    background: #fff url(./delete.png) no-repeat;
+    width: 12px;
+    height: 12px;
+    top: -5px;
+    left: -5px;
+    border-radius: 100%;
+}
+
+.org-input {
+    width: 100%;
+    height: 20px;
+}
+
+.org-confirm-del-button {
+    display: none;
+}
+
+div.orgChart div.node {
+    direction: rtl;
+    text-align: center;
+    width: 150px;
+    height: 93px;
+}
+
+div.orgChart h2 {
+    font-size: 14px;
+}
+
+div.orgChart table tbody tr:first-child td .org-del-button {
+    display: none;
+}
+
+div.orgChart table table tbody tr:first-child td .org-del-button {
+    display: inherit;
+}
+
+.saveNode {
+    cursor: pointer;
+    color: #0f0;
+    margin-top: 2px;
+}
+
+div.orgChart div.node.onEdit {
+    box-shadow: 0px 0px 3px 4px #b7b7b7;
+    z-index: 1000;
+}
+
+.node.name_error {
+    background: #ffc4c4 !important;
+}
+
+.node.type_error {
+    background: #f2dba4 !important;
+}
+
+.node.type_error2 {
+    background: #da9964 !important;
+}
+
+.node.type_error3 {
+    background: #F7CE31 !important;
+}
+
+.node.type_error4 {
+    background: #ECE912 !important;
+}
+
+.errorLists {
+    list-style: none;
+}
+
+.errorLists .err_sample {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+}
+
+.errorLists li {
+    padding: 4px;
+}
+
+.errorLists .err_title {
+    display: inline-block;
+    line-height: 20px;
+    vertical-align: middle;
+    padding: 0 10px;
+}
+
+#orgChartContainer {
+    position: relative;
+}
+
+#orgChartLevel {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1001;
+}
+
+#orgChartLevel .formContainer {
+    width: 0;
+    overflow: hidden;
+    float: right;
+    transition: .5s ease all;
+    background: #fafafa;
+    box-shadow: -14px 5px 7px -2px #ccc;
+    height: 97.7% !important;
+}
+
+#orgChartLevel .formContainer.active {
+    width: 300px;
+}
+
+#orgChartLevel .boxOpenClose {
+    float: right;
+    width: 20px;
+    height: 97.7%;
+    background: #eee;
+    cursor: pointer;
+    border-radius: 30px 0 0 30px;
+    box-shadow: -5px 4px 4px -3px #ccc;
+}
+
+
+#orgChartLevel.has-error .boxOpenClose {
+    background: #ff5a58;
+}
+
+#orgChartLevel .boxOpenClose .iconContainer {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+}
+
+.a_level_form {
+    padding: 7px 10px;
+    border-bottom: 1px dashed;
+    height: 133px;
+    width: 100%;
+
+}
+/*.a_level_form:nth-child(2n) {*/
+/*    background: #f1f1f1;*/
+/*}*/
+
+
+.an_elemnt {
+    width: 48%;
+    float: right;
+    padding: 1%;
+    height: 60px;
+}
+
+.an_elemnt label {
+    font-size: 11px;
+    margin: 0;
+}
+
+.an_elemnt input, .an_elemnt select {
+    padding: 0 !important;
+    height: 25px;
+}
+
+
+.an_elemnt input[type="checkbox"] {
+    padding: 0 !important;
+    height: 20px;
+    vertical-align: bottom;
+    margin-top: 20px;
+}
+
+.a_level_form:last-child {
+    border: none;
+}
+
+#orgChart {
+    margin: 0;
+    padding: 20px;
+    direction: ltr;
+    min-width: 100%;
+}
+
+#orgChartBox {
+    position: relative;
+    overflow-x: auto;
+    margin-right: 20px;
+}

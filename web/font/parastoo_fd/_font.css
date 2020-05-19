@@ -1,0 +1,17 @@
+@font-face {
+    font-family: parastoo_fd;
+    src: url('Parastoo-FD.eot');
+    src: url('Parastoo-FD.eot?#iefix') format('embedded-opentype'),
+    url('Parastoo-FD.woff') format('woff'),
+    url('Parastoo-FD.ttf') format('truetype');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: parastoo_fd;
+    src: url('Parastoo-Bold-FD.eot');
+    src: url('Parastoo-Bold-FD.eot?#iefix') format('embedded-opentype'),
+    url('Parastoo-Bold-FD.woff') format('woff'),
+    url('Parastoo-Bold-FD.ttf') format('truetype');
+    font-weight: bold;
+}

@@ -1,0 +1,16 @@
+@font-face {
+  font-family: 'iran';
+  font-weight:normal;
+  src: url('IRANSharp.eot') format('eot'),
+       url('IRANSharp.ttf') format('truetype'),
+	   url('IRANSharp.woff') format('woff'),
+	   url('IRANSharp.svg') format('svg');
+}
+@font-face {
+  font-family: 'iran';
+  font-weight: bold;
+  src: url('IRANBold.eot') format('eot'),
+       url('IRANBold.ttf') format('truetype'),
+	   url('IRANBold.woff') format('woff'),
+	   url('IRANBold.svg') format('svg');
+}

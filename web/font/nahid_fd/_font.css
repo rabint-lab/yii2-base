@@ -1,0 +1,8 @@
+@font-face {
+  font-family: nahid_fd;
+  src: url('Nahid-FD.eot');
+  src: url('Nahid-FD.eot?#iefix') format('embedded-opentype'),
+       url('Nahid-FD.woff') format('woff'),
+       url('Nahid-FD.ttf') format('truetype');
+  font-weight: normal;
+}

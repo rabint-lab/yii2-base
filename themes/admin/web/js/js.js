@@ -1,0 +1,1 @@
+console.log('assets js in theme basic successful');
