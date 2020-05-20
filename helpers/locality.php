@@ -85,7 +85,7 @@ class locality
                 $deff_time = $dtz->getOffset($time_obj);
                 $timestamp += $deff_time;
             } elseif (is_numeric($timezone)) {
-                $timestamp += (int) $timezone;
+                $timestamp += (int)$timezone;
             } elseif (is_string($timezone)) {
                 $dtz = new DateTimeZone($timezone);
                 $time_obj = new DateTime('now', $dtz);
@@ -129,7 +129,7 @@ class locality
             $deff_time = $dtz->getOffset($time_obj);
             $timestamp += $deff_time;
         } elseif (is_numeric($timezone)) {
-            $timestamp += (int) $timezone;
+            $timestamp += (int)$timezone;
         } elseif (is_string($timezone)) {
             $dtz = new DateTimeZone($timezone);
             $time_obj = new DateTime('now', $dtz);
@@ -161,15 +161,15 @@ class locality
 
         while ($i < $lenghFormat) {
             $par = $format{
-                $i};
+            $i};
             if ($par == '\\') {
                 $result .= $format{
-                    ++$i};
+                ++$i};
                 $i++;
                 continue;
             }
             switch ($par) {
-                    # Day
+                # Day
                 case 'd':
                     $result .= (($pDay < 10) ? ('0' . $pDay) : $pDay);
                     break;
@@ -202,12 +202,12 @@ class locality
                     $result .= 'ام';
                     break;
 
-                    # Week
+                # Week
                 case 'W':
                     $result .= ceil(self::jdayOfYear($pMonth, $pDay) / 7);
                     break;
 
-                    # Month
+                # Month
                 case 'F':
                     $result .= self::$jalali_month_name[$pMonth];
                     break;
@@ -228,9 +228,9 @@ class locality
                     $result .= self::jdayOfMonth($pYear, $pMonth);
                     break;
 
-                    # Years
+                # Years
                 case 'L':
-                    $result .= (int) self::isKabise($pYear);
+                    $result .= (int)self::isKabise($pYear);
                     break;
 
                 case 'Y':
@@ -242,7 +242,7 @@ class locality
                     $result .= substr($pYear, 2);
                     break;
 
-                    # Time
+                # Time
                 case 'a':
                 case 'A':
                     if (date('a', $timestamp) == 'am') {
@@ -270,21 +270,21 @@ class locality
                     $result .= date($par, $timestamp);
                     break;
 
-                    # Full Date/Time
+                # Full Date/Time
                 case 'c':
                     $result .= ($pYear . '-' . $pMonth . '-' . $pDay . ' ' . date('H:i:s P', $timestamp));
                     break;
 
                 case 'r':
                     $result .= (substr(
-                        self::$jalali_week_name[$pWeek],
-                        0,
-                        2
-                    ) . '، ' . $pDay . ' ' . substr(
-                        self::$jalali_month_name[$pMonth],
-                        0,
-                        6
-                    ) . ' ' . $pYear . ' ' . date('H::i:s P', $timestamp));
+                            self::$jalali_week_name[$pWeek],
+                            0,
+                            2
+                        ) . '، ' . $pDay . ' ' . substr(
+                            self::$jalali_month_name[$pMonth],
+                            0,
+                            6
+                        ) . ' ' . $pYear . ' ' . date('H::i:s P', $timestamp));
                     break;
 
                 case 'U':
@@ -334,12 +334,12 @@ class locality
 
         while ($i < $lenghFormat) {
             $par = $format{
-                $i};
+            $i};
             if ($par == '%') {
                 $type = $format{
-                    ++$i};
+                ++$i};
                 switch ($type) {
-                        # Day
+                    # Day
                     case 'a':
                         $result .= substr(self::$jalali_week_name[$pWeek], 0, 2);
                         break;
@@ -369,7 +369,7 @@ class locality
                         $result .= $pWeek;
                         break;
 
-                        # Week
+                    # Week
                     case 'U':
                         $result .= floor(self::jdayOfYear($pMonth, $pDay) / 7);
                         break;
@@ -379,7 +379,7 @@ class locality
                         $result .= ceil(self::jdayOfYear($pMonth, $pDay) / 7);
                         break;
 
-                        # Month
+                    # Month
                     case 'b':
                     case 'h':
                         $result .= substr(self::$jalali_month_name[$pMonth], 0, 6);
@@ -393,7 +393,7 @@ class locality
                         $result .= (($pMonth < 10) ? '0' . $pMonth : $pMonth);
                         break;
 
-                        # Year
+                    # Year
                     case 'C':
                         $result .= ceil($pYear / 100);
                         break;
@@ -408,7 +408,7 @@ class locality
                         $result .= $pYear;
                         break;
 
-                        # Time
+                    # Time
                     case 'H':
                     case 'I':
                     case 'l':
@@ -438,25 +438,25 @@ class locality
                         }
                         break;
 
-                        # Time and Date Stamps
+                    # Time and Date Stamps
                     case 'c':
                         $result .= (substr(
-                            self::$jalali_week_name[$pWeek],
-                            0,
-                            2
-                        ) . ' ' . substr(
-                            self::$jalali_month_name[$pMonth],
-                            0,
-                            6
-                        ) . ' ' . $pDay . ' ' . strftime("%T", $timestamp) . ' ' . $pYear);
+                                self::$jalali_week_name[$pWeek],
+                                0,
+                                2
+                            ) . ' ' . substr(
+                                self::$jalali_month_name[$pMonth],
+                                0,
+                                6
+                            ) . ' ' . $pDay . ' ' . strftime("%T", $timestamp) . ' ' . $pYear);
                         break;
 
                     case 'D':
                     case 'x':
                         $result .= ((($pMonth < 10) ? '0' . $pMonth : $pMonth) . '-' . (($pDay < 10) ? '0' . $pDay : $pDay) . '-' . substr(
-                            $pYear,
-                            2
-                        ));
+                                $pYear,
+                                2
+                            ));
                         break;
 
                     case 'F':
@@ -467,7 +467,7 @@ class locality
                         $result .= $timestamp;
                         break;
 
-                        # Miscellaneous
+                    # Miscellaneous
                     case 'n':
                         $result .= "\n";
                         break;
@@ -684,7 +684,7 @@ class locality
      */
     public static function intDiv($a, $b)
     {
-        return (int) ($a / $b);
+        return (int)($a / $b);
     }
 
     /* =================================================================== */
@@ -740,7 +740,7 @@ class locality
         if (self::isKabise($year) && ($month == 12)) {
             return 30;
         }
-        $month = (int) $month;
+        $month = (int)$month;
         return self::$jalali_month_days[$month - 1];
     }
 
@@ -754,7 +754,7 @@ class locality
      */
     public static function monthName($month)
     {
-        $month = (int) $month;
+        $month = (int)$month;
         return self::$jalali_month_name[$month];
     }
 
@@ -883,11 +883,11 @@ class locality
     }
 
     /**
-     * @deprecated
      * @param $source
      * @param string $date_divider
      * @param string $time_sep
      * @return string
+     * @deprecated
      */
     public static function formatedToGregorian($source, $date_divider = '/', $time_sep = ' ')
     {
@@ -918,11 +918,11 @@ class locality
     }
 
     /**
-     * @deprecated
      * @param $source
      * @param string $date_divider
      * @param string $time_sep
      * @return string
+     * @deprecated
      */
     public static function formatedToJalali($source, $date_divider = '/', $time_sep = ' ')
     {
@@ -941,9 +941,9 @@ class locality
     }
 
     /**
-     * @deprecated
      * @param $str
      * @return mixed
+     * @deprecated
      */
     public static function enNumber($str)
     {
@@ -957,9 +957,9 @@ class locality
     }
 
     /**
-     * @deprecated
      * @param $str
      * @return mixed
+     * @deprecated
      */
     public static function faNumber($str)
     {
@@ -1041,6 +1041,7 @@ class locality
         $lang = \Yii::$app->language;
         return str_replace("_", $sep, $lang);
     }
+
     public static function baseLang($lang = null)
     {
         if (empty($lang))
@@ -1050,10 +1051,10 @@ class locality
 
 
     /**
-     * @author mojtaba akbarzadeh <akbarzadeh.mojtaba@gmail.com>
      * @param type $source
      * @param string $targetFormat
      * @return void
+     * @author mojtaba akbarzadeh <akbarzadeh.mojtaba@gmail.com>
      */
     public static function anyToGregorian($source, $targetFormat = "Y-m-d H:i:s")
     {
@@ -1067,10 +1068,10 @@ class locality
     }
 
     /**
-     * @author mojtaba akbarzadeh <akbarzadeh.mojtaba@gmail.com>
      * @param type $source
      * @param string $targetFormat
      * @return void
+     * @author mojtaba akbarzadeh <akbarzadeh.mojtaba@gmail.com>
      */
     public static function anyToTimeStamp($source)
     {
@@ -1085,10 +1086,10 @@ class locality
 
 
     /**
-     * @author mojtaba akbarzadeh <akbarzadeh.mojtaba@gmail.com>
      * @param type $source
      * @param string $targetFormat
      * @return void
+     * @author mojtaba akbarzadeh <akbarzadeh.mojtaba@gmail.com>
      */
     public static function anyToJalali($source, $targetFormat = "Y-m-d H:i:s")
     {
@@ -1098,18 +1099,18 @@ class locality
             return static::formattedToJalali($source, $targetFormat);
         } else {
             $greg = static::formattedToGregorian($source, $targetFormat);
-            return  static::convertToEnglish(self::jdate($targetFormat, strtotime($greg)));
+            return static::convertToEnglish(self::jdate($targetFormat, strtotime($greg)));
         }
     }
 
 
     /**
-     * @author mojtaba akbarzadeh <akbarzadeh.mojtaba@gmail.com>
      * @param type $source
      * @param string $date_divider
      * @param string $time_sep
      * @param string $targetFormat
      * @return string
+     * @author mojtaba akbarzadeh <akbarzadeh.mojtaba@gmail.com>
      */
     public static function formattedToGregorian($source, $targetFormat = "Y-m-d H:i:s")
     {
@@ -1137,16 +1138,16 @@ class locality
     }
 
     /**
-     * @author mojtaba akbarzadeh <akbarzadeh.mojtaba@gmail.com>
      * @param type $source
      * @param string $targetFormat
      * @return type
+     * @author mojtaba akbarzadeh <akbarzadeh.mojtaba@gmail.com>
      */
     public static function formattedToJalali($source, $targetFormat = "Y-m-d H:i:s")
     {
-        $source =  static::convertToEnglish($source);
+        $source = static::convertToEnglish($source);
         $source = trim($source);
-        return  static::convertToEnglish(self::jdate($targetFormat, strtotime($source)));
+        return static::convertToEnglish(self::jdate($targetFormat, strtotime($source)));
     }
 
     /**
@@ -1168,9 +1169,9 @@ class locality
 
     /**
      * use elapsedTime instead
-     * @deprecated
      * @param $seconds
      * @return string
+     * @deprecated
      */
     public static function secToTime($seconds)
     {
@@ -1181,6 +1182,24 @@ class locality
             return sprintf('%02d:%02d', ($t / 60 % 60), $t % 60) . ' ' . \Yii::t('rabint', 'دقیقه');
         } else {
             return $t . ' ' . \Yii::t('rabint', 'ثانیه');
+        }
+    }
+
+    /**
+     * use elapsedTime instead
+     * @param $seconds
+     * @return string
+     * @deprecated
+     */
+    public static function secToTimeNoPref($seconds)
+    {
+        $t = round($seconds);
+        if ($t >= 3600) {
+            return sprintf('%02d:%02d:%02d', ($t / 3600), ($t / 60 % 60), $t % 60);
+        } elseif ($t >= 60) {
+            return sprintf('%02d:%02d', ($t / 60 % 60), $t % 60);
+        } else {
+            return $t;
         }
     }
 

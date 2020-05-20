@@ -2,7 +2,8 @@
 
 namespace rabint\services\sms\webservice;
 
-class websmsIR extends \rabint\classes\sms\ServiceAbstract {
+class websmsIR extends \rabint\services\sms\ServiceAbstract
+{
 
     protected static $wsdl_link = "http://s1.websms.ir/webservice/index.php?wsdl";
     public static $tariff = "http://spadsms.ir/";
@@ -11,7 +12,8 @@ class websmsIR extends \rabint\classes\sms\ServiceAbstract {
     public static $username;
     public static $password;
 
-    public function send($to, $message, $sender = null) {
+    public function send($to, $message, $sender = null)
+    {
         ini_set('soap.wsdl_cache_enabled', 0);
         ini_set('soap.wsdl_cache_ttl', 0);
         // Check credit for the gateway
@@ -27,11 +29,13 @@ class websmsIR extends \rabint\classes\sms\ServiceAbstract {
         return FALSE;
     }
 
-    public function sendBulk($to, $message, $sender = null) {
+    public function sendBulk($to, $message, $sender = null)
+    {
         return FALSE;
     }
 
-    public function getCredit() {
+    public function getCredit()
+    {
         ini_set('soap.wsdl_cache_enabled', 0);
         ini_set('soap.wsdl_cache_ttl', 0);
         $client = new \SoapClient(self::$wsdl_link);

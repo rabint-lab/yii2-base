@@ -9,13 +9,15 @@ use rabint\classes\sms\ServiceAbstract;
  * Author: Mojtaba Akbarzadeh
  * Author Email: akbarzadeh.mojtaba@gmail.com
  */
-class sms extends BaseObject{
+class sms extends BaseObject
+{
 
     /**
-     * 
+     *
      * @return ServiceAbstract
      */
-    static function getService() {
+    static function getService()
+    {
         $smsConf = config("SERVICE.sms", NULL);
         if ($smsConf == null) {
             return FALSE;
@@ -28,10 +30,11 @@ class sms extends BaseObject{
     }
 
     /**
-     * 
+     *
      * @return \rabint\rabint\classes\sms\webservice\kavenegar
      */
-    static function send($to, $message) {
+    static function send($to, $message)
+    {
         $service = static::getService();
 //        var_dump($service);
 //        die('---');
@@ -44,10 +47,29 @@ class sms extends BaseObject{
     }
 
     /**
-     * 
+     *
      * @return \rabint\rabint\classes\sms\webservice\kavenegar
      */
-    static function sendBulk($to, $message) {
+    static function sendVerify($to, $token)
+    {
+        $service = static::getService();
+//        var_dump($service);
+//        die('---');
+        try {
+            return $service->sendVerifySms($to, $token);
+        } catch (\Exception $ex) {
+//            var_dump($ex);
+            return FALSE;
+        }
+    }
+
+
+    /**
+     *
+     * @return \rabint\rabint\classes\sms\webservice\kavenegar
+     */
+    static function sendBulk($to, $message)
+    {
         $service = static::getService();
         try {
             return $service->sendBulk($to, $message, $sender = '');
@@ -56,7 +78,8 @@ class sms extends BaseObject{
         }
     }
 
-    static function sendStrong($to, $params) {
+    static function sendStrong($to, $params)
+    {
         return static::send($to, $message);
 //        try {
 //            $json = file_get_contents('https://api.kavenegar.com/v1//verify/lookup.json?'
@@ -70,7 +93,8 @@ class sms extends BaseObject{
 //        }
     }
 
-    static function credit() {
+    static function credit()
+    {
         $service = static::getService();
         return $service->getCredit($to, $sender = '', $message);
     }

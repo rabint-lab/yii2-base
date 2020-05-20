@@ -2,16 +2,16 @@
 
 namespace rabint\services\sms\webservice;
 
-/**
- */
-class kavenegar extends \rabint\classes\sms\ServiceAbstract {
+class kavenegar extends \rabint\services\sms\ServiceAbstract
+{
 
     protected $apiKey;
     protected $debug;
 
     const APIPATH = "http://api.kavenegar.com/v1/%s/%s/%s.json/";
 
-    public function __construct($apiKey, $debug = false) {
+    public function __construct($apiKey, $debug = false)
+    {
         if (!extension_loaded('curl')) {
             die('cURL library is not loaded');
             exit;
@@ -24,11 +24,13 @@ class kavenegar extends \rabint\classes\sms\ServiceAbstract {
         $this->debug = $debug;
     }
 
-    private function get_path($method, $base = 'sms') {
+    private function get_path($method, $base = 'sms')
+    {
         return sprintf(self::APIPATH, $this->apiKey, $base, $method);
     }
 
-    private function execute($url, $data = null) {
+    private function execute($url, $data = null)
+    {
 
         $headers = array(
             'Accept: application/json',
@@ -82,7 +84,7 @@ class kavenegar extends \rabint\classes\sms\ServiceAbstract {
     }
 
     /**
-     * 
+     *
      * @param type $receptor
      * @param type $sender
      * @param type $message
@@ -91,7 +93,8 @@ class kavenegar extends \rabint\classes\sms\ServiceAbstract {
      * @param type $localid
      * @return type
      */
-    public function Send($receptor, $sender, $message, $date = null, $type = null, $localid = null) {
+    public function Send($receptor, $sender, $message, $date = null, $type = null, $localid = null)
+    {
         if (is_array($receptor)) {
             $receptor = implode(",", $receptor);
         }
@@ -110,15 +113,16 @@ class kavenegar extends \rabint\classes\sms\ServiceAbstract {
         return $this->execute($path, $params);
     }
 
-    public function SendArray($receptor, $sender, $message, $date = null, $type = null, $localmessageid = null) {
+    public function SendArray($receptor, $sender, $message, $date = null, $type = null, $localmessageid = null)
+    {
         if (!is_array($receptor)) {
-            $receptor = (array) $receptor;
+            $receptor = (array)$receptor;
         }
         if (!is_array($sender)) {
-            $sender = (array) $sender;
+            $sender = (array)$sender;
         }
         if (!is_array($message)) {
-            $message = (array) $message;
+            $message = (array)$message;
         }
         $repeat = count($receptor);
         if (!is_null($type) && !is_array($type)) {
@@ -139,7 +143,8 @@ class kavenegar extends \rabint\classes\sms\ServiceAbstract {
         return $this->execute($path, $params);
     }
 
-    public function Status($messageid) {
+    public function Status($messageid)
+    {
         $path = $this->get_path("status");
         $params = array(
             "messageid" => is_array($messageid) ? implode(",", $messageid) : $messageid
@@ -147,7 +152,8 @@ class kavenegar extends \rabint\classes\sms\ServiceAbstract {
         return $this->execute($path, $params);
     }
 
-    public function StatusLocalMessageid($localid) {
+    public function StatusLocalMessageid($localid)
+    {
         $path = $this->get_path("statuslocalmessageid");
         $params = array(
             "localid" => is_array($localid) ? implode(",", $localid) : $localid
@@ -155,7 +161,8 @@ class kavenegar extends \rabint\classes\sms\ServiceAbstract {
         return $this->execute($path, $params);
     }
 
-    public function Select($messageId) {
+    public function Select($messageId)
+    {
         $params = array(
             "messageid" => is_array($messageid) ? implode(",", $messageid) : $messageid
         );
@@ -163,7 +170,8 @@ class kavenegar extends \rabint\classes\sms\ServiceAbstract {
         return $this->execute($path, $params);
     }
 
-    public function SelectOutbox($startdate, $enddate, $sender) {
+    public function SelectOutbox($startdate, $enddate, $sender)
+    {
         $path = $this->get_path("selectoutbox");
         $params = array(
             "startdate" => $startdate,
@@ -173,7 +181,8 @@ class kavenegar extends \rabint\classes\sms\ServiceAbstract {
         return $this->execute($path, $params);
     }
 
-    public function LatestOutbox($pagesize, $sender) {
+    public function LatestOutbox($pagesize, $sender)
+    {
         $path = $this->get_path("latestoutbox");
         $params = array(
             "pagesize" => $pagesize,
@@ -182,7 +191,8 @@ class kavenegar extends \rabint\classes\sms\ServiceAbstract {
         return $this->execute($path, $params);
     }
 
-    public function CountOutbox($startdate, $enddate, $status = 0) {
+    public function CountOutbox($startdate, $enddate, $status = 0)
+    {
         $path = $this->get_path("countoutbox");
         $params = array(
             "startdate" => $startdate,
@@ -192,7 +202,8 @@ class kavenegar extends \rabint\classes\sms\ServiceAbstract {
         return $this->execute($path, $params);
     }
 
-    public function Cancel($messageid) {
+    public function Cancel($messageid)
+    {
         $path = $this->get_path("cancel");
         $params = array(
             "messageid" => is_array($messageid) ? implode(",", $messageid) : $messageid
@@ -200,7 +211,8 @@ class kavenegar extends \rabint\classes\sms\ServiceAbstract {
         return $this->execute($path, $params);
     }
 
-    public function Receive($linenumber, $isread = 0) {
+    public function Receive($linenumber, $isread = 0)
+    {
         $path = $this->get_path("receive");
         $params = array(
             "linenumber" => $linenumber,
@@ -209,7 +221,8 @@ class kavenegar extends \rabint\classes\sms\ServiceAbstract {
         return $this->execute($path, $params);
     }
 
-    public function CountInbox($startdate, $enddate, $linenumber, $isread = 0) {
+    public function CountInbox($startdate, $enddate, $linenumber, $isread = 0)
+    {
         $path = $this->get_path("countinbox");
         $params = array(
             "startdate" => $startdate,
@@ -220,7 +233,8 @@ class kavenegar extends \rabint\classes\sms\ServiceAbstract {
         return $this->execute($path, $params);
     }
 
-    public function CountPostalcode($postalcode) {
+    public function CountPostalcode($postalcode)
+    {
         $path = $this->get_path("countpostalcode");
         $params = array(
             "postalcode" => $postalcode
@@ -228,7 +242,8 @@ class kavenegar extends \rabint\classes\sms\ServiceAbstract {
         return $this->execute($path, $params);
     }
 
-    public function SendbyPostalcode($postalcode, $sender, $message, $mcistartindex, $mcicount, $mtnstartindex, $mtncount, $date) {
+    public function SendbyPostalcode($postalcode, $sender, $message, $mcistartindex, $mcicount, $mtnstartindex, $mtncount, $date)
+    {
         $path = $this->get_path("sendbypostalcode");
         $params = array(
             "postalcode" => $postalcode,
@@ -243,12 +258,14 @@ class kavenegar extends \rabint\classes\sms\ServiceAbstract {
         return $this->execute($path, $params);
     }
 
-    public function AccountInfo() {
+    public function AccountInfo()
+    {
         $path = $this->get_path("info", "account");
         return $this->execute($path);
     }
 
-    public function AccountConfig($apilogs, $dailyreport, $debug, $defaultsender, $mincreditalarm, $resendfailed) {
+    public function AccountConfig($apilogs, $dailyreport, $debug, $defaultsender, $mincreditalarm, $resendfailed)
+    {
         $path = $this->get_path("config", "account");
         $params = array(
             "apilogs" => $apilogs,
@@ -261,7 +278,8 @@ class kavenegar extends \rabint\classes\sms\ServiceAbstract {
         return $this->execute($path, $params);
     }
 
-    public function VerifyLookup($receptor, $token, $template) {
+    public function VerifyLookup($receptor, $token, $template)
+    {
         $path = $this->get_path("lookup", "verify");
         $params = array(
             "receptor" => $receptor,
@@ -271,60 +289,73 @@ class kavenegar extends \rabint\classes\sms\ServiceAbstract {
         return $this->execute($path, $params);
     }
 
-    public function getCredit() {
-        
+    public function getCredit()
+    {
+
     }
 
-    public function sendBulk($to, $message, $sender = null) {
-        
+    public function sendBulk($to, $message, $sender = null)
+    {
+
     }
 
-    public function send($to, $message, $sender = null) {
-        
+    public function send($to, $message, $sender = null)
+    {
+
     }
 
 }
 
-class BaseRuntimeException extends \RuntimeException {
+class BaseRuntimeException extends \RuntimeException
+{
 
-    public function getName() {
+    public function getName()
+    {
         return 'BaseRuntimeException';
     }
 
-    public function __construct($message, $code = 0) {
+    public function __construct($message, $code = 0)
+    {
         parent::__construct($message, $code);
     }
 
-    public function errorMessage() {
+    public function errorMessage()
+    {
         return "\r\n" . $this->getName() . "[{$this->code}] : {$this->message}\r\n";
     }
 
 }
 
-class HttpException extends BaseRuntimeException {
+class HttpException extends BaseRuntimeException
+{
 
-    public function getName() {
+    public function getName()
+    {
         return 'HttpException';
     }
 
 }
 
-class ApiException extends BaseRuntimeException {
+class ApiException extends BaseRuntimeException
+{
 
-    public function getName() {
+    public function getName()
+    {
         return 'ApiException';
     }
 
 }
 
-abstract class General {
+abstract class General
+{
 
     const Enabled = "enabled";
     const Disabled = "disabled";
 
 }
 
-abstract class ApiLogs extends General {
+abstract class ApiLogs extends General
+{
 
     const Justforfault = "justforfault";
     const Enabled = "enabled";

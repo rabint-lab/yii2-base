@@ -2,7 +2,8 @@
 
 namespace rabint\services\sms\webservice;
 
-class sms3300 extends \rabint\classes\sms\ServiceAbstract {
+class sms3300 extends \rabint\services\sms\ServiceAbstract
+{
 
     protected static $wsdl_link = "http://sms.3300.ir/almassms.asmx?wsdl"; //Web Service URL
 //    protected static $wsdl_link = "http://94.232.173.124/almassms.asmx?wsdl"; //Web Service URL
@@ -12,7 +13,8 @@ class sms3300 extends \rabint\classes\sms\ServiceAbstract {
     public $username;
     public $password;
 
-    public function send($to, $message, $sender = null) {
+    public function send($to, $message, $sender = null)
+    {
         ini_set('soap.wsdl_cache_enabled', 0);
         ini_set('soap.wsdl_cache_ttl', 0);
         // Check credit for the gateway
@@ -50,11 +52,13 @@ class sms3300 extends \rabint\classes\sms\ServiceAbstract {
         }
     }
 
-    public function sendBulk($to, $message, $sender = null) {
+    public function sendBulk($to, $message, $sender = null)
+    {
         return FALSE;
     }
 
-    public function getCredit() {
+    public function getCredit()
+    {
         ini_set('soap.wsdl_cache_enabled', 0);
         ini_set('soap.wsdl_cache_ttl', 0);
         $client = new \SoapClient(self::$wsdl_link);
