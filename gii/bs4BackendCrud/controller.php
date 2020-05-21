@@ -198,8 +198,7 @@ class <?= $controllerClass ?> extends \rabint\controllers\AdminController <?php 
                 }
                 return $this->redirect(['index']);
             } else {
-                $errors = \rabint\helpers\str::modelErrToStr($model->getErrors());
-                Yii::$app->session->setFlash('danger',  <?= $generator->generateString('Unable to create item.')?>."<br/>".$errors);
+                Yii::$app->session->setFlash('danger', str::modelErrors($model->errors));
             }
         }
         return $this->render('create', [
@@ -239,8 +238,7 @@ class <?= $controllerClass ?> extends \rabint\controllers\AdminController <?php 
                 }
                 return $this->redirect(['index']);
             } else {
-                $errors = \rabint\helpers\str::modelErrToStr($model->getErrors());
-                Yii::$app->session->setFlash('danger',  <?= $generator->generateString('Unable to update item.')?>."<br/>".$errors);
+                Yii::$app->session->setFlash('danger', str::modelErrors($model->errors));
             }
         }
         return $this->render('update', [
