@@ -90,9 +90,9 @@ class GridView extends  BaseGridView
             'summaryOptions' => ['class' => 'float-left'],
             'type' => '',
             'heading' => Yii::t('rabint', '{title} listing', ['title' => $this->modelTitle]),
-            'options' => ['class' => 'block block-rounded'],
-            'headingOptions' =>  ['class' => 'block-header block-header-default '],
-            'titleOptions' =>  ['class' => 'block-title'],
+            'options' => ['class' => 'card block block-rounded'],
+            'headingOptions' =>  ['class' => 'card-header block-header block-header-default'],
+            'titleOptions' =>  ['class' => 'card-title block-title'],
             //'before' => '<em class="float-left">' . Yii::t('rabint', '* Resize table columns just like a spreadsheet by dragging the column edges.') . '</em>',
             'after' => $this->bulkactionHandler(),
         ];

@@ -72,7 +72,8 @@ class widget
         $options = [],
         $pluginOptions = [],
         $selected = []
-    ) {
+    )
+    {
         $options = array_merge([
             'placeholder' => \Yii::t('rabint', 'عبارت های مورد نظر را بنویسید'),
             'dir' => 'rtl',
@@ -108,7 +109,8 @@ class widget
         $options = [],
         $pluginOptions = [],
         $selected = []
-    ) {
+    )
+    {
         $options = array_merge([
             'placeholder' => \Yii::t('rabint', 'عبارت های مورد نظر را بنویسید'),
             'dir' => 'rtl',
@@ -168,9 +170,11 @@ class widget
     }
 
 
-    public static function datePickerBs4($form, $model, $fieldName, $default = null, $params = []){
+    public static function datePickerBs4($form, $model, $fieldName, $default = null, $params = [])
+    {
         return static::datePicker($form, $model, $fieldName, $default, $params);
     }
+
     public static function datePicker($form, $model, $fieldName, $default = null, $params = [])
     {
         $params = array_merge(
@@ -199,6 +203,7 @@ class widget
                 $params
             );
     }
+
     public static function locationPicker($form, $model, $fieldName, $default = null, $params = [])
     {
 
@@ -211,8 +216,25 @@ class widget
     }
 
 
-
     public static function datePickerStatic($attribute, $value = null)
+    {
+        return \rabint\widgets\DateTimePickerBs4\DateTimePickerBs4::widget(
+            [
+                "name" => $attribute,
+                "value" => $value,
+                'clientOptions' => [
+                    'EnableTimePicker' => false,
+                ],
+            ]
+        );
+    }
+
+    public static function datePickerBs4Static($attribute, $value = null)
+    {
+        return self::datePickerStatic($attribute, $value);
+    }
+
+    public static function datePickerOldStatic($attribute, $value = null)
     {
         return \rabint\widgets\DateTimePicker\DateTimePicker::widget(
             [
@@ -251,10 +273,12 @@ class widget
     }
 
     public static function colorPicker($form, $model, $fieldName)
-    { }
+    {
+    }
 
     public static function colorPickerStatic($attribute, $value = null)
-    { }
+    {
+    }
 
     public static function wysiwyg($form, $model, $fieldName, $options = [], $widgetOptions = [])
     {

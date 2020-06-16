@@ -54,9 +54,9 @@ class <?= $searchModelClass ?> extends <?= isset($modelAlias) ? $modelAlias : $m
     public function attributeLabels()
     {
         return parent::attributeLabels() + [
-        //    'created_from' =>  <?= $generator->generateString( 'Created from')?>,
-        //    'created_to' =>  <?= $generator->generateString( 'Created to')?>,
-        //   'keyword' =>  <?= $generator->generateString( 'Keyword')?>,
+             //'created_from' =>  <?= $generator->generateString( 'Created from')?>,
+             //'created_to' =>  <?= $generator->generateString( 'Created to')?>,
+             //'keyword' =>  <?= $generator->generateString( 'Keyword')?>,
         ];
     }
     /**
@@ -82,9 +82,13 @@ class <?= $searchModelClass ?> extends <?= isset($modelAlias) ? $modelAlias : $m
 
         // add conditions that should always apply here
 
+        $sort = ['id' => SORT_DESC];
+        $query->orderBy($sort);
+
+
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'sort' => ['defaultOrder' => ['id' => SORT_DESC]]
+            'sort' => ['defaultOrder' => $sort]
         ]);
 
         $this->load($params);
@@ -92,7 +96,7 @@ class <?= $searchModelClass ?> extends <?= isset($modelAlias) ? $modelAlias : $m
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
             // $query->where('0=1');
-            return $dataProvider;
+            return $returnActiveQuery ? $query : $dataProvider;
         }
 
         // grid filtering conditions
@@ -154,7 +158,7 @@ class <?= $searchModelClass ?> extends <?= isset($modelAlias) ? $modelAlias : $m
         if ($returnActiveQuery) {
             return $query;
         }
-        return $dataProvider;
+        return $returnActiveQuery ? $query : $dataProvider;
     }
 
     /**

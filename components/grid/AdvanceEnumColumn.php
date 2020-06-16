@@ -20,6 +20,8 @@ class AdvanceEnumColumn extends DataColumn
      * @var array List of value => name pairs
      */
     public $enum = [];
+    protected $enumClass = [];
+    public $idAttr = null;
     public $titleAttr = 'title';
     public $classAttr = 'class';
     public $format = 'html';
@@ -33,9 +35,16 @@ class AdvanceEnumColumn extends DataColumn
      */
     public function init()
     {
-        $enums = ArrayHelper::getColumn($this->enum, $this->titleAttr);
+        $this->enumClass = $this->enum;
+        if (!empty($this->idAttr)) {
+            $this->enum = ArrayHelper::map($this->enum, $this->idAttr, $this->titleAttr);
+            $this->enumClass = $this->classAttr ? (ArrayHelper::map($this->enumClass, $this->idAttr, $this->classAttr)) : [];
+        } else {
+            $this->enum = ArrayHelper::getColumn($this->enum, $this->titleAttr);
+            $this->enumClass = $this->classAttr ? (ArrayHelper::getColumn($this->enumClass, $this->classAttr)) : [];
+        }
         if ($this->loadFilterDefaultValues && $this->filter === null) {
-            $this->filter = $enums;
+            $this->filter = $this->enum;
         }
     }
 
@@ -48,9 +57,12 @@ class AdvanceEnumColumn extends DataColumn
     public function getDataCellValue($model, $key, $index)
     {
         $value = parent::getDataCellValue($model, $key, $index);
-        $data = isset($this->enum[$value][$this->titleAttr]) ? $this->enum[$value][$this->titleAttr] : $value;
-        $class = isset($this->enum[$value][$this->classAttr]) ? $this->enum[$value][$this->classAttr] : 'default';
-        return '<span class="badge badge-' . $class . '">' . $data . '</span>';
+        $data = $this->enum[$value] ?: $value;
+        if ($this->classAttr) {
+            $class = $this->enumClass[$value] ?: 'default';
+            return '<span class="badge badge-' . $class . '">' . $data . '</span>';
+        }
+        return $data;
     }
 
 
