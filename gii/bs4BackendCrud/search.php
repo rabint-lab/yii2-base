@@ -83,7 +83,7 @@ class <?= $searchModelClass ?> extends <?= isset($modelAlias) ? $modelAlias : $m
         // add conditions that should always apply here
 
         $sort = ['id' => SORT_DESC];
-        $query->orderBy($sort);
+        //$query->orderBy($sort);
 
 
         $dataProvider = new ActiveDataProvider([

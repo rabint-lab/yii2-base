@@ -210,7 +210,6 @@ class ManyToManyBehavior extends Behavior {
                     $cols[] = $viaTableColumn;
                 }
 //                try {
-
                 $connection->createCommand()
                         ->batchInsert($junctionTable, $cols, $junctionRows)
                         ->execute();
@@ -361,7 +360,7 @@ class ManyToManyBehavior extends Behavior {
 
     private function getSourceTableParams($attributeName) {
         $params = $this->getRelationParams($attributeName);
-        return isset($params['sourceTableInsert']) ? $params['sourceTableInsert'] : NULL;
+        return isset($params['sourceTableInsert']) ? $params['sourceTableInsert'] : $params;
     }
 
     /**

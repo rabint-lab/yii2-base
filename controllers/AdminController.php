@@ -18,14 +18,14 @@ class AdminController extends Controller
         $mustAdd = func_get_args();
         $mustAdd = (isset($mustAdd[0])) ? $mustAdd[0] : [];
 
-        return array_merge($mustAdd, [
+        return array_merge([
             'environment' => [
                 'class' => EnvironmentFilter::class,
                 'actions' => [
                     '*' => 'admin',
                 ],
             ],
-        ]);
+        ],$mustAdd);
     }
 
     public function init()

@@ -198,7 +198,7 @@ class <?= $controllerClass ?> extends \rabint\controllers\AdminController <?php 
                 }
                 return $this->redirect(['index']);
             } else {
-                Yii::$app->session->setFlash('danger', str::modelErrors($model->errors));
+                Yii::$app->session->setFlash('danger', \rabint\helpers\str::modelErrors($model->errors));
             }
         }
         return $this->render('create', [
@@ -238,7 +238,7 @@ class <?= $controllerClass ?> extends \rabint\controllers\AdminController <?php 
                 }
                 return $this->redirect(['index']);
             } else {
-                Yii::$app->session->setFlash('danger', str::modelErrors($model->errors));
+                Yii::$app->session->setFlash('danger', \rabint\helpers\str::modelErrors($model->errors));
             }
         }
         return $this->render('update', [
