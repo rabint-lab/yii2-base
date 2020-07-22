@@ -126,6 +126,7 @@ class locality
     static $jalali_month_days = array(31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29);
     static $gregorian_month_days = array(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
     static $jalali_week_name = array('شنبه', 'یکشنبه', 'دوشنبه', 'سه شنبه', 'چهارشنبه', 'پنج شنبه', 'جمعه');
+    static $jalali_key_week_name = array('sat' => 'شنبه', 'sun' => 'یکشنبه', 'mon' => 'دوشنبه', 'tue' => 'سه شنبه', 'wed' => 'چهارشنبه', 'thu' => 'پنج شنبه', 'fri' => 'جمعه');
     static $jalali_week_name_short = array("ش", "ی", "د", "س", "چ", "پ", "ج");
 
     /**
