@@ -8,7 +8,68 @@ namespace rabint\helpers;
  */
 class locality
 {
-
+    protected static $digit1 = [
+		0 => 'صفر',
+		1 => 'يک',
+		2 => 'دو',
+		3 => 'سه',
+		4 => 'چهار',
+		5 => 'پنج',
+		6 => 'شش',
+		7 => 'هفت',
+		8 => 'هشت',
+		9 => 'نه',
+	];
+    protected static $digit1_5 = [
+		1 => 'يازده',
+		2 => 'دوازده',
+		3 => 'سيزده',
+		4 => 'چهارده',
+		5 => 'پانزده',
+		6 => 'شانزده',
+		7 => 'هفده',
+		8 => 'هجده',
+		9 => 'نوزده',
+        ];
+    protected static $digit2 = [
+		1 => 'ده',
+		2 => 'بيست',
+		3 => 'سي',
+		4 => 'چهل',
+		5 => 'پنجاه',
+		6 => 'شصت',
+		7 => 'هفتاد',
+		8 => 'هشتاد',
+		9 => 'نود'
+    ];
+    protected static $digit3 = [
+		1 => 'صد',
+		2 => 'دويست',
+		3 => 'سيصد',
+		4 => 'چهارصد',
+		5 => 'پانصد',
+		6 => 'ششصد',
+		7 => 'هفتصد',
+		8 => 'هشتصد',
+		9 => 'نهصد',
+    ];
+    protected static $steps = [
+		1 => 'هزار',
+		2 => 'ميليون',
+		3 => 'میلیارد',
+		4 => 'تريليون',
+		5 => 'کادريليون',
+		6 => 'کوينتريليون',
+		7 => 'سکستريليون',
+		8 => 'سپتريليون',
+		9 => 'اکتريليون',
+		10 => 'نونيليون',
+		11 => 'دسيليون',
+            ];
+    protected static $t = [
+		'and' => 'و',
+        ];
+    
     //    static $jalali_month_name = array("", "حمل", "ثور", "جوزا", "سرطان", "اسد", "سنبله", "میزان", "عقرب", "قوس", "جدی", "دلو", "حوت");
     static $jalali_month_name = array(
         '',
@@ -1327,4 +1388,75 @@ class locality
                 return static::anyToJalali($date, $targetFormat);
         }
     }
+    
+    protected function groupToWords($group)
+	{
+		$d3 = floor($group / 100);
+		$d2 = floor(($group - $d3 * 100) / 10);
+		$d1 = $group - $d3 * 100 - $d2 * 10;
+		$group_array = array();
+		if ($d3 != 0)
+		{
+			$group_array[] = self::$digit3[$d3];
+		}
+		if ($d2 == 1 && $d1 != 0) // 11-19
+		{
+			$group_array[] = self::$digit1_5[$d1];
+		} else if ($d2 != 0 && $d1 == 0) // 10-20-...-90
+		{
+			$group_array[] = self::$digit2[$d2];
+		} else if ($d2 == 0 && $d1 == 0) // 00
+		{
+		} else if ($d2 == 0 && $d1 != 0) // 1-9
+		{
+			$group_array[] = self::$digit1[$d1];
+		} else // Others
+		{
+			$group_array[] = self::$digit2[$d2];
+			$group_array[] = self::$digit1[$d1];
+		}
+		if (!count($group_array))
+		{
+			return FALSE;
+		}
+		return $group_array;
+	}
+        
+    public function numberToWord($number,$unit = 'ریال')
+	{
+		$formated = self::number_format($number, 0, '.', ',');
+		$groups = explode(',', $formated);
+		$steps = count($groups);
+		$parts = array();
+		foreach ($groups as $step => $group)
+		{
+			$group_words = self::groupToWords($group);
+			if ($group_words)
+			{
+				$part = implode(' ' . self::$t['and'] . ' ', $group_words);
+				if (isset(self::$steps[$steps - $step - 1]))
+				{
+					$part .= ' ' . self::$steps[$steps - $step - 1];
+				}
+				$parts[] = $part;
+			}
+		}
+		return implode(' ' . self::$t['and'] . ' ', $parts).' '.$unit;
+	}
+    public function number_format($number, $decimal_precision = 0, $decimals_separator = '.', $thousands_separator = ',')
+	{
+		$number = explode('.', str_replace(' ', '', $number));
+		$number[0] = str_split(strrev($number[0]), 3);
+		$total_segments = count($number[0]);
+		for ($i = 0; $i < $total_segments; $i++)
+		{
+			$number[0][$i] = strrev($number[0][$i]);
+		}
+		$number[0] = implode($thousands_separator, array_reverse($number[0]));
+		if (!empty($number[1]))
+		{
+			$number[1] = self::Round($number[1], $decimal_precision);
+		}
+		return implode($decimals_separator, $number);
+	}
 }
