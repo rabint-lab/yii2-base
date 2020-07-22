@@ -1246,20 +1246,34 @@ class locality
     }
 
     /**
-     * use elapsedTime instead
+     * @param $time
+     * @param string $sprator
+     * @return int
+     */
+    public static function timeToSec($time, $sprator = ":")
+    {
+        $split = explode($sprator, $time);
+        $h = intval(isset($split[0]) ? $split[0] : 0);
+        $m = intval(isset($split[1]) ? $split[1] : 0);
+        $s = intval(isset($split[2]) ? $split[2] : 0);
+
+        return ($h * 3600) + ($m * 60) + ($s);
+    }
+
+    /**
      * @param $seconds
      * @return string
-     * @deprecated
      */
     public static function secToTime($seconds)
     {
-        $t = round($seconds);
+        $t = abs(round($seconds));
+        $sign =($seconds>=0)?'':'-';
         if ($t >= 3600) {
-            return sprintf('%02d:%02d:%02d', ($t / 3600), ($t / 60 % 60), $t % 60) . ' ' . \Yii::t('rabint', 'ساعت');
+            return $sign.sprintf('%02d:%02d:%02d', ($t / 3600), ($t / 60 % 60), $t % 60);
         } elseif ($t >= 60) {
-            return sprintf('%02d:%02d', ($t / 60 % 60), $t % 60) . ' ' . \Yii::t('rabint', 'دقیقه');
+            return $sign.sprintf('00:%02d:%02d', ($t / 60 % 60), $t % 60);
         } else {
-            return $t . ' ' . \Yii::t('rabint', 'ثانیه');
+            return $sign.sprintf('00:00:%02d', $t % 60);
         }
     }
 
