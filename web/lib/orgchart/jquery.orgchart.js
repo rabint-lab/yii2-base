@@ -181,12 +181,12 @@
             }
             return self.nodeLevel($structure, $node['parent']) + 1;
         }
-        this.newNode = function(parentId) {
+        this.newNode = function(parentId,Name) {
             var nextId = Object.keys(nodes).length;
             while (nextId in nodes) {
                 nextId++;
             }
-            self.addNode({ id: nextId, name: '', type: '', parent: parentId });
+            self.addNode({ id: nextId, name: Name, type: '', parent: parentId });
             return nextId;
         }
 
