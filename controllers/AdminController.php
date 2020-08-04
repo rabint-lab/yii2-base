@@ -35,11 +35,11 @@ class AdminController extends Controller
             return $this->redirect(['/user/sign-in/login']);
         }
 
-        $roles = Yii::$app->authManager->getRoles();
-        if (is_array($roles) and count($roles)) {
-            $role = array_shift($roles);
-            return $role->name;
-        }
+//        $roles = Yii::$app->authManager->getRoles();
+//        if (is_array($roles) and count($roles)) {
+//            $role = array_shift($roles);
+//            return $role->name;
+//        }
 
         if (!\rabint\helpers\user::can(\common\models\User::ROLE_MANAGER)) {
             throw new \yii\web\ForbiddenHttpException(\Yii::t('rabint', 'شما به این صفحه دسترسی ندارید.'));
@@ -53,9 +53,9 @@ class AdminController extends Controller
         EnvironmentFilter::setEnv(EnvironmentFilter::ENV_ADMIN);
 
         //Yii::$app->params['bsVersion'] = '3.x';
-        parent::init();
+        return parent::init();
     }
-
+    
     public function render($view, $params = [], $handleAjax = true)
     {
         if ($handleAjax && Yii::$app->request->isAjax) {
