@@ -32,7 +32,7 @@ class AdminController extends Controller
     {
         if (\rabint\helpers\user::isGuest()) {
             Yii::$app->session->setFlash('warning', \Yii::t('rabint', 'لطفا ابتدا وارد حساب کاربری خود شوید'));
-            return $this->redirect(['/user/sign-in/login']);
+            return redirect(['/user/sign-in/login']);
         }
 
 //        $roles = Yii::$app->authManager->getRoles();
@@ -55,7 +55,7 @@ class AdminController extends Controller
         //Yii::$app->params['bsVersion'] = '3.x';
         return parent::init();
     }
-    
+
     public function render($view, $params = [], $handleAjax = true)
     {
         if ($handleAjax && Yii::$app->request->isAjax) {
