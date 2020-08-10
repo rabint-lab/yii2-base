@@ -1,11 +1,11 @@
-(function($) {
-    $.fn.orgChart = function(options) {
+(function ($) {
+    $.fn.orgChart = function (options) {
         var opts = $.extend({}, $.fn.orgChart.defaults, options);
         return new OrgChart($(this), opts);
     }
 
     $.fn.orgChart.defaults = {
-        data: [{ id: 1, name: 'Root', type: 'auto', parent: 0 }],
+        data: [{id: 1, name: 'Root', type: 'auto', parent: 0}],
         showControls: false,
         types: ['auto'],
         typePrompt: '',
@@ -27,17 +27,17 @@
         this.$container = $container;
         var self = this;
 
-        this.draw = function() {
+        this.draw = function () {
             self.nodeLevels();
             $container.empty().append(rootNodes[0].render(opts));
-            $container.find('.node').click(function() {
+            $container.find('.node').click(function () {
                 if (self.opts.onClickNode !== null) {
                     self.opts.onClickNode(nodes[$(this).attr('node-id')]);
                 }
             });
 
             if (opts.allowEdit) {
-                $container.find('.node h2').click(function(e) {
+                $container.find('.node h2').click(function (e) {
                     var thisId = $(this).parents('.node').attr('node-id');
                     self.startEdit(thisId);
                     e.stopPropagation();
@@ -45,7 +45,7 @@
             }
 
             // add "add button" listener
-            $container.find('.org-add-button').click(function(e) {
+            $container.find('.org-add-button').click(function (e) {
                 var thisId = $(this).parent().attr('node-id');
 
                 if (self.opts.onAddNode !== null) {
@@ -56,7 +56,7 @@
                 e.stopPropagation();
             });
 
-            $container.find('.org-del-button').click(function(e) {
+            $container.find('.org-del-button').click(function (e) {
                 var thisId = $(this).parent().attr('node-id');
 
                 if (self.opts.onDeleteNode !== null) {
@@ -67,8 +67,11 @@
                 e.stopPropagation();
             });
         }
-        this.getInputElement = function(id) {
+        this.getInputElement = function (id) {
             //console.log(id)
+            if (typeof nodes[id].data.name == "undefined") {
+                nodes[id].data.name = ""
+            }
             $s1 = '<div class="nodeEditForm"><input class="org-input" type="text" value="' + nodes[id].data.name + '"/>';
             $s2 = '<select class="org-input">';
             if (opts.typePrompt != false) {
@@ -82,7 +85,7 @@
             $s2 += '</select><i class="fas fa-check saveNode"></i></div>';
             return $($s1 + $s2);
         }
-        this.getViewElement = function(id) {
+        this.getViewElement = function (id) {
             //console.log(id);
             if (typeof nodes[id] == "undefined") {
                 return false;
@@ -107,35 +110,35 @@
             $s1 = '<div class="nodeViewData">' + nameString + typeString + descString + '</div>';
             return $($s1);
         }
-        this.startEdit = function(id) {
+        this.startEdit = function (id) {
             //console.log(id)
             var inputElement = this.getInputElement(id);
             var viewElement = this.getViewElement(id);
             $container.find('div[node-id=' + id + '] .nodeViewData').replaceWith(inputElement);
 
-            var commitChange = function() {
-                    $container.find('div[node-id=' + id + ']').removeClass('onEdit')
+            var commitChange = function () {
+                $container.find('div[node-id=' + id + ']').removeClass('onEdit')
 
-                    var h2Element = self.getViewElement(id);
-                    if (h2Element == false) {
-                        return;
-                    }
-                    if (opts.allowEdit) {
-                        h2Element.click(function() {
-                            self.startEdit(id);
-                        })
-                    }
-                    inputElement.replaceWith(h2Element);
-
-                    if (opts.onCommitChange !== null) {
-                        opts.onCommitChange(id);
-                    }
+                var h2Element = self.getViewElement(id);
+                if (h2Element == false) {
+                    return;
                 }
-                //inputElement.find('input').focus();
-            inputElement.find('input').change(function(event) {
+                if (opts.allowEdit) {
+                    h2Element.click(function () {
+                        self.startEdit(id);
+                    })
+                }
+                inputElement.replaceWith(h2Element);
+
+                if (opts.onCommitChange !== null) {
+                    opts.onCommitChange(id);
+                }
+            }
+            //inputElement.find('input').focus();
+            inputElement.find('input').change(function (event) {
                 nodes[id].data.name = inputElement.find('input').val();
             });
-            inputElement.find('select').change(function(event) {
+            inputElement.find('select').change(function (event) {
                 nodes[id].data.type = inputElement.find('select').val();
             });
 
@@ -145,7 +148,7 @@
             // })
             $('.saveNode').click();
             $container.find('div[node-id=' + id + ']').addClass('onEdit')
-            $('.orgChart').on('click', '.saveNode', function(event) {
+            $('.orgChart').on('click', '.saveNode', function (event) {
                 //console.log('----');
                 commitChange();
             });
@@ -154,43 +157,43 @@
             // })
         }
 
-        this.nodeLevels = function($nodeID)
-        {
+        this.nodeLevels = function ($nodeID) {
             if (typeof $nodeID == 'undefined') {
+                $maxLevel = 0;
                 for (let $node in nodes) {
-                    let $nodeLevel =  self.nodeLevels($node);
-                    nodes[$node]['data'].level =$nodeLevel;
-                    self.opts.maxLevel = Math.max(self.opts.maxLevel,$nodeLevel);
+                    let $nodeLevel = self.nodeLevels($node);
+                    nodes[$node]['data'].level = $nodeLevel;
+                    $maxLevel = Math.max($maxLevel, $nodeLevel);
                 }
+                self.opts.maxLevel =$maxLevel;
                 return self.opts.maxLevel;
             } else {
                 let $anode = nodes[$nodeID];
-                if ($anode['data'].parent==0) {
+                if ($anode['data'].parent == 0) {
                     return 1;
                 }
                 return self.nodeLevels($anode['data'].parent) + 1;
             }
         }
-        this.nodeLevel = function($nodeID)
-        {
+        this.nodeLevel = function ($nodeID) {
             $node = nodes[$nodeID];
-            if ($node['parent']==0) {
+            if ($node['parent'] == 0) {
                 return 1;
-            }else {
-                return self.nodeLevel($node['parent'])+1;
+            } else {
+                return self.nodeLevel($node['parent']) + 1;
             }
             return self.nodeLevel($structure, $node['parent']) + 1;
         }
-        this.newNode = function(parentId,Name) {
+        this.newNode = function (parentId, Name) {
             var nextId = Object.keys(nodes).length;
             while (nextId in nodes) {
                 nextId++;
             }
-            self.addNode({ id: nextId, name: Name, type: '', parent: parentId });
+            self.addNode({id: nextId, name: Name, type: '', parent: parentId});
             return nextId;
         }
 
-        this.addNode = function(data) {
+        this.addNode = function (data) {
             var newNode = new Node(data);
             nodes[data.id] = newNode;
             nodes[data.parent].addChild(newNode);
@@ -199,7 +202,7 @@
             self.startEdit(data.id);
         }
 
-        this.deleteNode = function(id) {
+        this.deleteNode = function (id) {
             for (var i = 0; i < nodes[id].children.length; i++) {
                 self.deleteNode(nodes[id].children[i].data.id);
             }
@@ -208,7 +211,7 @@
             self.draw();
         }
 
-        this.getData = function() {
+        this.getData = function () {
             var outData = [];
             for (var i in nodes) {
                 outData.push(nodes[i].data);
@@ -241,11 +244,11 @@
         this.children = [];
         var self = this;
 
-        this.addChild = function(childNode) {
+        this.addChild = function (childNode) {
             this.children.push(childNode);
         }
 
-        this.removeChild = function(id) {
+        this.removeChild = function (id) {
             for (var i = 0; i < self.children.length; i++) {
                 if (self.children[i].data.id == id) {
                     self.children.splice(i, 1);
@@ -254,7 +257,7 @@
             }
         }
 
-        this.render = function(opts) {
+        this.render = function (opts) {
             var childLength = self.children.length,
                 mainTable;
 
@@ -296,7 +299,7 @@
             return mainTable;
         }
 
-        this.getViewElement = function(opts) {
+        this.getViewElement = function (opts) {
             var nameString = '',
                 typeString = '',
                 descString = '';
@@ -315,7 +318,7 @@
             $s1 = '<div class="nodeViewData">' + nameString + typeString + descString + '</div>';
             return $s1;
         }
-        this.formatNode = function(opts) {
+        this.formatNode = function (opts) {
             viewElement = this.getViewElement(opts);
             if (opts.showControls) {
                 var buttonsHtml = "<div class='org-add-button'>" + opts.newNodeText + "</div><div class='org-del-button'></div>";
