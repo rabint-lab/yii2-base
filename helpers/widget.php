@@ -63,6 +63,58 @@ class widget
                 ]
             );
     }
+    
+    /**
+     * 
+     * @param type $form
+     * @param type $model
+     * @param type $fieldName
+     * @param type $url  return json id:name
+     * @param type $options
+     * @param type $pluginOptions
+     * @return type
+     * 
+     * output url example input :  $q = Amersfoort
+     * output url example output :  {"results":[{"id":"21","text":"Amersfoort"},{"id":"326","text":"Americana"},...]}
+     */
+    public static function select2Ajax($form, $model, $fieldName, $url,$data, $options = [], $pluginOptions = [])
+    {
+        
+        $options = array_merge([
+            'placeholder' => \Yii::t('beensa', 'عبارت های مورد نظر را بنویسید'),
+            'dir' => 'rtl',
+            'multiple' => false,
+        ], $options);
+        $pluginOptions = array_merge([
+            'maximumInputLength' => 100,
+            'allowClear' => true,
+            'minimumInputLength' => 3,
+//            'escapeMarkup' => new JsExpression('function (markup) { return markup; }'),
+//            'templateResult' => new JsExpression('formatRepo'),
+//            'templateSelection' => new JsExpression('formatRepoSelection'),
+            'ajax'=>[
+                'url' => $url,
+                'delay' => 250,
+                'dataType' => 'json',
+                'data' => new JsExpression('function(params) { return {q:params.term}; }'),
+//                'processResults' => new JsExpression($resultsJs),
+                'cache' => true
+                ]
+        ], $pluginOptions);
+
+        $selected = []; //$model->find()->with('tags');
+        return $form->field($model, $fieldName)
+            ->widget(
+                \kartik\select2\Select2::className(),
+                [
+                    'value' => $selected, // initial value
+                    'maintainOrder' => true,
+                    'options' => $options,
+                    'data' => $data,
+                    'pluginOptions' => $pluginOptions,
+                ]
+            );
+    }
 
     public static function select2Multiple(
         $form,
