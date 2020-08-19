@@ -44,20 +44,22 @@ class LocationPicker extends Widget
 
         $ex = explode(',',$this->model->{$this->attribute});
         if(count($ex)>1) {
-            $lat = isset($ex[0]) ? $ex[0] : $this->def_lat;
-            $lon = isset($ex[1]) ? $ex[1] : $this->def_lon;
+            $lat = (isset($ex[0]) && !empty($ex[0])) ? $ex[0] : $this->def_lat;
+            $lon = (isset($ex[1]) && !empty($ex[1])) ? $ex[1] : $this->def_lon;
         }
         else
         {
             $lat =  $this->def_lat;
             $lon =  $this->def_lon;
         }
+
         $Options = [
             'lat' => $lat,
             'lon' => $lon,
             'zoom' => $this->def_zoom,
             'circle_radius'=>300,
         ];
+        
         $this->options = array_merge($Options, $this->options);
         $this->registerAssets();
         return $this->render(
@@ -65,6 +67,8 @@ class LocationPicker extends Widget
                 'attribute'=>$this->attribute,
                 'model'=>$this->model,
                 'id'=>$this->getId(),
+                'lat'=>$lat,
+                'lon'=>$lon,
             ]
         );
     }
@@ -198,7 +202,7 @@ var OSMPICKER = (function(){
     return app;
 })();
  $(document).ready(function(){
-        OSMPICKER.initmappicker('{$lat}', {$lon}, $circle_radius, {
+        OSMPICKER.initmappicker('{$lat}', '{$lon}', $circle_radius, {
         latitudeId: "latitude",
         longitudeId: "longitude",
         });

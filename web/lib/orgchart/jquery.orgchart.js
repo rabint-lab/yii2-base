@@ -137,9 +137,15 @@
             //inputElement.find('input').focus();
             inputElement.find('input').change(function (event) {
                 nodes[id].data.name = inputElement.find('input').val();
+                if (opts.onEditName !== null) {
+                    opts.onEditName(nodes,id);
+                }
             });
             inputElement.find('select').change(function (event) {
                 nodes[id].data.type = inputElement.find('select').val();
+                if (opts.onEditType !== null) {
+                    opts.onEditType(nodes,id);
+                }
             });
 
             inputElement.find('input').focus();
