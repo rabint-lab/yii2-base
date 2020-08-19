@@ -81,7 +81,7 @@ class widget
     {
         
         $options = array_merge([
-            'placeholder' => \Yii::t('beensa', 'عبارت های مورد نظر را بنویسید'),
+            'placeholder' => \Yii::t('rabint', 'عبارت های مورد نظر را بنویسید'),
             'dir' => 'rtl',
             'multiple' => false,
         ], $options);
