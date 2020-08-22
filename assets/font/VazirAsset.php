@@ -9,5 +9,6 @@ class VazirAsset extends AssetBundle {
     public $sourcePath = '@rabint/web/font';
     public $css = [
         'vazir/_font.css',
+        'vazir_fd/_font.css',
     ];
 }

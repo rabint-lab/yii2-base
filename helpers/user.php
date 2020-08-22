@@ -20,6 +20,19 @@ class user
         return Yii::$app->user->isGuest;
     }
 
+    public static function isProfileFull($user_id = null)
+    {
+        if(self::isGuest()){
+            return false;
+        }
+        $profile = static::profile($user_id);
+
+        $hasName = !empty($profile->firstname);
+        $hasFam = !empty($profile->lastname);
+        $hasGender = !empty($profile->gender);
+        return $hasName &&  $hasFam &&  $hasGender;
+    }
+
     /**
      *
      * @param type $userId

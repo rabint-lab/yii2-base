@@ -10,6 +10,7 @@ namespace rabint\helpers;
 
 use rabint\attachment\models\Attachment;
 use rabint\attachment\models\VirtualAttachment;
+use rabint\widgets\GalleryButton;
 use Yii;
 use yii\helpers\Html as baseHtml;
 
@@ -282,14 +283,16 @@ class html
 
     /* ------------------------------------------------------ */
 
-    public static function imgNotFindUrl($size = [120, 68]) {
+    public static function imgNotFindUrl($size = [120, 68])
+    {
         if ($size[0] > 300) {
             return Yii::getAlias('@app/web/img/noPictureMedium.png');
         }
         return Yii::getAlias('@app/web/img/noPictureTiny.png');
     }
 
-    public static function avatarNotFindUrl($size = [120, 68]) {
+    public static function avatarNotFindUrl($size = [120, 68])
+    {
         return Yii::getAlias('@app/web/img/noAvatar.png');
     }
 
@@ -302,9 +305,10 @@ class html
      * @param type $size
      * @return string
      */
-    public static function imageTag($attachment, $size = [120, 68], $options = [], $showIfEmpty = TRUE) {
+    public static function imageTag($attachment, $size = [120, 68], $options = [], $showIfEmpty = TRUE)
+    {
         $class = isset($options['class']) ? $options['class'] : 'attachment attachment-img';
-        $alt = isset($options['alt']) ? $options['alt'] : ($attachment->titleTag??"");
+        $alt = isset($options['alt']) ? $options['alt'] : ($attachment->titleTag ?? "");
 //        if (empty($size)) {
 //            $sizeArray = $options + ['style' => 'max-width:100%;'];
 //        } else {
@@ -330,7 +334,8 @@ class html
      * @param type $size
      * @return string
      */
-    public static function audioTag($attachment, $options = [], $thumbnail = '') {
+    public static function audioTag($attachment, $options = [], $thumbnail = '')
+    {
         return '<audio controls poster="' . $thumbnail . '">
     <source src="' . $attachment->url . '" type="' . $attachment['mime'] . '">'
             . \Yii::t('rabint', 'پخش فایل ضبط شده ممکن نیست')
@@ -344,7 +349,11 @@ class html
      * @param type $size
      * @return string
      */
-    public static function videoTag($attachment, $options = [], $thumbnail = '') {
+    public static function videoTag($attachment, $options = [], $thumbnail = '')
+    {
+        if (empty($attachment)) {
+            return '';
+        }
         return '<video controls poster="' . $thumbnail . '">
     <source src="' . $attachment->url . '" type="' . $attachment['mime'] . '">'
             . \Yii::t('rabint', 'پخش فایل ضبط شده ممکن نیست')
@@ -358,7 +367,8 @@ class html
      * @param type $size
      * @return string
      */
-    public static function videoJsTag($attachment, $options = [], $thumbnail = '') {
+    public static function videoJsTag($attachment, $options = [], $thumbnail = '')
+    {
 
         return widgets\VideoJs\VideoJsWidget::widget([
             'options' => [
@@ -396,13 +406,15 @@ class html
      * @param type $size
      * @return string
      */
-    public static function fileTag($attachment, $options = []) {
+    public static function fileTag($attachment, $options = [])
+    {
         return '<a href="' . $attachment->url . '" class="fileAttachment" >'
-            . '<i class="fas fa-download"></i>'
+            . '<i class="fa fa-download"></i>'
             . '</a>';
     }
 
-    public static function galleryTag($attachments, $size = [120, 68], $options = [], $activeTitle = false) {
+    public static function galleryTag($attachments, $size = [120, 68], $options = [], $activeTitle = false)
+    {
         if (!is_array($attachments)) {
             $attachments = [$attachments];
         }
@@ -433,21 +445,55 @@ class html
         return \dosamigos\gallery\Gallery::widget(['items' => $items]);
     }
 
+    public static function galleryBtn($attachments, $size = [120, 68], $options = [], $activeTitle = false)
+    {
+        if (!is_array($attachments)) {
+            $attachments = [$attachments];
+        }
+        $return = '';
+        $items = [];
+        foreach ($attachments as $attachment) {
+            if (empty($attachment)) {
+                continue;
+            }
+//            if (empty($size)) {
+//                $sizeArray = $options + ['style' => 'max-width:100%;'];
+//            } else {
+//                $sizeArray = $options + ['width' => $size[0], 'height' => $size[1], 'style' => 'max-width:100%;'];
+//            }
+            $option = [];
+            if ($activeTitle) {
+                $option['title'] = $attachment->titleTag;
+            }
+            $items[] = [
+                'url' => $attachment->getUrl(),
+                'src' => $attachment->getUrl($size),
+                'options' => $option,
+            ];
+
+//            $class = isset($options['class']) ? $options['class'] : 'attachment attachment-img';
+//            $return.= baseHtml::img($attachment->getUrl($size), ['class' => $class] + $sizeArray);
+        }
+        $options['items'] =$items;
+        return GalleryButton::widget($options);
+    }
+
 
     /**
-     * 
+     *
      */
-    public static function virtualAttachmentTag($url,$ext=null, $options = [], $size = [120, 68]) {
-        $ext = $ext??pathinfo($url,PATHINFO_EXTENSION);
+    public static function virtualAttachmentTag($url, $options = [], $size = [120, 68])
+    {
+        $ext = pathinfo($url, PATHINFO_EXTENSION);
         $type = file::extToType($ext);
         $attachment = new VirtualAttachment();
         $attachment->path = $url;
-        $attachment->title=pathinfo($url,PATHINFO_FILENAME);
-        $attachment->name=$attachment->title;
-        $attachment->extension=$ext;
-        $attachment->type=$type;
-        $attachment->protected=false;
-        
+        $attachment->title = pathinfo($url, PATHINFO_FILENAME);
+        $attachment->name = $attachment->title;
+        $attachment->extension = $ext;
+        $attachment->type = $type;
+        $attachment->protected = false;
+
 
         switch ($type) {
             case 'image':
@@ -468,8 +514,9 @@ class html
             default:
                 return self::fileTag($attachment, $options);
                 break;
-        }   
+        }
     }
+
     /**
      *
      * @param Attachment $attachment
@@ -477,7 +524,8 @@ class html
      * @param type $size
      * @return string
      */
-    public static function attachmentTag($attachment, $options = [], $size = [120, 68]) {
+    public static function attachmentTag($attachment, $options = [], $size = [120, 68])
+    {
         if (empty($attachment)) {
             return self::imageTag($attachment, $size, $options);
         }

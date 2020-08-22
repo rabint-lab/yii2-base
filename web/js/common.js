@@ -1,5 +1,4 @@
-
-jQuery(document).ready(function(){
+jQuery(document).ready(function($) {
     $('[data-toggle="tooltip"]').tooltip();
 });
 // jQuery(function () {
@@ -12,15 +11,15 @@ jQuery(document).ready(function(){
 //     }
 // });
 /* =================================================================== */
-jQuery(function () {
-    $('body').on('submit', '.staticNonAjaxForm', function (e) {
+jQuery(function() {
+    $('body').on('submit', '.staticNonAjaxForm', function(e) {
         $(this).find('[type="submit"]').attr('disabled', 'disabled');
     });
 });
 /* =================================================================== */
-jQuery(function () {
-    $('body').on('click', function (e) {
-        $('.popover.closeByBody').each(function (i) {
+jQuery(function() {
+    $('body').on('click', function(e) {
+        $('.popover.closeByBody').each(function(i) {
             /* popoverX ===================================================== */
 
             $target = $(e.target).attr('data-target');
@@ -29,11 +28,11 @@ jQuery(function () {
             }
             $myId = $(this).attr('id');
             if (
-                    $target != '#' + $myId
-                    && !$(this).is(e.target)
-                    && $(this).has(e.target).length === 0
-                    && $('.popover').has(e.target).length === 0
-                    ) {
+                $target != '#' + $myId &&
+                !$(this).is(e.target) &&
+                $(this).has(e.target).length === 0 &&
+                $('.popover').has(e.target).length === 0
+            ) {
                 $(this).find('[data-dismiss="popover-x"]').click();
             }
             /* popover ====================================================== */
@@ -44,7 +43,7 @@ jQuery(function () {
         });
     });
     /* ################################################################### */
-    $('body').on('click', 'a.disabled', function (event) {
+    $('body').on('click', 'a.disabled', function(event) {
         event.preventDefault();
     });
 });
@@ -73,23 +72,20 @@ function addParamToUrl(url, params) {
 function numberFormat(number, decimals, dec_point, thousands_sep) {
     number = (number + '').replace(/[^0-9+\-Ee.]/g, '');
     var n = !isFinite(+number) ? 0 : +number,
-            prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
-            sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
-            dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
-            s = '',
-            toFixedFix = function (n, prec)
-            {
-                var k = Math.pow(10, prec);
-                return '' + Math.round(n * k) / k;
-            };
+        prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+        sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
+        dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
+        s = '',
+        toFixedFix = function(n, prec) {
+            var k = Math.pow(10, prec);
+            return '' + Math.round(n * k) / k;
+        };
     // Fix for IE parseFloat(0.55).toFixed(0) = 0;
     s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
-    if (s[0].length > 3)
-    {
+    if (s[0].length > 3) {
         s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
     }
-    if ((s[1] || '').length < prec)
-    {
+    if ((s[1] || '').length < prec) {
         s[1] = s[1] || '';
         s[1] += new Array(prec - s[1].length + 1).join('0');
     }
@@ -98,16 +94,15 @@ function numberFormat(number, decimals, dec_point, thousands_sep) {
 
 /* =================================================================== */
 
-function enNumber(ret)
-{
+function enNumber(ret) {
     $farsi_array = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹", "."];
     $farsi_array = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹", "٫"];
 
     $english_array = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "."];
 
-    ret +="";
-    for($i=0;$i<11;$i++)
-        for($j=0;$j<ret.length;$j++)
+    ret += "";
+    for ($i = 0; $i < 11; $i++)
+        for ($j = 0; $j < ret.length; $j++)
             ret = ret.replace($farsi_array[$i], $english_array[$i]);
     return ret;
 }
@@ -117,30 +112,29 @@ function enNumber(ret)
  * @param $str
  * @return mixed
  */
-function faNumber(ret)
-{
+function faNumber(ret) {
     $farsi_array = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹", "."];
     $farsi_array = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹", "٫"];
 
     $english_array = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "."];
 
-    ret +="";
-    for($i=0;$i<11;$i++)
-        for($j=0;$j<ret.length;$j++)
+    ret += "";
+    for ($i = 0; $i < 11; $i++)
+        for ($j = 0; $j < ret.length; $j++)
             ret = ret.replace($english_array[$i], $farsi_array[$i]);
     return ret;
 }
 
 /* =================================================================== */
 
-jQuery(document).ready(function ($) {
+jQuery(document).ready(function($) {
     $firstSlug = $('.slugGenerateDestination').val();
     if ($firstSlug == '') {
-        $('.slugGenerateSource').change(function () {
+        $('.slugGenerateSource').change(function() {
             $source = $(this).val();
             var $slug = '';
             $slug = $.trim($source);
-//            $slug = $slug.replace($special_chars, '');
+            //            $slug = $slug.replace($special_chars, '');
             $slug = $slug.replace(/ /g, '-');
             $slug = $slug.toLowerCase();
             $slug = $slug.replace('%20', '-');
@@ -156,11 +150,12 @@ jQuery(document).ready(function ($) {
                 re = new RegExp($special_chars[$i], "g");
                 $slug = $slug.replace(re, '');
             }
-//                    .replace('/#\x{00a0}#siu/g', '-')
+            //                    .replace('/#\x{00a0}#siu/g', '-')
             $('.slugGenerateDestination').val($slug);
         });
     }
 });
+
 function createCookie(name, value, days) {
     var expires;
     if (days) {

@@ -684,7 +684,7 @@ return [
     'sdd' => 'application/vnd.stardivision.impress',
     'sdkd' => 'application/vnd.solent.sdkm+xml',
     'sdkm' => 'application/vnd.solent.sdkm+xml',
-    'rabint' => 'application/rabint',
+    'sdp' => 'application/sdp',
     'sdw' => 'application/vnd.stardivision.writer',
     'see' => 'application/vnd.seemail',
     'seed' => 'application/vnd.fdsn.seed',
