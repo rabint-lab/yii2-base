@@ -57,9 +57,9 @@ class AdvanceEnumColumn extends DataColumn
     public function getDataCellValue($model, $key, $index)
     {
         $value = parent::getDataCellValue($model, $key, $index);
-        $data = $this->enum[$value] ?: $value;
+        $data = (isset($this->enum[$value]) && !empty($this->enum[$value])) ? $this->enum[$value] : $value;
         if ($this->classAttr) {
-            $class = $this->enumClass[$value] ?: 'default';
+            $class = (isset($this->enumClass[$value]) && !empty($this->enumClass[$value])) ? $this->enum[$value] : 'default';
             return '<span class="badge badge-' . $class . '">' . $data . '</span>';
         }
         return $data;
