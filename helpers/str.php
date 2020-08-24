@@ -402,7 +402,7 @@ class str
          */
         if (strpos($base, '+') === 0) {
             $CC = substr($base, 1);
-        } elseif (strpos($base, '00') === 0) {
+        } elseif (strpos($base, '00') === 0 and strlen($base)>2 ) {
             $CC = substr($base, 2);
         }
 

@@ -86,7 +86,7 @@ class EnvironmentFilter extends Behavior
         if (\Yii::$app->user->isGuest) {
             Yii::$app->session->setFlash('warning', \Yii::t('rabint', 'لطفا ابتدا وارد حساب کاربری خود شوید.'));
             \yii\helpers\Url::remember();
-            return redirect(array('/user/sign-in/login'));
+            return redirect(array('/user/sign-in/login','redirect'=>\yii\helpers\Url::current()));
         }
         if (!\Yii::$app->user->can('loginToBackend')) {
             \Yii::$app->session->setFlash('warning', \Yii::t('rabint', 'شما حق دسترسی به این صفحه را ندارید.'));
@@ -110,7 +110,8 @@ class EnvironmentFilter extends Behavior
         if (\Yii::$app->user->isGuest) {
             Yii::$app->session->setFlash('warning', \Yii::t('rabint', 'لطفا ابتدا وارد حساب کاربری خود گردید.'));
             \yii\helpers\Url::remember();
-            return redirect(array('/user/sign-in/login'));
+            return redirect(array('/user/sign-in/login','redirect'=>\yii\helpers\Url::current()));
+
         }
         $panelTheme = config('panelThemePath', '@rabint/themes/basic');
         if (!empty($panelTheme)) {
