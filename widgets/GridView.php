@@ -17,7 +17,7 @@ class GridView extends  BaseGridView
     public $showToggleData = false;
     public $showAddBtn = true;
     public $addUrl= ['create'];
-    public $action_btns = true;
+    public $action_btns = '';
 
     public function init()
     {
@@ -27,7 +27,7 @@ class GridView extends  BaseGridView
                 'content' =>
                ($this->showAddBtn? Html::a(
                     '<i class="fas fa-plus"></i>',
-                    $addUrl,
+                    $this->addUrl,
                     [
                         //'role' => 'modal-remote',
                         'title' => Yii::t(
