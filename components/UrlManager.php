@@ -26,6 +26,7 @@ class UrlManager extends \yii\web\UrlManager {
     }
 
     public function createAbsoluteUrl($params, $scheme = null) {
+        $scheme = config('base_url.scheme','http');
         $params = (array) $params;
         $url = parent::createUrl($params);
         if (strpos($url, '://') === false) {

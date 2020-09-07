@@ -2,8 +2,6 @@
 
 namespace rabint\helpers;
 
-use Yii;
-
 /**
  * Author: Mojtaba Akbarzadeh
  * Author Email: akbarzadeh.mojtaba@gmail.com
@@ -64,12 +62,15 @@ class currency
      * @param string $currency
      * @return float
      */
-    public static function numberToCurrency($amount, $currency = NULL)
+    public static function numberToCurrency($amount, $currency = NULL,$format=false)
     {
         if ($currency == NULL) {
             $currency = self::$CURRENT_CURRENCY;
         }
         $amount *= static::factor($currency);
+        if($format){
+            return number_format($amount);
+        }
         return $amount;
     }
     
