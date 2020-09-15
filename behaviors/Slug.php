@@ -2,11 +2,13 @@
 
 namespace rabint\behaviors;
 
+use rabint\helpers\str;
 use yii\base\Behavior;
 use yii\base\Exception;
 use common\models\base\ActiveRecord;
 use yii\db\ActiveRecordInterface;
 use yii\validators\UniqueValidator;
+use function GuzzleHttp\Psr7\str;
 
 /**
  * Class Slug
@@ -19,6 +21,7 @@ class Slug extends Behavior
 
     public $sourceAttributeName = 'name';
     public $slugAttributeName = 'slug';
+    public $onlyEnglish = false;
     public $replacement = '-';
     public $lowercase = true;
     public $unique = true;
@@ -79,6 +82,9 @@ class Slug extends Behavior
             $src = implode('-', $src);
         } else {
             $src = $this->owner->{$this->sourceAttributeName};
+        }
+        if($this->onlyEnglish){
+            $src = str::ascii($src);
         }
         if (empty($this->owner->{$this->slugAttributeName}) && !empty($src)) {
             $slug = $this->prefix . $this->slugify($src) . $this->postfix;
