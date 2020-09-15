@@ -372,12 +372,12 @@ class str
         $base = substr($cellNumber, 0, $len - 10);
 
 
+
+        if ($defaultBase === "0") {
+            return '0' . $cell;
+        }
         if (empty($defaultBase)) {
             return $cell;
-        }
-
-        if ($defaultBase == "0") {
-            return '0' . $cell;
         }
         $pf = "";
         $CC = $defaultBase;
