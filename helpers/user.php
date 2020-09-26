@@ -88,6 +88,11 @@ class user
 
     public static function ip()
     {
+        return static::realIP();
+    }
+
+    public static function remoteIp()
+    {
         return Yii::$app->getRequest()->getUserIP();
     }
 
