@@ -6,6 +6,7 @@ use Yii;
 use kartik\grid\GridView as BaseGridView;
 use yii\bootstrap4\Html;
 use yii\helpers\ArrayHelper;
+use rabint\assets\AjaxCrudAsset;
 
 class GridView extends  BaseGridView
 {
@@ -16,39 +17,41 @@ class GridView extends  BaseGridView
     public $showJsExport = false;
     public $showToggleData = false;
     public $showAddBtn = true;
+    public $showRefreshBtn = true;
     public $addUrl= ['create'];
     public $action_btns = '';
+    public $toolbar = '';
 
     public function init()
     {
-
-        $this->toolbar = [
-            [
-                'content' =>
-               ($this->showAddBtn? Html::a(
-                    '<i class="fas fa-plus"></i>',
-                    $this->addUrl,
-                    [
-                        //'role' => 'modal-remote',
-                        'title' => Yii::t(
-                            'rabint',
-                            'Create new {title}',
-                            ['title' => $this->modelTitle]
-                        ), 'class' => 'btn btn-default'
-                    ]
-                ) :'').
-                    Html::a(
-                        '<i class="fas fa-redo"></i>',
-                        [''],
+        if($this->toolbar == '')
+            $this->toolbar = [
+                [
+                    'content' =>
+                   ($this->showAddBtn? Html::a(
+                        '<i class="fas fa-plus"></i> ایجاد',
+                        $this->addUrl,
                         [
-                            'data-pjax' => 1,
-                            'class' => 'btn btn-default',
-                            'title' => Yii::t('rabint', 'Reset Grid')
+                            //'role' => 'modal-remote',
+                            'title' => Yii::t(
+                                'rabint',
+                                'Create new {title}',
+                                ['title' => $this->modelTitle]
+                            ), 'class' => 'btn btn-info'
                         ]
-                    )
+                    ) :'').
+                    ($this->showRefreshBtn? Html::a(
+                            '<i class="fas fa-redo"></i>',
+                            [''],
+                            [
+                                'data-pjax' => 1,
+                                'class' => 'btn btn-success',
+                                'title' => Yii::t('rabint', 'Reset Grid')
+                            ]
+                        :'')
 
-            ],
-        ];
+                ],
+            ];
         if ($this->showToggleData) {
             $this->toolbar[]['content'] .= '{toggleData}';
         }
@@ -102,7 +105,17 @@ class GridView extends  BaseGridView
          */
         return parent::init();
     }
-
+    
+    public function run(){
+        
+        $this->registerAssets();
+        return parent::run();
+    }
+    
+    public function registerAssets(){
+        AjaxCrudAsset::register($this->getView());
+    }
+    
     public function bulkactionHandler()
     {
         if (empty($this->bulkActions)) {

@@ -232,10 +232,18 @@ function ModalRemote(modalId) {
             if (response.forceReload == 'true') {
                 // Backwards compatible reload of fixed crud-datatable-pjax or ajaxCrudDatatable
                 //if($('#ajaxCrudDatatable').length>0){
+                if(typeof $.pjax == 'undefined' ){
+                    location.reload();
+                }else{
                     $.pjax.reload({container: '#ajaxCrudDatatable'}); 
+                }
                 //}
             } else {
-                $.pjax.reload({container: response.forceReload});
+                if(typeof $.pjax == 'undefined' ){
+                    location.reload();
+                }else{
+                    $.pjax.reload({container: response.forceReload});
+                }
             }
         }
 

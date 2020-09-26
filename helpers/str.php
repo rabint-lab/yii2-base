@@ -29,6 +29,8 @@ class str
      * @var array
      */
     protected static $studlyCache = [];
+    
+    public static $cellPhonePattern = '/(0|\+98|98)?([ ]|,|-|[()]){0,2}9[0|1|2|3|4]([ ]|,|-|[()]){0,2}(?:[0-9]([ ]|,|-|[()]){0,2}){8}/';
 
     public static function unique($len = null, $moreUnique = true, $prefix = "")
     {
@@ -364,7 +366,7 @@ class str
         /**
          * cellphone not has true lenght
          */
-        if ($len < 10 or $len > 13) {
+        if ($len < 10 or $len > 13 or !preg_match(self::$cellPhonePattern, $cellNumber)) {
             return false;
         }
 
