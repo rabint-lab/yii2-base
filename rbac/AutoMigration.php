@@ -52,7 +52,10 @@ Abstract class AutoMigration extends Migration
                     $ruleObj->$key = $conf;
                 }
             }
-            $this->auth->add($ruleObj);
+            $hasRule = $this->auth->getRule($ruleObj->name);
+            if(!$hasRule){
+                $this->auth->add($ruleObj);
+            }
 
             $newRules = $this->auth->createPermission($rule);
             $newRules->ruleName = $ruleObj->name;
