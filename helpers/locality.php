@@ -239,11 +239,10 @@ class locality
         $result = '';
 
         while ($i < $lenghFormat) {
-            $par = $format{
-            $i};
+            $par = $format[$i]
+            ;
             if ($par == '\\') {
-                $result .= $format{
-                ++$i};
+                $result .= $format[++$i];
                 $i++;
                 continue;
             }
@@ -412,11 +411,9 @@ class locality
         $result = '';
 
         while ($i < $lenghFormat) {
-            $par = $format{
-            $i};
+            $par = $format[$i];
             if ($par == '%') {
-                $type = $format{
-                ++$i};
+                $type = $format[++$i];
                 switch ($type) {
                     # Day
                     case 'a':
@@ -437,7 +434,7 @@ class locality
 
                     case 'j':
                         $dayinM = self::jdayOfYear($pMonth, $pDay);
-                        $result .= (($dayinM < 10) ? '00' . $dayinM : ($dayinM < 100) ? '0' . $dayinM : $dayinM);
+                        $result .= ((($dayinM < 10) ? '00' . $dayinM : ($dayinM < 100)) ? '0' . $dayinM : $dayinM);
                         break;
 
                     case 'u':
@@ -505,12 +502,12 @@ class locality
                     case 'P':
                     case 'r':
                         if (date('a', $timestamp) == 'am') {
-                            $result .= (($type == 'p') ? 'ق.ظ' : ($type == 'P') ? 'قبل از ظهر' : strftime(
+                            $result .= ((($type == 'p') ? 'ق.ظ' : ($type == 'P')) ? 'قبل از ظهر' : strftime(
                                 "%I:%M:%S قبل از ظهر",
                                 $timestamp
                             ));
                         } else {
-                            $result .= (($type == 'p') ? 'ب.ظ' : ($type == 'P') ? 'بعد از ظهر' : strftime(
+                            $result .= ((($type == 'p') ? 'ب.ظ' : ($type == 'P')) ? 'بعد از ظهر' : strftime(
                                 "%I:%M:%S بعد از ظهر",
                                 $timestamp
                             ));
