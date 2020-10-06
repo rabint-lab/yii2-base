@@ -29,8 +29,6 @@ class str
      * @var array
      */
     protected static $studlyCache = [];
-    
-    public static $cellPhonePattern = '/(0|\+98|98)?([ ]|,|-|[()]){0,2}9[0|1|2|3|4]([ ]|,|-|[()]){0,2}(?:[0-9]([ ]|,|-|[()]){0,2}){8}/';
 
     public static function unique($len = null, $moreUnique = true, $prefix = "")
     {
@@ -351,24 +349,38 @@ class str
     }
 
     /**
-     * $cellNumber string
-     * $defaultBase string :
-     * if "" (empty) => remove all base
-     * if "0" => replace any base with "0"
-     * if "98" (CC=Country Code) => replace "0" to "CC" , "" to "CC" , "+CC" to "CC"
-     * if "+98" (+CC) => replace "0" to "+CC" , "" to "+CC" , "CC" to "+CC"
-     * if "0098" (00CC) => replace "0" to "00CC" , "" to "00CC" , "CC" to "00CC"
-     * return string
+     * suppoted:
+     *  09151238855
+     *  989151238855
+     * +989151338855
+     * 9151238855
+     * 09011235258
+     * 09901238855
+     * 989011235258
+     * 989901238855
+     * 00989151238855
+     * @param $cellNumber
+     * @return bool
      */
+    public static function isValidCellphone($cellNumber)
+    {
+        $re1 = '/^(\+\d\d|0|\d\d|00\d\d)?(9)(\d{9})$/isu';
+        if (preg_match($re1, $cellNumber)) {
+            return true;
+        }
+        return false;
+    }
+
     public static function formatCellphone($cellNumber, $defaultBase = "98")
     {
-        $len = strlen($cellNumber);
         /**
          * cellphone not has true lenght
          */
-        if ($len < 10 or $len > 13 or !preg_match(self::$cellPhonePattern, $cellNumber)) {
+        if (!static::isValidCellphone($cellNumber)) {
             return false;
         }
+        $len = strlen($cellNumber);
+
 
         $cell = substr($cellNumber, $len - 10, 10);
         $base = substr($cellNumber, 0, $len - 10);
