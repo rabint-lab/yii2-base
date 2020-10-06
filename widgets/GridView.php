@@ -47,7 +47,7 @@ class GridView extends  BaseGridView
                                 'data-pjax' => 1,
                                 'class' => 'btn btn-success',
                                 'title' => Yii::t('rabint', 'Reset Grid')
-                            ]
+                            ])
                         :'')
 
                 ],
