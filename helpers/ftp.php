@@ -177,4 +177,22 @@ class ftp {
         return $return;
     }
 
+    public static function getFile($address,$downloadPath='webinar',$destination=null){
+        $curl = curl_init();
+        
+        $fileName = ($destination?$destination:basename($address));
+        $fileAddress = $downloadPath.'/'.$fileName;
+        if(!is_dir(dirname($fileAddress)))mkdir(dirname($fileAddress),755);
+        if(file_exists($fileAddress)){
+            unlink($fileAddress);
+        }
+        $file = fopen($fileAddress, 'w');
+        curl_setopt($curl, CURLOPT_URL, $address); #input
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl, CURLOPT_FILE, $file); #output
+        curl_exec($curl);
+        curl_close($curl);
+        fclose($file);
+        return $fileAddress;
+    }
 }
