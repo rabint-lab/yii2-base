@@ -576,3 +576,6 @@ ul.suggestSceneUl {
 .invalid-feedback {
     color: #f00;
 }
+.popover.mds-bootstrap-persian-datetime-picker-popover{
+    min-width:300px;
+}
