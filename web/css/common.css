@@ -64,6 +64,7 @@ a.disabled:hover {
 }
 
 .redactor-editor {
+    color:#000;
     direction: rtl;
 }
 
@@ -320,6 +321,7 @@ ul.suggestSceneUl {
 }
 
 .optGroup {
+    background: #2c2c34;
     width: 49%;
     margin: .5%;
     float: right;
