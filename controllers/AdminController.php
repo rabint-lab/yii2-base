@@ -17,7 +17,6 @@ class AdminController extends Controller
     {
         $mustAdd = func_get_args();
         $mustAdd = (isset($mustAdd[0])) ? $mustAdd[0] : [];
-
         return array_merge([
             'environment' => [
                 'class' => EnvironmentFilter::class,
@@ -41,7 +40,7 @@ class AdminController extends Controller
 //            return $role->name;
 //        }
 
-        if (!\rabint\helpers\user::can(\common\models\User::ROLE_MANAGER)) {
+        if (!\rabint\helpers\user::can('loginToBackend')) {
             throw new \yii\web\ForbiddenHttpException(\Yii::t('rabint', 'شما به این صفحه دسترسی ندارید.'));
             //            Yii::$app->session->setFlash('warning', \Yii::t('rabint', 'شما به این صفحه دسترسی ندارید.'));
             //            $url = \Yii::$app->urlManagerApp->createAbsoluteUrl(['/'], true);
