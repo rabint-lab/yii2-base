@@ -42,8 +42,11 @@ class BinaryFields extends \yii\base\Behavior
     public function setData(){
         if(!is_array($this->fields))new yii\base\Exception ('binary field\'s array field not defined');
         foreach($this->fields as $field){
-                if(is_array($this->owner->$field))
+            if(is_array($this->owner->$field)){
                     $this->owner->$field = array_sum($this->owner->$field);
+            }else{
+                $this->owner->$field = 0;
+            }
         }
     }
     

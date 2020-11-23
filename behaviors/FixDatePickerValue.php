@@ -31,6 +31,8 @@ class FixDatePickerValue extends \yii\base\Behavior
     
     public $return = self::RETURN_DATETIME;
     public $fields;
+    public $format = 'Y-m-d H:i:s';
+    
         
     public function events(){
             return [
@@ -66,7 +68,7 @@ class FixDatePickerValue extends \yii\base\Behavior
     public function afterFind(){
         foreach($this->fields as $field){
             
-            $this->owner->$field = ($this->owner->$field ? \rabint\helpers\locality::anyToJalali($this->owner->$field):'');
+            $this->owner->$field = ($this->owner->$field ? \rabint\helpers\locality::anyToJalali($this->owner->$field,$this->format):'');
         }
     }
 	
