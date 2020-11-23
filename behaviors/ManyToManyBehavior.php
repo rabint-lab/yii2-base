@@ -179,7 +179,7 @@ class ManyToManyBehavior extends Behavior {
                     if ($has === NULL) {
                         $newObj = new $relation->modelClass;
                         $newObj->$sourceTableParams = $relatedPk;
-                        if ($newObj->save()) {
+                        if ($newObj->save(false)) {
                             $relatedPk = $newObj->id;
                         } else {
                             continue;
