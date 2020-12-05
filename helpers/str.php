@@ -956,4 +956,28 @@ class str
 
         return $languageSpecific[$language] ?? null;
     }
+    
+    public static function explodeUrlParameters($url,$part = null){
+        $query = parse_url($url, PHP_URL_QUERY);
+        $return = [];
+        if($query){
+            foreach(explode('&',$query) as $values){
+                $row = explode('=',$values);
+                $return[$row[0]] = $row[1];
+            }
+        }
+        if($part){
+            return $return[$part];
+        }
+        
+        return $return;
+    }
+    
+    public static function xml2array ( $xmlObject, $out = array () )
+    {
+        foreach ( (array) $xmlObject as $index => $node )
+            $out[$index] = ( is_object ( $node ) ) ? xml2array ( $node ) : $node;
+
+        return $out;
+    }
 }
