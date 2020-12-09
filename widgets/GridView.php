@@ -25,7 +25,6 @@ class GridView extends  BaseGridView
     public function init()
     {
         if($this->toolbar == '')
-        if($this->toolbar == '')
             $this->toolbar = [
                 [
                     'content' =>
