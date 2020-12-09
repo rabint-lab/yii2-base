@@ -25,6 +25,7 @@ class GridView extends  BaseGridView
     public function init()
     {
         if($this->toolbar == '')
+        if($this->toolbar == '')
             $this->toolbar = [
                 [
                     'content' =>
@@ -53,10 +54,10 @@ class GridView extends  BaseGridView
                 ],
             ];
         if ($this->showToggleData) {
-            $this->toolbar[]['content'] .= '{toggleData}';
+            $this->toolbar[]['content'] = '{toggleData}';
         }
         if ($this->showJsExport) {
-            $this->toolbar[]['content'] .= '{export}';
+            $this->toolbar[]['content'] = '{export}';
         }
 
         $this->striped = true;

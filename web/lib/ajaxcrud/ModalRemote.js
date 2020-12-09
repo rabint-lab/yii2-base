@@ -134,7 +134,7 @@ function ModalRemote(modalId) {
      */
     this.displayLoading = function () {
         this.setContent(this.loadingContent);
-        this.setTitle(this.defaults.loadingTitle);
+//        this.setTitle(this.defaults.loadingTitle);
     };
 
     /**
