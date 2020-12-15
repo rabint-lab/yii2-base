@@ -77,7 +77,7 @@ class widget
      * output url example input :  $q = Amersfoort
      * output url example output :  {"results":[{"id":"21","text":"Amersfoort"},{"id":"326","text":"Americana"},...]}
      */
-    public static function select2Ajax($form, $model, $fieldName, $url,$data, $options = [], $pluginOptions = [])
+    public static function select2Ajax($form, $model, $fieldName, $url,$data, $options = [], $pluginOptions = [],$selected=[])
     {
         
         $options = array_merge([
@@ -101,7 +101,6 @@ class widget
                 'cache' => true
                 ]
         ], $pluginOptions);
-
         $selected = []; //$model->find()->with('tags');
         return $form->field($model, $fieldName)
             ->widget(

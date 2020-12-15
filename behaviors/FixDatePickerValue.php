@@ -3,11 +3,11 @@
 namespace rabint\behaviors;
 
 use yii;
-use beensa\helpers\locality;
 use yii\db\Schema;
 use beensa\models\ActiveRecordLogModel as ActiveRecordLog;
 use yii\db\ActiveRecord;
 use beensa\helpers\user;
+use rabint\helpers\locality;
 
 /**
  *  useage example :
@@ -48,15 +48,15 @@ class FixDatePickerValue extends \yii\base\Behavior
             if(!is_numeric($field)){
                 switch($this->return){
                     case self::RETURN_DATE:
-                        $res = \rabint\helpers\locality::anyToGregorian ($this->owner->$field,'Y-m-d');
+                        $res = locality::anyToGregorian ($this->owner->$field,'Y-m-d');
                         break;
                     case self::RETURN_TIMESTAMP:
-                        $res = \rabint\helpers\locality::anyToTimeStamp($this->owner->$field);
+                        $res = locality::anyToTimeStamp($this->owner->$field);
                         
                         break;
                     case self::RETURN_DATETIME:
                     default:
-                        $res = \rabint\helpers\locality::anyToGregorian ($this->owner->$field,'Y-m-d');
+                        $res = locality::anyToGregorian ($this->owner->$field,'Y-m-d');
                         break;
                 }
                 $this->owner->$field = $res;
@@ -67,8 +67,8 @@ class FixDatePickerValue extends \yii\base\Behavior
     
     public function afterFind(){
         foreach($this->fields as $field){
-            
-            $this->owner->$field = ($this->owner->$field ? \rabint\helpers\locality::anyToJalali($this->owner->$field,$this->format):'');
+
+            $this->owner->$field = ($this->owner->$field ? locality::anyToJalali($this->owner->$field,$this->format):'');
         }
     }
 	
