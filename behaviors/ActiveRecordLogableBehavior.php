@@ -1,13 +1,13 @@
 <?php
 
-namespace beensa\behaviors;
+namespace rabint\behaviors;
 
 use yii;
-use beensa\helpers\locality;
+use rabint\helpers\locality;
 use yii\db\Schema;
-use beensa\models\ActiveRecordLogModel as ActiveRecordLog;
+use rabint\models\ActiveRecordLogModel as ActiveRecordLog;
 use yii\db\ActiveRecord;
-use beensa\helpers\user;
+use rabint\helpers\user;
 
 /**
  *  useage example :
@@ -15,7 +15,7 @@ use beensa\helpers\user;
  *   {
  *       return [
  *           [
- *               'class' => \beensa\behaviors\ActiveRecordLogableBehavior::class,
+ *               'class' => \rabint\behaviors\ActiveRecordLogableBehavior::class,
  *           ]
  *       ];
  *   }
@@ -23,7 +23,8 @@ use beensa\helpers\user;
 class ActiveRecordLogableBehavior extends \yii\base\Behavior
 {
 	private $_oldattributes = array();
-        static $user_alias = '';
+        
+        public $user_alias = '';
         
     public function events(){
             return [
@@ -61,7 +62,7 @@ class ActiveRecordLogableBehavior extends \yii\base\Behavior
                         $log->field=		$name;
                         $log->created_at=     time();
                         $log->user_id=		user::id();
-                        $log->user_alias=       self::$user_alias;
+                        $log->user_alias=       $this->user_alias;
                         
                         if(!$log->save())
                             pr($log->errors,1);
@@ -80,7 +81,7 @@ class ActiveRecordLogableBehavior extends \yii\base\Behavior
             $log->field=		'';
             $log->created_at= new CDbExpression('NOW()');
             $log->user_id=		Yii::app()->user->id;
-            $log->user_alias=       self::$user_alias;
+            $log->user_alias=       $this->user_alias;
             $log->save();
 	}
 

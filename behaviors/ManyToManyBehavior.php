@@ -100,7 +100,6 @@ class ManyToManyBehavior extends Behavior {
         if (is_array($primaryModelPk = $primaryModel->getPrimaryKey())) {
             throw new ErrorException('This behavior does not support composite primary keys');
         }
-
         foreach ($this->relations as $attributeName => $params) {
             $relationName = $this->getRelationName($attributeName);
             $relation = $primaryModel->getRelation($relationName);
@@ -179,7 +178,7 @@ class ManyToManyBehavior extends Behavior {
                     if ($has === NULL) {
                         $newObj = new $relation->modelClass;
                         $newObj->$sourceTableParams = $relatedPk;
-                        if ($newObj->save()) {
+                        if ($newObj->save(false)) {
                             $relatedPk = $newObj->id;
                         } else {
                             continue;
