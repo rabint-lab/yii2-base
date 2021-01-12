@@ -1,6 +1,6 @@
 <?php
 
-namespace beensa\models;
+namespace rabint\models;
 
 use Yii;
 use beensa\helpers\locality;
