@@ -42,8 +42,8 @@ class ActiveRecordLogModel extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['model_id','created_at'], 'integer'],
-            [['action','model','field','user_id'], 'string'],
+            [['model_id','created_at','user_id'], 'integer'],
+            [['action','model','field'], 'string'],
             [['old_value','new_value'], 'safe'],
         ];
     }
