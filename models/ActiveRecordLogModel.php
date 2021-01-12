@@ -3,7 +3,7 @@
 namespace rabint\models;
 
 use Yii;
-use beensa\helpers\locality;
+use rabint\helpers\locality;
 use yii\db\Schema;
 
 class ActiveRecordLogModel extends \yii\db\ActiveRecord
