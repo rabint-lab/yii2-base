@@ -581,3 +581,10 @@ ul.suggestSceneUl {
 .popover.mds-bootstrap-persian-datetime-picker-popover{
     min-width:300px;
 }
+
+[dir="rtl"] .float-start, html:not([dir="rtl"]) .float-end {
+	float: right !important;
+}
+[dir="rtl"] .float-start, html:not([dir="rtl"]) .float-first {
+	float: left !important;
+}
