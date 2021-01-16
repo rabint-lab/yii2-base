@@ -585,6 +585,6 @@ ul.suggestSceneUl {
 [dir="rtl"] .float-start, html:not([dir="rtl"]) .float-end {
 	float: right !important;
 }
-[dir="rtl"] .float-start, html:not([dir="rtl"]) .float-first {
+[dir="rtl"] .float-end, html:not([dir="rtl"]) .float-start {
 	float: left !important;
 }
