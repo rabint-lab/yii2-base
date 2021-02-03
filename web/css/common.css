@@ -262,7 +262,15 @@ ul.suggestSceneUl {
     padding: 15px;
     border: 1px solid #d1d1d1;
     position: relative;
+    width: 49%;
+    margin: .5%;
+    float: right;
 }
+
+.c-dark-theme .optGroup {
+    background: #2c2c34;
+}
+
 
 .beensa_clone_btn {
 	position: absolute;
@@ -320,12 +328,6 @@ ul.suggestSceneUl {
     border-radius: 100%;
 }
 
-.optGroup {
-    background: #2c2c34;
-    width: 49%;
-    margin: .5%;
-    float: right;
-}
 
 .sepratorTag {
     margin-top: 25px;
@@ -587,4 +589,18 @@ ul.suggestSceneUl {
 }
 [dir="rtl"] .float-end, html:not([dir="rtl"]) .float-start {
 	float: left !important;
+}
+.rabint_clone_btn {
+    position: absolute;
+    top: 40px;
+    left: 23px;
+    color: #00DF96 !important;
+    cursor: pointer;
+}
+.rabint_unclone_btn {
+    position: absolute;
+    left: -11px;
+    top: -11px;
+    color: #f00 !important;
+    cursor: pointer;
 }
