@@ -2,6 +2,7 @@
 
 namespace rabint\filters;
 
+use rabint\helpers\uri;
 use Yii;
 use yii\base\ActionEvent;
 use yii\base\Behavior;
@@ -86,11 +87,11 @@ class EnvironmentFilter extends Behavior
         if (\Yii::$app->user->isGuest) {
             Yii::$app->session->setFlash('warning', \Yii::t('rabint', 'لطفا ابتدا وارد حساب کاربری خود شوید.'));
             \yii\helpers\Url::remember();
-            return redirect(array('/user/sign-in/login','redirect'=>\yii\helpers\Url::current()));
+            return redirect(array('/user/sign-in/login', 'redirect' => \yii\helpers\Url::current()));
         }
         if (!\Yii::$app->user->can('loginToBackend')) {
             \Yii::$app->session->setFlash('warning', \Yii::t('rabint', 'شما حق دسترسی به این صفحه را ندارید.'));
-            return redirect(array('/user/default/index'));
+            return redirect(\rabint\helpers\uri::dashboardRoute());
         }
         $adminTheme = config('backendThemePath', '@rabint/themes/admin');
         if (!empty($adminTheme)) {
@@ -110,7 +111,7 @@ class EnvironmentFilter extends Behavior
         if (\Yii::$app->user->isGuest) {
             Yii::$app->session->setFlash('warning', \Yii::t('rabint', 'لطفا ابتدا وارد حساب کاربری خود گردید.'));
             \yii\helpers\Url::remember();
-            return redirect(array('/user/sign-in/login','redirect'=>\yii\helpers\Url::current()));
+            return redirect(array('/user/sign-in/login', 'redirect' => \yii\helpers\Url::current()));
 
         }
         $panelTheme = config('panelThemePath', '@rabint/themes/basic');

@@ -59,7 +59,7 @@ $menus = \yii\helpers\ArrayHelper::merge(
             'items' => [
                 [
                     'label' => Yii::t('rabint', 'پیشخوان'),
-                    'url' => ['/user/default/index']
+                    'url' => \rabint\helpers\uri::dashboardRoute()
                 ],
                 [
                     'label' => Yii::t('rabint', 'ویرایش پروفایل'),

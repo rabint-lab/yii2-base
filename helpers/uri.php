@@ -22,6 +22,17 @@ class uri
         return Url::home($scheme);
     }
 
+    public static function dashboardRoute()
+    {
+        return [config('dashboardRoute', '/dashboard/index')];
+    }
+
+    public static function dashboard($scheme = true)
+    {
+        $dr = static::dashboardRoute();
+        return static::to($dr);
+    }
+
     public static function current($scheme = true)
     {
         if ($scheme) {
