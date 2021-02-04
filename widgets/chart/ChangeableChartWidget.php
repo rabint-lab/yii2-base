@@ -163,6 +163,7 @@ function regenerateChart_{$id}(val) {
        display: {$showXLabel},
        labelString: '{$this->xLabel}'
     };
+if(typeof (config_{$id}['options']) !== "undefined" ){
   if(typeof (config_{$id}['options']['scales']) !== "undefined" ){
         config_{$id}['options']['scales']['yAxes'][0]['ticks']['callback']=function(label, index, labels) {
             if(label>1)
@@ -172,6 +173,7 @@ function regenerateChart_{$id}(val) {
                 return numberFormat(label);
             return label;
         }
+  }
   }
     
     {$id}_Chart = new Chart(context_{$id}, config_{$id});
