@@ -221,3 +221,11 @@ function selectText(containerid) {
 $.fn.size = function() {
     return this.lenght;
 };
+
+
+$(document).ready(function() {
+    $('table thead th').each(function(i){
+        $label=$(this).text();
+        $('tr td:nth-child('+(i+1)+')').attr('data-label',$label);
+    });
+});

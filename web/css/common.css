@@ -604,3 +604,118 @@ ul.suggestSceneUl {
     color: #f00 !important;
     cursor: pointer;
 }
+
+
+/**
+ *
+ * table responsive
+ *
+ */
+table {
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    /* table-layout: fixed; */
+}
+
+table caption {
+    font-size: 1.5em;
+    margin: .5em 0 .75em;
+}
+
+/* table tr {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    padding: .35em;
+} */
+
+table th,
+table td {
+    padding: .625em;
+    text-align: center;
+}
+
+table th {
+    font-size: .85em;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+
+@media screen and (max-width: 575px) and (min-width: 320px){
+    table {
+        border: 0;
+    }
+
+    table caption {
+        font-size: 1.3em;
+    }
+
+    table thead {
+        border: none;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+    }
+
+    table tr {
+        border-bottom: 1px solid #ddd;
+        display: block;
+        margin-bottom: .625em;
+    }
+
+    table tr:last-of-type{
+        border-bottom: 0 !important;
+    }
+
+    table td {
+        border-bottom: 1px solid #ddd;
+        display: block;
+        font-size: .8rem !important;
+        text-align: left !important;
+    }
+
+    table td::before {
+        /*
+  * aria-label has no advantage, it won't be read inside a table
+  content: attr(aria-label);
+  */
+        content: attr(data-label);
+        float: right;
+        font-weight: 800;
+        text-transform: uppercase;
+    }
+
+    table td:last-child {
+        border-bottom: 0;
+        margin-bottom: 0.6rem;
+    }
+
+    tr td:first-child{
+        border-top: 1px solid rgba(255,255,255,.1)!important;
+        border-radius: 7px 7px 0 0 !important;
+
+    }
+
+    tr td:last-of-type{
+        border-radius: 0 0 7px 7px !important;
+        border-bottom: 1px solid rgba(255,255,255,.1)!important;
+    }
+
+    .kv-table-wrap th, .kv-table-wrap td{
+        width: 100% !important;
+    }
+
+    .c-dark-theme .card{
+        padding: 0.5rem;
+    }
+
+    .kv-panel-before{
+        border-bottom: 0 !important;
+    }
+}
