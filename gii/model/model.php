@@ -102,23 +102,23 @@ return '<?= $generator->generateTableName($tableName) ?>';
 public function behaviors() {
 return [
 [
-'class' => \yii\behaviors\TimestampBehavior::className(),
+'class' => \yii\behaviors\TimestampBehavior::class,
 'createdAtAttribute' => 'created_at',
 'updatedAtAttribute' => 'updated_at',
 'value' => time(),
 ],
 [
-'class' => \yii\behaviors\BlameableBehavior::className(),
+'class' => \yii\behaviors\BlameableBehavior::class,
 'createdByAttribute' => 'created_by',
 'updatedByAttribute' => 'updated_by',
 ],
 // [
-//     'class' =>\rabint\behaviors\SoftDeleteBehavior::className(),
+//     'class' =>\rabint\behaviors\SoftDeleteBehavior::class,
 //     'attribute' => 'deleted_at',
 //     'attribute' => 'deleted_by',
 // ],
 /*[
-'class' => \rabint\behaviors\Slug::className(),
+'class' => \rabint\behaviors\Slug::class,
 'sourceAttributeName' => 'title', // If you want to make a slug from another attribute, set it here
 'slugAttributeName' => 'slug', // Name of the attribute containing a slug
 ],*/

@@ -52,7 +52,7 @@ class <?= $controllerClass ?> extends \rabint\controllers\DefaultController <?ph
     {
         return parent::behaviors([
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],

@@ -55,7 +55,7 @@ class <?= $controllerClass ?> extends \rabint\controllers\AdminController
     {
         return  parent::behaviors([
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['post'],
                     'bulk-delete' => ['post'],
