@@ -113,6 +113,17 @@ class collection
         return true;
     }
 
+    /* switch key value ============================================ */
+
+    public static function switchKeyVal($array)
+    {
+        $new = [];
+        foreach ($array as $key => $value) {
+            $new[$value] = $key;
+        }
+        return $new;
+    }
+
     /* rotate array ============================================ */
 
     public static function rotateArray($array)
