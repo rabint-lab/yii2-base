@@ -19,10 +19,10 @@ use yii\bootstrap4\ActiveForm;
 
 <div class="card block block-rounded block-mode-loading-refresh">
     <div class="card-header block-header">
-        <h3 class="card-title block-title float-right">
+        <h3 class="card-title block-title float-start">
             <?= "<?= " ?> \Yii::t('rabint', 'جستجو'); ?>
         </h3>
-        <div class="block-options card-header-actions float-left">
+        <div class="block-options card-header-actions float-end">
             <button type="button" class="card-header-action btn-minimize btn-block-option block-minimize-btn btn btn-sm btn-link">
                 <i class="btnicon fas fa-chevron-down"></i>
             </button>

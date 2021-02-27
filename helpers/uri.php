@@ -217,6 +217,11 @@ class uri
         return $forend_link;
     }
 
+    /**
+     * @param string $url
+     * @param array $params
+     * @return string
+     */
     public static function addUrlParam($url, $params)
     {
         if (is_array($params)) {

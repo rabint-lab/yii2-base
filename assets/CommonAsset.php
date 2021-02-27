@@ -11,6 +11,7 @@ class CommonAsset extends AssetBundle
     public $sourcePath = '@rabint/web';
     public $css = [
         'css/common.css',
+        //'css/step.css',
     ];
     public $js = [
         'js/common.js',
