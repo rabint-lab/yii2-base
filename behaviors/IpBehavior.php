@@ -20,13 +20,13 @@ class IpBehavior extends \yii\base\Behavior {
      * @inheritdoc
      */
     public function events() {
-        if ($updatable) {
+        if ($this->updatable) {
             return [
                 ActiveRecord::EVENT_BEFORE_INSERT => 'setIpAndAgent',
                 ActiveRecord::EVENT_BEFORE_UPDATE => 'setIpAndAgentOnUpdate'
             ];
         } else {
-             return [
+            return [
                 ActiveRecord::EVENT_BEFORE_INSERT => 'setIpAndAgent',
             ];
         }
