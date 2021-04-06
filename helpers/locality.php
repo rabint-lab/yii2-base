@@ -1135,7 +1135,7 @@ class locality
     public static function anyToGregorian($source, $targetFormat = "Y-m-d H:i:s")
     {
         $year = intval(static::convertToEnglish($source));
-        if ($year > 2000) {
+        if ($year > 1700) {
             //is Gregorian
             return date($targetFormat, strtotime($source));
         } else {
@@ -1152,7 +1152,7 @@ class locality
     public static function anyToTimeStamp($source)
     {
         $year = intval(static::convertToEnglish($source));
-        if ($year > 2000) {
+        if ($year > 1700) {
             //is Gregorian
             return strtotime($source);
         } else {
@@ -1173,7 +1173,7 @@ class locality
             return self::jdate($targetFormat, $source);
         }
         $year = intval(static::convertToEnglish($source));
-        if ($year > 2000) {
+        if ($year > 1700) {
             //is Gregorian
             return static::formattedToJalali($source, $targetFormat);
         } else {
