@@ -1404,7 +1404,7 @@ class locality
         }
     }
     
-    protected function groupToWords($group)
+    protected static function groupToWords($group)
 	{
 		$d3 = floor($group / 100);
 		$d2 = floor(($group - $d3 * 100) / 10);
@@ -1437,7 +1437,7 @@ class locality
 		return $group_array;
 	}
         
-    public function numberToWord($number,$unit = 'ریال')
+    public static function numberToWord($number,$unit = 'ریال')
 	{
 		$formated = self::number_format($number, 0, '.', ',');
 		$groups = explode(',', $formated);
@@ -1458,7 +1458,7 @@ class locality
 		}
 		return implode(' ' . self::$t['and'] . ' ', $parts).' '.$unit;
 	}
-    public function number_format($number, $decimal_precision = 0, $decimals_separator = '.', $thousands_separator = ',')
+    public static function number_format($number, $decimal_precision = 0, $decimals_separator = '.', $thousands_separator = ',')
 	{
 		$number = explode('.', str_replace(' ', '', $number));
 		$number[0] = str_split(strrev($number[0]), 3);
