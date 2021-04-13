@@ -1169,6 +1169,8 @@ class locality
      */
     public static function anyToJalali($source, $targetFormat = "Y-m-d H:i:s")
     {
+        if($source === null or $source == '')return null;
+        
         if(is_int($source)){
             return self::jdate($targetFormat, $source);
         }
