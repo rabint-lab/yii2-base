@@ -664,9 +664,9 @@ table th {
     }
 
     table tr {
-        border-bottom: 1px solid #ddd;
         display: block;
         margin-bottom: .625em;
+        border-radius: 10px;
     }
 
     table tr:last-of-type{
@@ -696,15 +696,14 @@ table th {
         margin-bottom: 0.6rem;
     }
 
-    tr td:first-child{
-        border-top: 1px solid rgba(255,255,255,.1)!important;
-        border-radius: 7px 7px 0 0 !important;
-
+    .kv-table-wrap tr>td:first-child{
+        border-top: 2px solid #d8dbe0 !important;
+        border-radius: 9px 9px 0 0 !important;
     }
 
-    tr td:last-of-type{
-        border-radius: 0 0 7px 7px !important;
-        border-bottom: 1px solid rgba(255,255,255,.1)!important;
+    .kv-table-wrap tr>td:last-of-type{
+        border-radius: 0 0 9px 9px !important;
+        border-bottom: 2px solid #d8dbe0 !important;
     }
 
     .kv-table-wrap th, .kv-table-wrap td{
