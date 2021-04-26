@@ -643,6 +643,66 @@ table th {
     text-transform: uppercase;
 }
 
+/**
+=====================================
+alert style
+=====================================
+*/
+
+.alert:before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: calc(100% - 44px);
+    border-right: 1px solid;
+    border-left: 2px solid;
+    border-bottom-left-radius: 3px;
+    border-top-left-radius: 3px;
+    right: 0;
+    top: 50%;
+    transform: translate(0, -50%);
+    height: 20px;
+  }
+
+.blink-anime {
+    -webkit-animation: blink-1 3s infinite both;
+    animation: blink-1 3s infinite both;
+  }
+  
+/**
+=====================================
+animation blink-1
+=====================================
+*/
+  @-webkit-keyframes blink-1 {
+    0%,
+    50%,
+    100% {
+      opacity: 1;
+    }
+    25%,
+    75% {
+      opacity: 0;
+    }
+  }
+  @keyframes blink-1 {
+    0%,
+    50%,
+    100% {
+      opacity: 1;
+    }
+    25%,
+    75% {
+      opacity: 0;
+    }
+  }
+
+/**
+=====================================
+responsive
+=====================================
+*/
+
 @media screen and (max-width: 575px) and (min-width: 320px){
     table {
         border: 0;

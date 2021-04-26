@@ -1386,7 +1386,7 @@ class locality
         else
             $sign = 0;
         $years = floor($diff / (365 * 60 * 60 * 24));
-        $months = floor(($diff) / (30 * 60 * 60 * 24));
+        $months = floor(($diff) / (30.5 * 60 * 60 * 24));
         $days = floor(($diff) / (60 * 60 * 24));
         $kab_t = explode('.', ($diff) / (60 * 60 * 24));
         if (isset($kab_t[1]) && substr($kab_t[1], 0, 2) > 90)
