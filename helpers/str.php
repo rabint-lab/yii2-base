@@ -981,4 +981,10 @@ class str
 
         return $out;
     }
+    
+    public static function percentRound($value,$decimal=1){
+        $zarib = ($decimal>0?$decimal*10:1);
+        $value = round(($value*100*($zarib)))/($zarib);
+        return $value;
+    }
 }
