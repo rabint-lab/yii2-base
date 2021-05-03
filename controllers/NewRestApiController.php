@@ -2,8 +2,8 @@
 
 namespace rabint\controllers;
 
-use rabint\filters\CustomHttpHeaderAuth;
 use rabint\helpers\user;
+use rabint\user\behaviors\UserHttpHeaderAuth;
 use Yii;
 use yii\filters\auth\CompositeAuth;
 use yii\web\Response;
@@ -49,7 +49,7 @@ class NewRestApiController extends \yii\rest\Controller
         $parentBehavior['authenticator'] = [
             'class' => CompositeAuth::className(),
             'authMethods' => [
-                CustomHttpHeaderAuth::className(),
+                UserHttpHeaderAuth::className(),
             ],
         ];
 
