@@ -37,6 +37,65 @@ class Bootstrap implements BootstrapInterface
             $isRanThisFunction = true;
 
             /**
+             * global fix arabic content
+             * convertToPersian,convertToEnglish,farsiToArabic,arabicToFarsi
+             */
+            if ($fixNumber = config('params.fixNumber', 'context')) {
+                /** get filter */
+                $params = Yii::$app->request->getQueryParams();
+                foreach($params as $key=>&$param){
+                    if($fixNumber == 'farsi'){
+                        $param = helpers\locality::convertToPersian($param);
+                    }elseif($fixNumber == 'english'){
+                        $param = helpers\locality::convertToEnglish($param);
+                    }
+                }
+                Yii::$app->request->setQueryParams($params);
+                
+                
+                /** post filter */
+                $params = Yii::$app->request->getBodyParams();
+                foreach($params as $key=>&$param){
+                    if($fixNumber == 'farsi'){
+                        $param = helpers\locality::convertToPersian($param);
+                    }elseif($fixNumber == 'english'){
+                        $param = helpers\locality::convertToEnglish($param);
+                    }
+                }
+                Yii::$app->request->setBodyParams($params);
+            }
+            
+            if ($fixCharacters = config('params.fixCharacters', 'context')) {
+                
+                /** get filter */
+                $params = Yii::$app->request->getQueryParams();
+//                pr(Yii::$app->request->getQueryParams());
+                foreach($params as $key=>&$param){
+                    if($fixCharacters == 'farsi'){
+                        $param = helpers\locality::arabicToFarsi($param);
+                    }elseif($fixCharacters == 'arabic'){
+                        $param = helpers\locality::farsiToArabic($param);
+                    }
+                }
+                Yii::$app->request->setQueryParams($params);
+//                pr(Yii::$app->request->getQueryParams(),1);
+                
+                
+                /** post filter */
+                $params = Yii::$app->request->getBodyParams();
+                foreach($params as $key=>&$param){
+                    if($fixCharacters == 'farsi'){
+                        $param = helpers\locality::arabicToFarsi($param);
+                    }elseif($fixCharacters == 'arabic'){
+                        $param = helpers\locality::farsiToArabic($param);
+                    }
+                }
+                Yii::$app->request->setBodyParams($params);
+                
+            }
+            
+            
+            /**
              * global xss filter
              */
             if (config('SECURITY.globalXssFilter', $this->globalXssFilter)) {
@@ -101,5 +160,6 @@ class Bootstrap implements BootstrapInterface
 //        });
         }
     }
+    
 
 }

@@ -1476,4 +1476,19 @@ class locality
 		}
 		return implode($decimals_separator, $number);
 	}
+        
+    public static function farsiToArabic($string)
+    {
+        $arabic = array('ي', 'ك', 'ة');
+        $farsi = array('ی', 'ک', 'ه');
+        return str_replace( $farsi,$arabic, $string);
+    }
+    
+    public static function arabicToFarsi($string)
+    {
+        $arabic = array('ي', 'ك', 'ة');
+        $farsi = array('ی', 'ک', 'ه');
+        return str_replace($arabic,$farsi, $string);
+    }
+    
 }
