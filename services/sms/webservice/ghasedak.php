@@ -7,7 +7,6 @@ class ghasedak extends \rabint\services\sms\ServiceAbstract
 
     public $from;
     public $api_key;
-    public $verifyTemplete;
 
     public function send($to, $message, $sender = null)
     {
@@ -25,7 +24,7 @@ class ghasedak extends \rabint\services\sms\ServiceAbstract
         }
     }
 
-    public function sendVerifySms($to, $param1, $param2 = null, $param3 = null, $template = null)
+    public function sendVerifySms($to, $param1, $param2 = null, $param3 = null, $template = null, $sender = null)
     {
         try {
             $api = new \Ghasedak\GhasedakApi($this->api_key);
