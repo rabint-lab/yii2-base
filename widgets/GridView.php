@@ -21,6 +21,7 @@ class GridView extends  BaseGridView
     public $addUrl= ['create'];
     public $action_btns = '';
     public $toolbar = '';
+    public $otherActions = '';
 
     public function init()
     {
@@ -143,6 +144,7 @@ class GridView extends  BaseGridView
             $buttons .= Html::submitButton(\Yii::t('rabint', 'اعمال'), ['role' => 'modal-remote-bulk-do-button', 'class' => 'btn btn-danger btn-noborder']);
             $buttons .= '</div>';
         }
+        $buttons .= $this->otherActions;
 
         $out = '<div class="float-right">&nbsp;' .
             Yii::t('rabint', 'Do With selected') .
