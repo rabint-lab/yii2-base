@@ -11,7 +11,7 @@ namespace rabint\components\log;
 
 use yii\helpers\VarDumper;
 use yii\log\Target;
-use rabint\helpers\user::;
+use rabint\helpers\user;
 
 class SlackTarget extends Target
 {
