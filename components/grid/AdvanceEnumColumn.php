@@ -35,6 +35,7 @@ class AdvanceEnumColumn extends DataColumn
      */
     public function init()
     {
+        parent::init();
         $this->enumClass = $this->enum;
         if (!empty($this->idAttr)) {
             $this->enum = ArrayHelper::map($this->enum, $this->idAttr, $this->titleAttr);
