@@ -6,7 +6,7 @@
     "require": {
         "yiisoft/yii2-bootstrap": "~2.0.0",
         "trntv/yii2-command-bus": "^3.0",
-        "guzzlehttp/guzzle": "^6.0",
+        "guzzlehttp/guzzle": "^7.0",
         "yiisoft/yii2-redis": "^2.0",
         "kartik-v/yii2-widget-select2": "@dev",
         "psr/http-message": "^1.0",
