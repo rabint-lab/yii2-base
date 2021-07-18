@@ -1271,7 +1271,10 @@ class locality
     {
         $t = abs(round($seconds));
         $sign =($seconds>=0)?'':'-';
-        if ($t >= 3600) {
+        
+        if($t >86400  ){
+            return self::jdate('j F Y H:i',time() - $seconds);
+        }elseif ($t >= 3600) {
             return $sign.sprintf('%02d:%02d:%02d', ($t / 3600), ($t / 60 % 60), $t % 60);
         } elseif ($t >= 60) {
             return $sign.sprintf('00:%02d:%02d', ($t / 60 % 60), $t % 60);
