@@ -1,11 +1,9 @@
 <?php
 
 use yii\bootstrap4\Html;
+use yii\bootstrap4\Nav;
 
 \rabint\themes\admin\ThemeAsset::register($this);
-
-use yii\bootstrap4\Nav;
-use yii\bootstrap4\NavBar;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -18,9 +16,17 @@ $modules = include(Yii::getAlias('@app/config/modules.php'));
 foreach ((array)$modules as $item) {
     $moduleClass = $item['class'];
     if (method_exists($moduleClass, 'AdminMenu')) {
-        $ModuleMenu[] = call_user_func([$moduleClass, 'adminMenu']);
+        $mm = call_user_func([$moduleClass, 'adminMenu']);
+        if (isset($mm['label'])) {
+            $ModuleMenu[] = $mm;
+        } else {
+            foreach ($mm as $m) {
+                $ModuleMenu[] = $m;
+            }
+        }
     }
 }
+
 
 $menus = \yii\helpers\ArrayHelper::merge(
 #first menu

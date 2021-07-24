@@ -229,3 +229,17 @@ $(document).ready(function() {
         $('tr td:nth-child('+(i+1)+')').attr('data-label',$label);
     });
 });
+
+
+$(document).on('keyup','.select2-container input',function (e) {
+    var type=$(e.target).val();
+    type=type.replace(/ي/g, "ی");
+    type=type.replace(/ك/g, 'ک');
+    type=type.replace(/ة/g, "ه");
+    type=type.replace(/٤/g, "۴");
+    type=type.replace(/٥/g, "۵");
+    type=type.replace(/٦/g, "۶");
+    $(e.target).val(type);
+    //$('.select2-search__field').trigger("input").trigger("change");
+    $(e.target).find('.select2-search__field').trigger("input").trigger("change");
+});
