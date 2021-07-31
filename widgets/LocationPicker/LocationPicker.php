@@ -20,11 +20,16 @@ class LocationPicker extends Widget
      */
     public $model = '';
     public $attribute = '';
+
+    public $name = '';
+    public $value = '';
     public $options = [];
     public $def_lon = '419.58023071289057';
     public $def_lat = '36.30627216957992';
     public $def_zoom = 10;
     public $finalJs = '';
+    public $hint = '';
+    public $label = '';
 
 
     /**
@@ -40,35 +45,44 @@ class LocationPicker extends Widget
      */
     public function run()
     {
-        $input = Html::activeTextInput($this->model, $this->attribute, $this->options);
 
-        $ex = explode(',',$this->model->{$this->attribute});
-        if(count($ex)>1) {
+        if (empty($this->model)) {
+            $input = Html::textInput($this->name, $this->value, $this->options);
+            $val = $this->value;
+        } else {
+            $input = Html::activeTextInput($this->model, $this->attribute, $this->options);
+            $val = $this->model->{$this->attribute};
+        }
+
+        $ex = explode(',', $val);
+        if (count($ex) > 1) {
             $lat = (isset($ex[0]) && !empty($ex[0])) ? $ex[0] : $this->def_lat;
             $lon = (isset($ex[1]) && !empty($ex[1])) ? $ex[1] : $this->def_lon;
-        }
-        else
-        {
-            $lat =  $this->def_lat;
-            $lon =  $this->def_lon;
+        } else {
+            $lat = $this->def_lat;
+            $lon = $this->def_lon;
         }
 
         $Options = [
             'lat' => $lat,
             'lon' => $lon,
             'zoom' => $this->def_zoom,
-            'circle_radius'=>300,
+            'circle_radius' => 300,
         ];
-        
+
         $this->options = array_merge($Options, $this->options);
         $this->registerAssets();
         return $this->render(
             $this->theme, [
-                'attribute'=>$this->attribute,
-                'model'=>$this->model,
-                'id'=>$this->getId(),
-                'lat'=>$lat,
-                'lon'=>$lon,
+                'attribute' => $this->attribute,
+                'model' => $this->model,
+                'name' => $this->name,
+                'value' => $this->value,
+                'id' => $this->getId(),
+                'lat' => $lat,
+                'lon' => $lon,
+                'hint' => $this->hint,
+                'label' => $this->label,
             ]
         );
     }
@@ -89,7 +103,7 @@ class LocationPicker extends Widget
     {
 
         $cid = $this->getId();
-        extract($this->options) ;
+        extract($this->options);
         $this->finalJs = <<<JS
 var OSMPICKER = (function(){
     var app = {};
