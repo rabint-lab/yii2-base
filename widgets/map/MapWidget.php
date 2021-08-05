@@ -35,6 +35,7 @@ class MapWidget extends Widget
      * ];
      */
     public $circles = [];
+    public $style = 'width: 100%;height: 400px;	float: right;';
     public $polygons = [];
     public $markers = [];
 
@@ -76,7 +77,8 @@ class MapWidget extends Widget
         
         
     var mbAttrEmpty = "";
-    var mbUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
+    //var mbUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
+    var mbUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
     
     var grayscale = L.tileLayer(mbUrl, {id: 'mapbox.light', attribution: mbAttrEmpty});
     // var  streets  = L.tileLayer(mbUrl, {id: 'mapbox.streets',   attribution: mbAttrEmpty});
@@ -173,6 +175,7 @@ CMP;
         return $this->render(
             $this->theme, [
                 'id' => $this->getId(),
+                'style' => $this->style,
             ]
         );
     }
