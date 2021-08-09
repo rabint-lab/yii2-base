@@ -1278,12 +1278,12 @@ class locality
      * @param $seconds
      * @return string
      */
-    public static function secToTime($seconds)
+    public static function secToTime($seconds,$returnDate = false)
     {
         $t = abs(round($seconds));
         $sign = ($seconds >= 0) ? '' : '-';
 
-        if ($t > 86400) {
+        if ($t > 86400 and $returnDate) {
             return self::jdate('j F Y H:i', time() - $seconds);
         } elseif ($t >= 3600) {
             return $sign . sprintf('%02d:%02d:%02d', ($t / 3600), ($t / 60 % 60), $t % 60);
