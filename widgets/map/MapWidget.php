@@ -118,11 +118,13 @@ CMP;
 
         foreach ($this->markers as $marker) {
 
-            $this->finalJs .= <<<CMP
+            $this->finalJs .= PHP_EOL."L.marker([{$marker['location']}]).addTo({$mapVar})";
 
-    L.marker([{$marker['location']}]).addTo({$mapVar});
-        
-CMP;
+            if (isset($marker['bindPopup']) && !empty($marker['bindPopup'])) {
+                $this->finalJs .= ".bindPopup('{$marker['bindPopup']}').openPopup();";
+            }
+
+            $this->finalJs .= PHP_EOL;
         }
 
         // L.marker([36.305857, 59.614906]).addTo(mymap)
