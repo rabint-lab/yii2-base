@@ -881,6 +881,12 @@ class locality
      */
     public static function arabicToPersian($content)
     {
+        if(is_array($content)){
+            foreach ($content as &$item){
+                $item = self::arabicToPersian($item);
+            }
+            return $content;
+        }
         return str_replace(array('ي', 'ك', '٤', '٥', '٦', 'ة'), array('ی', 'ک', '۴', '۵', '۶', 'ه'), $content);
     }
 
@@ -1066,6 +1072,12 @@ class locality
         $persian = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
         $english = range(0, 9);
         // replace all english numbers with persian numbers
+        if(is_array($string)){
+            foreach ($string as &$item){
+                $item = self::convertToPersian($item);
+            }
+            return $string;
+        }
         return str_replace($english, $persian, $string);
     }
 
@@ -1074,6 +1086,12 @@ class locality
         $persian = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
         $english = range(0, 9);
         // replace all persian numbers with english numbers
+        if(is_array($string)){
+            foreach ($string as &$item){
+                $item = self::convertToEnglish($item);
+            }
+            return $string;
+        }
         return str_replace($persian, $english, $string);
     }
 
