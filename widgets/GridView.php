@@ -22,6 +22,7 @@ class GridView extends  BaseGridView
     public $action_btns = '';
     public $toolbar = '';
     public $otherActions = '';
+    public $frontend_url = null;
 
     public function init()
     {
@@ -91,10 +92,11 @@ class GridView extends  BaseGridView
             //                        'firstPageCssClass' => 'page-link',
             //                        'lastPageCssClass' => 'page-link',
         ];
+        $frontlink = !empty($this->frontend_url)?(\yii\helpers\Html::a(Yii::t('app', 'نمایش در سایت'),$this->frontend_url,['target'=>'_blank','class'=>'btn btn-info btn-sm float-left'])):'';
         $this->panel = [
             'summaryOptions' => ['class' => 'float-left'],
             'type' => '',
-            'heading' => Yii::t('rabint', '{title} listing', ['title' => $this->modelTitle]),
+            'heading' => Yii::t('rabint', '{title} listing', ['title' => $this->modelTitle]).' '.$frontlink,
             'options' => ['class' => 'card block block-rounded'],
             'headingOptions' =>  ['class' => 'card-header block-header block-header-default'],
             'titleOptions' =>  ['class' => 'card-title block-title'],
