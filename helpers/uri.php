@@ -24,7 +24,10 @@ class uri
 
     public static function dashboardRoute()
     {
-        return [config('dashboardRoute', '/dashboard/index')];
+        if (class_exists('\rabint\user\Module')) {
+            return [\rabint\user\Module::getConfig('account_action')];
+        }
+        return [config('dashboardRoute', '/user/default/index')];
     }
 
     public static function dashboard($scheme = true)
