@@ -471,6 +471,11 @@ class widget
         } else {
             $url = ['/attachment/default/file-upload'];
         }
+
+        if (isset($options['serverOption'])) {
+            $url['opt'] = $options['serverOption'];
+            unset($options['serverOption']);
+        }
         $options = ArrayHelper::merge([
             'name' => $attribute,
             'url' => $url,

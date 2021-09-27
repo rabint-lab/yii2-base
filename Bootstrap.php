@@ -51,8 +51,8 @@ class Bootstrap implements BootstrapInterface
                     }
                 }
                 Yii::$app->request->setQueryParams($params);
-                
-                
+
+
                 /** post filter */
                 $params = Yii::$app->request->getBodyParams();
                 foreach($params as $key=>&$param){
@@ -64,9 +64,9 @@ class Bootstrap implements BootstrapInterface
                 }
                 Yii::$app->request->setBodyParams($params);
             }
-            
+
             if ($fixCharacters = config('params.fixCharacters', 'context')) {
-                
+
                 /** get filter */
                 $params = Yii::$app->request->getQueryParams();
 //                pr(Yii::$app->request->getQueryParams());
@@ -79,8 +79,8 @@ class Bootstrap implements BootstrapInterface
                 }
                 Yii::$app->request->setQueryParams($params);
 //                pr(Yii::$app->request->getQueryParams(),1);
-                
-                
+
+
                 /** post filter */
                 $params = Yii::$app->request->getBodyParams();
                 foreach($params as $key=>&$param){
@@ -91,10 +91,10 @@ class Bootstrap implements BootstrapInterface
                     }
                 }
                 Yii::$app->request->setBodyParams($params);
-                
+
             }
-            
-            
+
+
             /**
              * global xss filter
              */
