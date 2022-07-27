@@ -1,17 +1,12 @@
 {
     "name": "rabint/base",
-    "type": "library",
+    "type": "yii2-extension",
     "description": "",
-    "license": "rabint",
+    "license": "MIT",
     "require": {
-        "yiisoft/yii2-bootstrap": "~2.0.0",
         "trntv/yii2-command-bus": "^3.0",
-        "guzzlehttp/guzzle": "^7.0",
-        "yiisoft/yii2-redis": "^2.0",
         "kartik-v/yii2-widget-select2": "@dev",
-        "psr/http-message": "^1.0",
         "geniusts/hijri-dates": "^1.1",
-        "yiisoft/yii2-bootstrap4": "^2.0",
         "npm-asset/font-awesome": "^5.7",
         "npm-asset/leaflet": "^1.4",
         "npm-asset/chart.js": "^2.7",
@@ -26,7 +21,6 @@
             "rabint\\": ""
         }
     },
-    "type": "yii2-extension",
     "extra": {
         "bootstrap": "rabint\\Bootstrap"
     }
