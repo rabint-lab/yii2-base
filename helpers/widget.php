@@ -63,23 +63,23 @@ class widget
                 ]
             );
     }
-    
+
     /**
-     * 
+     *
      * @param type $form
      * @param type $model
      * @param type $fieldName
-     * @param type $url  return json id:name
+     * @param type $url return json id:name
      * @param type $options
      * @param type $pluginOptions
      * @return type
-     * 
+     *
      * output url example input :  $q = Amersfoort
      * output url example output :  {"results":[{"id":"21","text":"Amersfoort"},{"id":"326","text":"Americana"},...]}
      */
-    public static function select2Ajax($form, $model, $fieldName, $url,$data, $options = [], $pluginOptions = [],$selected=[])
+    public static function select2Ajax($form, $model, $fieldName, $url, $data, $options = [], $pluginOptions = [], $selected = [])
     {
-        
+
         $options = array_merge([
             'placeholder' => \Yii::t('rabint', 'عبارت های مورد نظر را بنویسید'),
             'dir' => 'rtl',
@@ -92,14 +92,14 @@ class widget
 //            'escapeMarkup' => new JsExpression('function (markup) { return markup; }'),
 //            'templateResult' => new JsExpression('formatRepo'),
 //            'templateSelection' => new JsExpression('formatRepoSelection'),
-            'ajax'=>[
+            'ajax' => [
                 'url' => $url,
                 'delay' => 250,
                 'dataType' => 'json',
                 'data' => new JsExpression('function(params) { return {q:params.term}; }'),
 //                'processResults' => new JsExpression($resultsJs),
                 'cache' => true
-                ]
+            ]
         ], $pluginOptions);
         $selected = []; //$model->find()->with('tags');
         return $form->field($model, $fieldName)
@@ -409,6 +409,15 @@ class widget
 
         $widgetOptions['options'] = ArrayHelper::merge($widgetOptions['options'], $options);
         return \yii\imperavi\Widget::widget($widgetOptions);
+    }
+
+    public static function uploaderProtected($form, $model, $fieldName, $options = [])
+    {
+        $url = ['/attachment/default/file-upload-protected'];
+        $options = ArrayHelper::merge([
+            'url' => $url,
+        ], $options);
+        return self::uploader($form, $model, $fieldName, $options);
     }
 
     public static function uploader($form, $model, $fieldName, $options = [])
