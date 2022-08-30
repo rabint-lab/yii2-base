@@ -29,7 +29,7 @@ class ghasedak extends \rabint\services\sms\ServiceAbstract
         try {
             $api = new \Ghasedak\GhasedakApi($this->api_key);
             $template = empty($template) ? $this->verifyTemplete : $template;
-            return $api->Verify($to, 1, $template, $param1, $param2 = null, $param3 = null);
+            return $api->Verify($to, $template, $param1, $param2 = null, $param3 = null);
         } catch (\Ghasedak\Exceptions\ApiException $e) {
             echo $e->errorMessage();
             die('---');
