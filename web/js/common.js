@@ -1,5 +1,7 @@
 jQuery(document).ready(function($) {
-    $('[data-toggle="tooltip"]').tooltip();
+    if ( $.isFunction($.fn.tooltip) ) {
+        $('[data-toggle="tooltip"]').tooltip();
+    }
 });
 // jQuery(function () {
 //     $hash = window.location.hash;
