@@ -355,7 +355,7 @@ class file {
 
         $model = new \rabint\attachment\models\Tmpupload();
 
-        $attachement = $model->createFile('attachment', $res, $name);
+        $attachement = $model->createFile('attachment_id', $res, $name);
         if (!empty($attachement)) {
             static::regenerateAttachment($attachement->id);
         }
