@@ -11,6 +11,7 @@ namespace rabint\helpers;
 use rabint\attachment\models\Attachment;
 use rabint\attachment\models\VirtualAttachment;
 use rabint\widgets\GalleryButton;
+use rabint\widgets\VideoJs\VideoJsWidget;
 use Yii;
 use yii\helpers\Html as baseHtml;
 
@@ -370,7 +371,7 @@ class html
     public static function videoJsTag($attachment, $options = [], $thumbnail = '')
     {
 
-        return widgets\VideoJs\VideoJsWidget::widget([
+        return VideoJsWidget::widget([
             'options' => [
                 'class' => 'video-js vjs-default-skin vjs-big-play-centered vjs-16-9',
                 'poster' => $thumbnail,
