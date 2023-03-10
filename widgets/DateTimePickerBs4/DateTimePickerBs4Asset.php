@@ -18,8 +18,7 @@ class DateTimePickerBs4Asset extends AssetBundle
 		'jquery.md.bootstrap.datetimepicker.style.css',
 	];
 	public $depends = [
-		'yii\web\YiiAsset',
-        'yii\bootstrap4\BootstrapPluginAsset',
-		'yii\web\JqueryAsset',
+        'yii\web\JqueryAsset',
+
 	];
 }

@@ -2,10 +2,10 @@
 
 namespace rabint\helpers;
 
-use Yii;
-use yii\web\JsExpression;
-use yii\helpers\ArrayHelper;
 use ReflectionClass;
+use Yii;
+use yii\helpers\ArrayHelper;
+use yii\web\JsExpression;
 use yii\widgets\ActiveField;
 
 /**
@@ -14,7 +14,6 @@ use yii\widgets\ActiveField;
  */
 class widget
 {
-
     public static function select2Static($data, $attribute, $value = null, $options = [], $pluginOptions = [])
     {
         $options = array_merge([
@@ -228,14 +227,7 @@ class widget
 
     public static function datePicker($form, $model, $fieldName, $default = null, $params = [])
     {
-        $params = array_merge(
-            [
-                'clientOptions' => [
-                    //'EnableTimePicker' => false,
-                ],
-            ],
-            $params
-        );
+
 
         $model->$fieldName = (empty($model->$fieldName) && $model->isNewRecord) ? $default : $model->$fieldName;
         if (!is_numeric($model->$fieldName)) {
@@ -247,12 +239,47 @@ class widget
             $model->$fieldName = null;
         }
 
-        return $form->field($model, $fieldName)
-            ->textInput()
-            ->widget(
-                \rabint\widgets\DateTimePickerBs4\DateTimePickerBs4::className(),
+
+        $params = array_merge(
+            [
+                'clientOptions' => [
+                    //'EnableTimePicker' => false,
+//                    'selectedDate' => $time_to_show,
+//                    'selectedDateToShow' => $time_to_show,
+                ],
+            ],
+            $params
+        );
+        if (\Yii::$app->params['bsVersion'] == "5.x") {
+            if (empty(!$model->$fieldName)) {
+                $time_to_show = \rabint\helpers\locality::anyToGregorian($model->$fieldName);
+            } else {
+                $time_to_show = date('Y-m-d');
+            }
+            $params = array_merge(
+                [
+                    'clientOptions' => [
+                        'selectedDate' => $time_to_show,
+                        'selectedDateToShow' => $time_to_show,
+                    ],
+                ],
                 $params
             );
+
+            return $form->field($model, $fieldName)
+                ->textInput()
+                ->widget(
+                    \rabint\widgets\DateTimePickerBs5\DateTimePickerBs5::className(),
+                    $params
+                );
+        } else {
+            return $form->field($model, $fieldName)
+                ->textInput()
+                ->widget(
+                    \rabint\widgets\DateTimePickerBs4\DateTimePickerBs4::className(),
+                    $params
+                );
+        }
     }
 
     public static function locationPicker($form, $model, $fieldName, $default = null, $params = [])

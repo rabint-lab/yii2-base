@@ -2,7 +2,6 @@
 
 namespace rabint\filters;
 
-use rabint\helpers\uri;
 use Yii;
 use yii\base\ActionEvent;
 use yii\base\Behavior;
@@ -84,6 +83,9 @@ class EnvironmentFilter extends Behavior
 
     public function switchToAdmin()
     {
+        if (isset(\Yii::$app->params['adminBsVersion'])) {
+            \Yii::$app->params['bsVersion'] = \Yii::$app->params['adminBsVersion'];
+        }
         if (\Yii::$app->user->isGuest) {
             Yii::$app->session->setFlash('warning', \Yii::t('rabint', 'لطفا ابتدا وارد حساب کاربری خود شوید.'));
             \yii\helpers\Url::remember();
@@ -108,6 +110,9 @@ class EnvironmentFilter extends Behavior
 
     public function switchToPanel()
     {
+        if (isset(\Yii::$app->params['panelBsVersion'])) {
+            \Yii::$app->params['bsVersion'] = \Yii::$app->params['panelBsVersion'];
+        }
         if (\Yii::$app->user->isGuest) {
             Yii::$app->session->setFlash('warning', \Yii::t('rabint', 'لطفا ابتدا وارد حساب کاربری خود گردید.'));
             \yii\helpers\Url::remember();
@@ -129,6 +134,9 @@ class EnvironmentFilter extends Behavior
 
     public function switchToFrontend()
     {
+        if (isset(\Yii::$app->params['frontBsVersion'])) {
+            \Yii::$app->params['bsVersion'] = \Yii::$app->params['frontBsVersion'];
+        }
         self::setEnv(self::ENV_FRONTEND);
     }
 
