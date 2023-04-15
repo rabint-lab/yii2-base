@@ -27,8 +27,8 @@ class CodebaseModalActions extends AssetBundle
     public $depends = [
         'yii\web\YiiAsset',
         'yii\web\JqueryAsset'
-//        'yii\bootstrap\BootstrapAsset',
-//        'yii\bootstrap\BootstrapPluginAsset',
+//        'yii\bootstrap4\BootstrapAsset',
+//        'yii\bootstrap4\BootstrapPluginAsset',
     ];
 
 }

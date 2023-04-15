@@ -22,8 +22,8 @@ class AjaxCrudAsset extends AssetBundle
 
     public $depends = [
         'yii\web\YiiAsset',
-//        'yii\bootstrap\BootstrapAsset',
-//        'yii\bootstrap\BootstrapPluginAsset',
+//        'yii\bootstrap4\BootstrapAsset',
+//        'yii\bootstrap4\BootstrapPluginAsset',
     ];
 
     public function init()

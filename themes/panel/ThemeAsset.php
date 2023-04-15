@@ -22,8 +22,8 @@ class ThemeAsset extends AssetBundle
         'js/js.js'
     ];
     public $depends = [
-        'yii\bootstrap\BootstrapAsset',
-        'yii\bootstrap\BootstrapPluginAsset',
+        'yii\bootstrap4\BootstrapAsset',
+        'yii\bootstrap4\BootstrapPluginAsset',
         'rabint\assets\font\VazirAsset',
 //        'rabint\assets\FontAwesomeAsset',
         'rabint\assets\CommonAsset',

@@ -22,8 +22,8 @@ class ThemeAsset extends AssetBundle
         'js/js.js'
     ];
     public $depends = [
-//        'yii\bootstrap\BootstrapAsset',
-//        'yii\bootstrap\BootstrapPluginAsset',
+//        'yii\bootstrap4\BootstrapAsset',
+//        'yii\bootstrap4\BootstrapPluginAsset',
 //        'rabint\assets\CommonAsset',
 //        'rabint\themes\admin\ThemeAsset',
         'yii\bootstrap4\BootstrapAsset',

@@ -2,7 +2,7 @@
 
 use yii\helpers\Inflector;
 use yii\helpers\StringHelper;
-use yii\bootstrap\Modal;
+use yii\bootstrap4\Modal;
 use yii\helpers\Url;
 use yii\helpers\Html;
 
