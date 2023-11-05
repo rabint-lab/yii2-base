@@ -62,7 +62,9 @@ class collection
     public static function stripslashesDeep($value)
     {
         if (is_array($value)) {
-            $value = array_map('self::stripslashesDeep', $value);
+            //$value = array_map('self::stripslashesDeep', $value);
+            //fix: php 8.2 warning: self in callables is deprecated
+            $value = array_map([self::class , 'stripslashesDeep'], $value);
         } elseif (is_object($value)) {
             $vars = get_object_vars($value);
             foreach ($vars as $key => $data) {
