@@ -132,8 +132,10 @@ class collection
     {
         if (!empty($array)) {
             foreach ($array as $key => $value) {
-                foreach ($value as $i => $val) {
-                    $new[$i][$key] = $val;
+                if (is_array($value)) {
+                    foreach ($value as $i => $val) {
+                        $new[$i][$key] = $val;
+                    }
                 }
             }
             return $new;

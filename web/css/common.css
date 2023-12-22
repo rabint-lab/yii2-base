@@ -263,7 +263,7 @@ ul.suggestSceneUl {
     border: 1px solid #d1d1d1;
     position: relative;
     width: 49%;
-    margin: .5%;
+    margin: .5% !important;
     float: right;
 }
 
