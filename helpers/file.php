@@ -10,7 +10,8 @@ use rabint\attachment\models\Attachment;
  * Author: Mojtaba Akbarzadeh
  * Author Email: akbarzadeh.mojtaba@gmail.com
  */
-class file {
+class file
+{
 
     public static function deepCopy($src, $dst)
     {
@@ -31,8 +32,8 @@ class file {
     }
 
 
-
-    public static function extToType($ext) {
+    public static function extToType($ext)
+    {
         $ext = strtolower($ext);
         $extTypes = self::extTypes();
         foreach ($extTypes as $type => $exts)
@@ -41,7 +42,8 @@ class file {
         return 'N/A';
     }
 
-    public static function extToMime($ext) {
+    public static function extToMime($ext)
+    {
         $extArray = self::extMimes();
         if (isset($extArray[$ext])) {
             return $extArray[$ext];
@@ -49,7 +51,8 @@ class file {
         return 'N/A';
     }
 
-    public static function mimeToExt($mime) {
+    public static function mimeToExt($mime)
+    {
         $extArray = self::extMimes();
         $ext = array_search($mime, $extArray);
         if ($ext) {
@@ -58,7 +61,8 @@ class file {
         return 'N/A';
     }
 
-    public static function mimeToType($mime) {
+    public static function mimeToType($mime)
+    {
         $extArray = self::extMimes();
         $ext = array_search($mime, $extArray);
         if (!$ext) {
@@ -70,14 +74,15 @@ class file {
     /* =================================================================== */
 
 
-
     /* =================================================================== */
 
-    public static function extMimes() {
+    public static function extMimes()
+    {
         return include dirname(__DIR__) . '/cheatsheet/ArrayMimeTypes.php';
     }
 
-    public static function extTypes() {
+    public static function extTypes()
+    {
         return array(
             'image' => array('webp', 'jpg', 'jpeg', 'jpe', 'gif', 'png', 'bmp', 'tif', 'tiff', 'ico'),
             'audio' => array('weba', 'm2a', 'aac', 'ac3', 'aif', 'aiff', 'm3a', 'm4a', 'm4b', 'mka', 'mp1', 'mp2', 'mp3', 'ogg', 'oga', 'ram', 'wav', 'wma'),
@@ -91,7 +96,8 @@ class file {
         );
     }
 
-    public static function deleteDir($dirPath, $exclude = [], $onlyContent = false) {
+    public static function deleteDir($dirPath, $exclude = [], $onlyContent = false)
+    {
         if (!is_dir($dirPath)) {
             throw new \InvalidArgumentException("$dirPath must be a directory");
         }
@@ -116,18 +122,21 @@ class file {
 
     /* =================================================================== */
 
-    public static function getFileExt($filename) {
+    public static function getFileExt($filename)
+    {
         return pathinfo($filename, PATHINFO_EXTENSION);
     }
 
-    public static function getFileMime($filename) {
+    public static function getFileMime($filename)
+    {
         $finfo = finfo_open(FILEINFO_MIME_TYPE);
         $res = finfo_file($finfo, $filename);
         finfo_close($finfo);
         return $res;
     }
 
-    public static function readfileChunked($filename, $retbytes = TRUE) {
+    public static function readfileChunked($filename, $retbytes = TRUE)
+    {
         $buffer = "";
         $cnt = 0;
         // $handle = fopen($filename, "rb");
@@ -153,7 +162,8 @@ class file {
 
     /* ========================================================= */
 
-    public static function download_file($link, $type, $dist = '', $force = true) {
+    public static function download_file($link, $type, $dist = '', $force = true)
+    {
         if ($force) {
             $dl_type = 'force';
         } else {
@@ -202,7 +212,7 @@ class file {
             $ext = substr($ext, 0, $pos);
         }
         /* ==================================================== */
-        if (($all_Allow OR in_array($ext, $Allows) ) AND ! (in_array($ext, $notAllows))) {
+        if (($all_Allow or in_array($ext, $Allows)) and !(in_array($ext, $notAllows))) {
             if (empty($dist)) {
                 $dist = \Yii::getAlias("@app/runtime/tmp_file/" . \rabint\helpers\str::unique() . '.tmp');
             }
@@ -233,7 +243,7 @@ class file {
                     static::download_with_curl_https($org_link, $uploadFile);
                 else
                     static::download_with_curl($org_link, $uploadFile);
-            }else {
+            } else {
                 static::transfer_file($link, $uploadFile);
             }
             return $uploadFile;
@@ -245,7 +255,8 @@ class file {
 
     /* ======================================================== */
 
-    public static function content_with_curl_https($url, $VerifyPeer = false, $VerifyHost = true) {
+    public static function content_with_curl_https($url, $VerifyPeer = false, $VerifyHost = true)
+    {
         //set_time_limit(0);
         $Channel = curl_init($url);
         $dist = '';
@@ -261,7 +272,8 @@ class file {
 
     /* ======================================================== */
 
-    public static function download_with_curl_https($url, $destination, $VerifyPeer = false, $VerifyHost = true) {
+    public static function download_with_curl_https($url, $destination, $VerifyPeer = false, $VerifyHost = true)
+    {
         //set_time_limit(0);
         $Channel = curl_init($url);
         $dist = fopen($destination, "w");
@@ -277,7 +289,8 @@ class file {
 
     /* ======================================================== */
 
-    public static function content_with_curl($url) {
+    public static function content_with_curl($url)
+    {
         //set_time_limit(0);
         $Channel = curl_init($url);
         $dist = '';
@@ -291,7 +304,8 @@ class file {
 
     /* ======================================================== */
 
-    public static function download_with_curl($url, $destination) {
+    public static function download_with_curl($url, $destination)
+    {
         //set_time_limit(0);
         $Channel = curl_init($url);
         $dist = fopen($destination, "w");
@@ -305,7 +319,8 @@ class file {
 
     /* ======================================================== */
 
-    public static function setTrueExt($file) {
+    public static function setTrueExt($file)
+    {
         if (file_exists($file)) {
             $mime = static::getFileMime($file);
             $ext = static::mimeToExt($mime);
@@ -320,7 +335,7 @@ class file {
                     $distFile = $dir . DIRECTORY_SEPARATOR . $fname . $pre . '.' . $ext;
                 }
                 rename($file, $distFile);
-                return($distFile);
+                return ($distFile);
             }
             return FALSE;
         }
@@ -328,13 +343,14 @@ class file {
     }
 
     /**
-     * 
+     *
      * @param type $url
      * @param type $type
      * @param type $name
      * @return Attachment
      */
-    public static function urlToAttachment($url, $type = "all", $name = "") {
+    public static function urlToAttachment($url, $type = "all", $name = "")
+    {
 
         $res = static::download_file($url, $type, \Yii::getAlias("@app/runtime/tmp_file/" . $name), true);
 //        var_dump($res);
@@ -362,7 +378,8 @@ class file {
         return $attachement;
     }
 
-    public static function transfer_file($url, $destination, $bufer_size = 1048576) {
+    public static function transfer_file($url, $destination, $bufer_size = 1048576)
+    {
         $buffer = '';
         $handle = fopen($url, 'rb');
         if ($handle === false) {
@@ -379,7 +396,8 @@ class file {
 
     /* ===================================================== */
 
-    public static function get_file_size($url) {
+    public static function get_file_size($url)
+    {
         $fp = fopen($url, 'r');
         $data = stream_get_meta_data($fp);
         fclose($fp);
@@ -389,13 +407,14 @@ class file {
                 break;
             }
         }
-        if (isset($size) AND is_numeric($size)) {
+        if (isset($size) and is_numeric($size)) {
             return $size; //in byte
         }
         return null;
     }
 
-    public static function rename_if_exist($file) {
+    public static function rename_if_exist($file)
+    {
         if (file_exists($file)) {
             $fname = pathinfo($file, PATHINFO_FILENAME);
             $fext = pathinfo($file, PATHINFO_EXTENSION);
@@ -414,7 +433,10 @@ class file {
 
     /* ========================================================= */
 
-    public static function regenerateAttachment($id) {
+    public static function regenerateAttachment($id, $force = false)
+    {
+        set_time_limit(500);
+        ignore_user_abort(true);
         $attachment = Attachment::findOne($id);
         if ($attachment == null) {
             return "attachment_not_find";
@@ -433,6 +455,13 @@ class file {
                         $realPath = dirname($publicPath);
                         $fileName = basename($publicPath);
                         $thumbPath = \rabint\attachment\behaviors\AttechmentBehavior::generateThumbName($fileName, $preset);
+                        $realFilepath = str_replace('//','/',$realPath . '/' . $thumbPath);
+
+//                        var_dump($publicPath);
+//                        var_dump($realFilepath);
+                        if (file_exists($realFilepath) && !$force) {
+                            continue;
+                        }
                         $res = $presetFn($realPath, $fileName, $thumbPath);
                     }
                     $output .= 'generateThumbnailSize(id): ' . $attachment->id;
@@ -452,7 +481,8 @@ class file {
         return $output;
     }
 
-    public static function rename_for_breakname($file, $breakname, $replace) {
+    public static function rename_for_breakname($file, $breakname, $replace)
+    {
         if (empty($breakname))
             return $file;
         if (!(is_array($breakname)))
@@ -463,7 +493,8 @@ class file {
         return $file;
     }
 
-    public static function downloadContentImgs($content, $base_url) {
+    public static function downloadContentImgs($content, $base_url)
+    {
         $pat = '/<img[^<]*src=["|\']([^"|^\']*)["|\'][^<]*>/';
         preg_match_all($pat, $content, $data);
         foreach ($data[1] as $value) {
@@ -484,7 +515,8 @@ class file {
 
     /* ========================================================= */
 
-    public static function downloadContentFiles($content, $base_url, $ext = array('zip', 'rar', 'apk', 'pdf', 'doc', '7z')) {
+    public static function downloadContentFiles($content, $base_url, $ext = array('zip', 'rar', 'apk', 'pdf', 'doc', '7z'))
+    {
         die('fix it before use : \rabint\helpers\file::downloadContentFiles');
         $pat = '/<[a|A][^>]*href=["|\']([^"|^\']*)["|\']>/';
         preg_match_all($pat, $content, $data);

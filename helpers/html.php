@@ -287,14 +287,14 @@ class html
     public static function imgNotFindUrl($size = [120, 68])
     {
         if ($size[0] > 300) {
-            return Yii::getAlias('@app/web/img/noPictureMedium.png');
+            return Yii::getAlias('/img/default/noPictureMedium.jpg');
         }
-        return Yii::getAlias('@app/web/img/noPictureTiny.png');
+        return Yii::getAlias('/img/default/noPictureTiny.jpg');
     }
 
     public static function avatarNotFindUrl($size = [120, 68])
     {
-        return Yii::getAlias('@app/web/img/noAvatar.png');
+        return Yii::getAlias('/img/default/noAvatar.jpg');
     }
 
     /* ------------------------------------------------------ */
@@ -414,7 +414,7 @@ class html
             . '</a>';
     }
 
-    public static function galleryTag($attachments, $size = [120, 68], $options = [], $activeTitle = false)
+    public static function galleryTag($attachments, $size = [120, 68], $options = [],$widgetOptions=[], $activeTitle = false)
     {
         if (!is_array($attachments)) {
             $attachments = [$attachments];
@@ -443,7 +443,7 @@ class html
 //            $class = isset($options['class']) ? $options['class'] : 'attachment attachment-img';
 //            $return.= baseHtml::img($attachment->getUrl($size), ['class' => $class] + $sizeArray);
         }
-        return \dosamigos\gallery\Gallery::widget(['items' => $items]);
+        return \dosamigos\gallery\Gallery::widget(['items' => $items,'options' => $widgetOptions,]);
     }
 
     public static function galleryBtn($attachments, $size = [120, 68], $options = [], $activeTitle = false)
