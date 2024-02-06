@@ -12,14 +12,13 @@ class DateTimePickerAsset extends AssetBundle
 {
 	public $sourcePath = '@rabint/widgets/DateTimePicker/assets';
 	public $js = [
-		'mds.bs.datetimepicker.js',
+		'jalaliHelper.js',
+		'PersianDateTimePicker.js',
 	];
 	public $css = [
-		'mds.bs.datetimepicker.style.css',
+		'PersianDateTimePicker.css',
 	];
 	public $depends = [
-        'rabint\assets\CommonAsset',
-        'yii\bootstrap5\BootstrapAsset',
-        'yii\bootstrap5\BootstrapPluginAsset',
+		'yii\web\JqueryAsset',
 	];
 }
