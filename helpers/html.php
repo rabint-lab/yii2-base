@@ -309,7 +309,8 @@ class html
     public static function imageTag($attachment, $size = [120, 68], $options = [], $showIfEmpty = TRUE)
     {
         $class = isset($options['class']) ? $options['class'] : 'attachment attachment-img';
-        $alt = isset($options['alt']) ? $options['alt'] : ($attachment->titleTag ?? "");
+        $alt = isset($options['alt']) ? $options['alt'] : ($attachment->alt ?? "");
+        $title = isset($options['description']) ? $options['description'] : ($attachment->description ?? "");
 //        if (empty($size)) {
 //            $sizeArray = $options + ['style' => 'max-width:100%;'];
 //        } else {
@@ -317,15 +318,17 @@ class html
 //        }
         if (empty($attachment)) {
             if ($showIfEmpty) {
-                return baseHtml::img(static::imgNotFindUrl($size), ['class' => $class, 'alt' => $alt, 'title' => $alt]);
+                //, 'data-bs-toggle'=>"tooltip",'data-bs-placement'=>"bottom"
+                return baseHtml::img(static::imgNotFindUrl($size), ['class' => $class, 'alt' => $alt, 'title' => $title]);
             } else {
                 return '';
             }
         }
         if (is_string($attachment)) {
-            return baseHtml::img($attachment, ['class' => $class]);
+            return baseHtml::img($attachment, ['class' => $class, 'alt' => $alt,  'title' => $title]);
         }
-        return baseHtml::img($attachment->getUrl($size), ['class' => $class, 'alt' => $alt, 'title' => $alt]);
+        //, 'data-bs-toggle'=>"tooltip",'data-bs-placement'=>"bottom"
+        return baseHtml::img($attachment->getUrl($size), ['class' => $class, 'alt' => $alt,  'title' => $title]);
     }
 
     /**
@@ -434,10 +437,14 @@ class html
             if ($activeTitle) {
                 $options['title'] = $attachment->titleTag;
             }
+            $options['alt'] = $attachment->alt;
+            $options['title'] = $attachment->description;
             $items[] = [
                 'url' => $attachment->getUrl(),
                 'src' => $attachment->getUrl($size),
                 'options' => $options,
+                'alt' => $attachment->alt,
+                'title' => $attachment->description,
             ];
 
 //            $class = isset($options['class']) ? $options['class'] : 'attachment attachment-img';
