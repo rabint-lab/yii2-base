@@ -294,7 +294,7 @@ class widget
     }
 
 
-    public static function datePickerStatic($attribute, $value = null)
+    public static function datePickerStaticOld($attribute, $value = null)
     {
         return \rabint\widgets\DateTimePickerBs4\DateTimePickerBs4::widget(
             [
@@ -306,6 +306,56 @@ class widget
             ]
         );
     }
+
+
+    public static function datePickerStatic($attribute, $value = null, $params = [])
+    {
+        if (!empty($value)) {
+            if (!is_numeric($value)) {
+                $value = \rabint\helpers\locality::anyToTimeStamp($value);
+            }
+            $value = \rabint\helpers\locality::jdate('Y/m/d', $value);
+        } else {
+            $value = null;
+        }
+
+
+        $params = array_merge(
+            [
+                "name" => $attribute,
+                "value" => $value,
+                'clientOptions' => [
+                    //'EnableTimePicker' => false,
+//                    'selectedDate' => $time_to_show,
+//                    'selectedDateToShow' => $time_to_show,
+                ],
+            ],
+            $params
+        );
+        if (\Yii::$app->params['bsVersion'] == "5.x") {
+
+            if (empty(!$value)) {
+                $time_to_show = \rabint\helpers\locality::anyToGregorian($value);
+            } else {
+                $time_to_show = date('Y-m-d');
+            }
+            $params = array_merge(
+                [
+                    'clientOptions' => [
+                        'selectedDate' => $time_to_show,
+                        'selectedDateToShow' => $time_to_show,
+                    ],
+                ],
+                $params
+            );
+
+
+            return \rabint\widgets\DateTimePickerBs5\DateTimePickerBs5::widget($params);
+        } else {
+            return \rabint\widgets\DateTimePickerBs4\DateTimePickerBs4::widget($params);
+        }
+    }
+
 
     public static function datePickerBs4Static($attribute, $value = null)
     {
@@ -389,24 +439,146 @@ class widget
     public static function tinymce($form, $model, $fieldName, $options = [], $widgetOptions = [])
     {
         //todo: add uploader and handle options
-        $cssUrl = \Yii::getAlias('@appUrl') . '/css/tinymce.css';
+        $cssUrl = \Yii::getAlias('@web') . '/css/tinymce.css';
         $options = ArrayHelper::merge([
             'allowUpload' => true,
             'toolbarLevel' => 'full', //basic,standard
         ], $options);
+
+        $jayParsedAry = array(
+            'selector' => 'textarea#full-featured',
+            'plugins' => ' preview  importcss  searchreplace autolink autosave save directionality  visualblocks visualchars fullscreen image link media  template codesample table charmap pagebreak nonbreaking anchor  insertdatetime advlist lists  wordcount      help    charmap   quickbars  emoticons  ',
+            '_token_provider' => 'URL_TO_YOUR_TOKEN_PROVIDER',
+            '_dropbox_app_key' => 'YOUR_DROPBOX_APP_KEY',
+            '_google_drive_key' => 'YOUR_GOOGLE_DRIVE_KEY',
+            '_google_drive_client_id' => 'YOUR_GOOGLE_DRIVE_CLIENT_ID',
+            'mobile' =>
+                array(
+                    'plugins' => ' preview  importcss  searchreplace autolink autosave save directionality  visualblocks visualchars fullscreen image link media  template codesample table charmap pagebreak nonbreaking anchor insertdatetime advlist lists  wordcount help   charmap  quickbars  emoticons ',
+                ),
+            'menu' =>
+                array(
+                    'tc' =>
+                        array(
+                            'title' => 'Comments',
+                            'items' => 'addcomment showcomments deleteallconversations',
+                        ),
+                ),
+            'menubar' => 'file edit view insert format tools table tc help',
+            'toolbar' => 'fullscreen| undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignright aligncenter alignleft alignjustify | outdent indent | numlist bullist  | forecolor backcolor    removeformat | pagebreak | charmap emoticons | preview save  | insertfile image media  template link anchor codesample | a11ycheck ltr rtl | showcomments addcomment',
+            'autosave_ask_before_unload' => true,
+            'autosave_interval' => '30s',
+            'autosave_prefix' => '{path}{query}-{id}-',
+            'autosave_restore_when_empty' => false,
+            'autosave_retention' => '2m',
+            'image_advtab' => true,
+            'link_list' =>
+                array(
+                    0 =>
+                        array(
+                            'title' => 'My page 1',
+                            'value' => 'https://www.tiny.cloud',
+                        ),
+                    1 =>
+                        array(
+                            'title' => 'My page 2',
+                            'value' => 'http://www.moxiecode.com',
+                        ),
+                ),
+            'image_list' =>
+                array(
+                    0 =>
+                        array(
+                            'title' => 'My page 1',
+                            'value' => 'https://www.tiny.cloud',
+                        ),
+                    1 =>
+                        array(
+                            'title' => 'My page 2',
+                            'value' => 'http://www.moxiecode.com',
+                        ),
+                ),
+            'image_class_list' =>
+                array(
+                    0 =>
+                        array(
+                            'title' => 'None',
+                            'value' => '',
+                        ),
+                    1 =>
+                        array(
+                            'title' => 'Some class',
+                            'value' => 'class-name',
+                        ),
+                ),
+            'importcss_append' => true,
+            'templates' =>
+                array(
+                    0 =>
+                        array(
+                            'title' => 'New Table',
+                            'description' => 'creates a new table',
+                            'content' => '<div class="mceTmpl"><table width="98%%" border="0" cellspacing="0" cellpadding="0"><tr><th scope="col"> </th><th scope="col"> </th></tr><tr><td> </td><td> </td></tr></table></div>',
+                        ),
+                    1 =>
+                        array(
+                            'title' => 'Starting my story',
+                            'description' => 'A cure for writers block',
+                            'content' => 'Once upon a time...',
+                        ),
+                    2 =>
+                        array(
+                            'title' => 'New list with dates',
+                            'description' => 'New List with dates',
+                            'content' => '<div class="mceTmpl"><span class="cdate">cdate</span><br /><span class="mdate">mdate</span><h2>My List</h2><ul><li></li><li></li></ul></div>',
+                        ),
+                ),
+            'template_cdate_format' => '[Date Created (CDATE): %m/%d/%Y : %H:%M:%S]',
+            'template_mdate_format' => '[Date Modified (MDATE): %m/%d/%Y : %H:%M:%S]',
+            'height' => 600,
+            'image_caption' => true,
+            'quickbars_selection_toolbar' => 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
+            '__class' => 'mceNonEditable',
+            'toolbar_mode' => 'sliding',
+            'spellchecker_ignore_list' =>
+                array(
+                    0 => 'Ephox',
+                    1 => 'Moxiecode',
+                ),
+            '_mode' => 'embedded',
+            'content_style' => '.mymention{ color: gray; }',
+            'contextmenu' => 'link image  table configure',
+            'a11y_advanced_options' => true,
+            'skin' => 'oxide',
+            'content_css' => 'default',
+            '_selector' => '.mymention',
+            '_fetch' => '_fetch',
+            '_menu_hover' => '_menu_hover',
+            '_menu_complete' => '_menu_complete',
+            '_select' => '_select',
+            '_item_type' => 'profile',
+        );
+
+
         $widgetOptions = ArrayHelper::merge([
             'options' => ['rows' => 18],
             'language' => 'fa',
             'clientOptions' => [
+                'menubar' => true,
                 'directionality' => 'rtl',
                 'content_css' => $cssUrl,
                 'plugins' => [
                     "advlist autolink lists link charmap print preview anchor directionality",
                     "searchreplace visualblocks code fullscreen",
-                    "insertdatetime media table contextmenu paste "
+                    "insertdatetime media table contextmenu paste ",
+                    'advlist autolink lists link image charmap print preview anchor',
+                    'searchreplace visualblocks code fullscreen',
+                    'insertdatetime media table paste code help wordcount'
                 ],
-                'toolbar' => "undo redo | styleselect | bold italic | ltr rtl | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
-            ]
+                'toolbar' => 'fullscreen | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignright aligncenter alignleft alignjustify | outdent indent |  numlist bullist checklist | forecolor backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | preview save print | insertfile image media pageembed template link anchor codesample | a11ycheck ltr rtl | showcomments addcomment | undo redo ',
+                'content_style' => 'body { font-family:vazirmant,sahel, Helvetica,Arial,sans-serif; font-size:14px }'
+            ],
+            'clientOptions' => $jayParsedAry
         ], $widgetOptions);
         return $form->field($model, $fieldName)->widget(\dosamigos\tinymce\TinyMce::className(), $widgetOptions);
     }

@@ -286,6 +286,9 @@ class html
 
     public static function imgNotFindUrl($size = [120, 68])
     {
+        if ($size[0] == $size[1]) {
+            return Yii::getAlias('/img/default/noPictureCube.jpg');
+        }
         if ($size[0] > 300) {
             return Yii::getAlias('/img/default/noPictureMedium.jpg');
         }

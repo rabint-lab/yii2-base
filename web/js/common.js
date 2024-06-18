@@ -63,7 +63,7 @@ function isJson(str) {
 }
 
 function addParamToUrl(url, params) {
-    if (url.indexOf('?') > 0) {
+    if (url.indexOf('?') >= 0) {
         return url + '&' + params;
     } else {
         return url + '?' + params;

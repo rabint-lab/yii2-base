@@ -130,9 +130,9 @@ ul.suggestSceneUl li img {
     transition: .5s ease 0s all;
 }
 
-select.form-control {
-    padding-top: 0;
-}
+/*select.form-control {
+   padding-top: 0;
+}*/
 
 ul.suggestSceneUl li.active img {
     border: #ffffff 4px solid;
