@@ -38,6 +38,8 @@ class ghasedakSms extends \rabint\services\sms\ServiceAbstract
         $sendDate = new DateTimeImmutable('now');
         try {
             $api = new GhasedaksmsApi($this->api_key);
+            $template = empty($template) ? $this->verifyTemplete : $template;
+
             $response = $api->sendOtpWithParams(new OtpMessageWithParamsDTO(
                 sendDate: $sendDate,
                 receptors: [
