@@ -53,7 +53,7 @@ class ghasedakSms extends \rabint\services\sms\ServiceAbstract
                 param2: $param2,
                 param3: $param3,
             ));
-            var_dump($response);
+            return true;
         } catch (GhasedakSMSException $e) {
             var_dump($e->getMessage());
             die('---');
