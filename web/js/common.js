@@ -1,5 +1,5 @@
-jQuery(document).ready(function($) {
-    if ( $.isFunction($.fn.tooltip) ) {
+jQuery(document).ready(function ($) {
+    if ($.isFunction($.fn.tooltip)) {
         $('[data-toggle="tooltip"]').tooltip();
     }
 });
@@ -13,15 +13,76 @@ jQuery(document).ready(function($) {
 //     }
 // });
 /* =================================================================== */
-jQuery(function() {
-    $('body').on('submit', '.staticNonAjaxForm', function(e) {
+/* =================================================================== */
+jQuery(function () {
+    /**
+     * shaba formatter
+     *
+     * usage :  add  data-formatter="shaba"  to input
+     *
+     */
+    var shabaFormat = "00-0000-0000-0000-0000-0000-00";
+    $('[data-formatter="shaba"]').mask(shabaFormat);
+    $(document).ajaxComplete(function () {
+        $('[data-formatter="shaba"]').mask(shabaFormat);
+    });
+
+    /**
+     * number formatter
+     */
+
+
+    /**
+     * money formatter
+     *
+     * usage :  add  data-formatter="money"  to input
+     *
+     */
+    var moneyFormat = '0٫000٫000٫000';
+    var moneyInputs = $('[data-formatter="money"]');
+
+    // Initialize mask
+    moneyInputs.mask(moneyFormat, {reverse: true});
+    moneyInputs.mask(moneyFormat, {reverse: true});
+
+    // Add error handling using keypress
+    moneyInputs.on('keypress', function (event) {
+        var key = String.fromCharCode(event.which); // کاراکتر وارد شده
+        var isValid = /^[0-9٫]$/.test(key); // فقط اعداد و نقطه مجاز هستند
+
+        if (!isValid) {
+            event.preventDefault(); // جلوگیری از ورود کاراکتر غیرمجاز
+            $(this).addClass('is-invalid');
+            //$(this).next('.invalid-feedback').text('لطفاً فقط عدد وارد کنید.').show();
+        } else {
+            $(this).removeClass('is-invalid');
+            //$(this).next('.invalid-feedback').hide();
+        }
+    });
+
+
+    // بررسی مقدار در هنگام تغییر (input)
+    moneyInputs.on('blur', function () {
+        $(this).removeClass('is-invalid');
+        // $(this).next('.invalid-feedback').hide();
+    });
+
+    // Reinitialize mask after AJAX complete
+    $(document).ajaxComplete(function () {
+        moneyInputs.mask(moneyFormat, {reverse: true});
+    });
+});
+/* =================================================================== */
+
+jQuery(function () {
+    $('body').on('submit', '.staticNonAjaxForm', function (e) {
         $(this).find('[type="submit"]').attr('disabled', 'disabled');
     });
 });
 /* =================================================================== */
-jQuery(function() {
-    $('body').on('click', function(e) {
-        $('.popover.closeByBody').each(function(i) {
+jQuery(function () {
+    $('body').on('click', function (e) {
+        $('.popover.closeByBody').each(function (i) {
             /* popoverX ===================================================== */
 
             $target = $(e.target).attr('data-target');
@@ -45,11 +106,12 @@ jQuery(function() {
         });
     });
     /* ################################################################### */
-    $('body').on('click', 'a.disabled', function(event) {
+    $('body').on('click', 'a.disabled', function (event) {
         event.preventDefault();
     });
 });
 /* =================================================================== */
+
 /* =================================================================== */
 
 
@@ -69,6 +131,7 @@ function addParamToUrl(url, params) {
         return url + '?' + params;
     }
 }
+
 /* =================================================================== */
 
 function numberFormat(number, decimals, dec_point, thousands_sep) {
@@ -78,7 +141,7 @@ function numberFormat(number, decimals, dec_point, thousands_sep) {
         sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
         dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
         s = '',
-        toFixedFix = function(n, prec) {
+        toFixedFix = function (n, prec) {
             var k = Math.pow(10, prec);
             return '' + Math.round(n * k) / k;
         };
@@ -129,10 +192,10 @@ function faNumber(ret) {
 
 /* =================================================================== */
 
-jQuery(document).ready(function($) {
+jQuery(document).ready(function ($) {
     $firstSlug = $('.slugGenerateDestination').val();
     if ($firstSlug == '') {
-        $('.slugGenerateSource').change(function() {
+        $('.slugGenerateSource').change(function () {
             $source = $(this).val();
             var $slug = '';
             $slug = $.trim($source);
@@ -220,27 +283,27 @@ function selectText(containerid) {
     }
 }
 
-$.fn.size = function() {
+$.fn.size = function () {
     return this.lenght;
 };
 
 
-$(document).ready(function() {
-    $('table thead th').each(function(i){
-        $label=$(this).text();
-        $('tr td:nth-child('+(i+1)+')').attr('data-label',$label);
+$(document).ready(function () {
+    $('table thead th').each(function (i) {
+        $label = $(this).text();
+        $('tr td:nth-child(' + (i + 1) + ')').attr('data-label', $label);
     });
 });
 
 
-$(document).on('keyup','.select2-container input',function (e) {
-    var type=$(e.target).val();
-    type=type.replace(/ي/g, "ی");
-    type=type.replace(/ك/g, 'ک');
-    type=type.replace(/ة/g, "ه");
-    type=type.replace(/٤/g, "۴");
-    type=type.replace(/٥/g, "۵");
-    type=type.replace(/٦/g, "۶");
+$(document).on('keyup', '.select2-container input', function (e) {
+    var type = $(e.target).val();
+    type = type.replace(/ي/g, "ی");
+    type = type.replace(/ك/g, 'ک');
+    type = type.replace(/ة/g, "ه");
+    type = type.replace(/٤/g, "۴");
+    type = type.replace(/٥/g, "۵");
+    type = type.replace(/٦/g, "۶");
     $(e.target).val(type);
     //$('.select2-search__field').trigger("input").trigger("change");
     $(e.target).find('.select2-search__field').trigger("input").trigger("change");

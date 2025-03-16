@@ -2,8 +2,8 @@
 
 namespace rabint\services\sms;
 
-use yii\base\BaseObject;
 use rabint\classes\sms\ServiceAbstract;
+use yii\base\BaseObject;
 
 /**
  * Author: Mojtaba Akbarzadeh
@@ -50,13 +50,13 @@ class sms extends BaseObject
      *
      * @return \rabint\rabint\classes\sms\webservice\kavenegar
      */
-    static function sendVerify($to, $token)
+    static function sendVerify($to, $param1, $param2 = null, $param3 = null, $template = null)
     {
         $service = static::getService();
 //        var_dump($service);
 //        die('---');
         try {
-            return $service->sendVerifySms($to, $token);
+            return $service->sendVerifySms($to, $param1, $param2, $param3, $template);
         } catch (\Exception $ex) {
 //            var_dump($ex);
             return FALSE;

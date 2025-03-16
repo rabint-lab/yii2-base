@@ -703,16 +703,16 @@ responsive
 =====================================
 */
 
-@media screen and (max-width: 575px) and (min-width: 320px){
-    table {
+@media screen and (max-width: 575px) and (min-width: 300px) {
+    table:not(.no-minimize-table) {
         border: 0;
     }
 
-    table caption {
+    table:not(.no-minimize-table) caption {
         font-size: 1.3em;
     }
 
-    table thead {
+    table:not(.no-minimize-table) thead {
         border: none;
         clip: rect(0 0 0 0);
         height: 1px;
@@ -723,24 +723,45 @@ responsive
         width: 1px;
     }
 
-    table tr {
+    table:not(.no-minimize-table) tr {
         display: block;
         margin-bottom: .625em;
         border-radius: 10px;
     }
 
-    table tr:last-of-type{
+    table:not(.no-minimize-table) tr:last-of-type {
         border-bottom: 0 !important;
     }
-
-    table td {
+    table:not(.no-minimize-table) td {
         border-bottom: 1px solid #ddd;
         display: block;
         font-size: .8rem !important;
         text-align: left !important;
     }
 
-    table td::before {
+    .mds-bs-persian-datetime-picker-popover table thead {
+        clip: rect(0 0 0 0);
+        height: auto;
+        margin: auto;
+        overflow: static;
+        padding: inherit;
+        position: static;
+        width: inherit;
+    }
+
+    .mds-bs-persian-datetime-picker-popover td {
+        display: table-cell;
+        text-align: center;
+        padding: 3px !important;
+        font-size: 14px !important;
+    }
+
+    .mds-bs-persian-datetime-picker-popover tr {
+        display: table-row;
+    }
+
+
+    table:not(.no-minimize-table) td::before {
         /*
   * aria-label has no advantage, it won't be read inside a table
   content: attr(aria-label);
@@ -751,31 +772,45 @@ responsive
         text-transform: uppercase;
     }
 
-    table td:last-child {
+    table:not(.no-minimize-table) td:last-child {
         border-bottom: 0;
         margin-bottom: 0.6rem;
     }
 
-    .kv-table-wrap tr>td:first-child{
+
+    .no-minimize-table {
+        display: block; /* جدول را به یک بلوک تبدیل می‌کند */
+        overflow-x: auto; /* اسکرول افقی فعال می‌شود */
+        white-space: nowrap; /* از شکسته شدن متن در سلول‌ها جلوگیری می‌کند */
+        width: 100%; /* عرض جدول را به اندازه والد تنظیم می‌کند */
+    }
+
+    .no-minimize-table th,
+    .no-minimize-table td {
+        padding: 10px; /* اختیاری: برای زیبایی */
+        border: 1px solid #ddd; /* اختیاری: برای زیبایی */
+    }
+
+
+    .kv-table-wrap tr > td:first-child {
         border-top: 2px solid #d8dbe0 !important;
         border-radius: 9px 9px 0 0 !important;
     }
 
-    .kv-table-wrap tr>td:last-of-type{
+    .kv-table-wrap tr > td:last-of-type {
         border-radius: 0 0 9px 9px !important;
         border-bottom: 2px solid #d8dbe0 !important;
     }
 
-    .kv-table-wrap th, .kv-table-wrap td{
+    .kv-table-wrap th, .kv-table-wrap td {
         width: 100% !important;
     }
 
-    .c-dark-theme .card{
+    .c-dark-theme .card {
         padding: 0.5rem;
     }
 
-    .kv-panel-before{
+    .kv-panel-before {
         border-bottom: 0 !important;
     }
 }
-
