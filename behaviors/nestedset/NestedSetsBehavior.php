@@ -409,6 +409,7 @@ class NestedSetsBehavior extends Behavior {
                 }
 
                 if ($this->owner->isRoot()) {
+                    break;
                     throw new Exception('Can not move the root node as the root.');
                 }
 

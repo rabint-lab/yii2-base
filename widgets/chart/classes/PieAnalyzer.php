@@ -33,7 +33,12 @@ class PieAnalyzer extends AbstractAnalyzer
                 $mainData['datasets'][$i]['data'][] = $val;
             }
         }
-        
+
+        if (isset($dataset[0]['backgroundColor'])) {
+            $mainData['datasets'][0]['backgroundColor'] = $dataset[0]['backgroundColor'];
+        }
+
+
         return [
             'type' => $type,
             'data' => $mainData

@@ -9,28 +9,31 @@
 namespace rabint\widgets\chart\classes;
 
 
-use rabint\widgets\chart\ChartWidget;
-
 class BarAnalyzer extends AbstractAnalyzer
 {
 
     static function analyze($dataset, $type, $pluginOptions, $theme)
     {
         $mainData = [];
-        if(!isset($dataset[0]['data'])){
+        if (!isset($dataset[0]['data'])) {
             return [
                 'type' => 'bar',
                 'data' => []
             ];
         }
         $mainData['labels'] = array_keys($dataset[0]['data']);
+        $color_counter = 0;
         foreach ($dataset as $i => $row) {
             $mainData['datasets'][$i]['label'] = $row['label'];
             foreach ($row['data'] as $j => $val) {
                 $mainData['datasets'][$i]['data'][] = $val;
-                $mainData['datasets'][$i]['backgroundColor'][] = static::getThemeColor(1, $i + static::$colorOffset,
+                $mainData['datasets'][$i]['backgroundColor'][] = static::getThemeColor(1, $color_counter + static::$colorOffset,
                     $theme)[0];
+                $color_counter++;
             }
+        }
+        if (isset($dataset[0]['backgroundColor'])) {
+            $mainData['datasets'][0]['backgroundColor'] = $dataset[0]['backgroundColor'];
         }
 
         return [

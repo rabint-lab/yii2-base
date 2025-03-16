@@ -64,55 +64,55 @@ a.disabled:hover {
 }
 
 .redactor-editor {
-    color:#000;
+    color: #000;
     direction: rtl;
 }
 
 
 /* =================================================================== */
 
-.popover>.close {
+.popover > .close {
     float: left;
     margin: 7px 7px 7px 9px;
 }
 
-.popover.top-right>.arrow,
-.popover.bottom-right>.arrow {
+.popover.top-right > .arrow,
+.popover.bottom-right > .arrow {
     right: 5%;
 }
 
-.popover.top-left>.arrow,
-.popover.bottom-left>.arrow {
+.popover.top-left > .arrow,
+.popover.bottom-left > .arrow {
     left: 95%;
 }
 
-.popover.left-top>.arrow,
-.popover.right-top>.arrow {
+.popover.left-top > .arrow,
+.popover.right-top > .arrow {
     top: 10%;
 }
 
-.popover.left-bottom>.arrow,
-.popover.right-bottom>.arrow {
+.popover.left-bottom > .arrow,
+.popover.right-bottom > .arrow {
     top: 90%;
 }
 
-.popover-footer .btn+.btn {
+.popover-footer .btn + .btn {
     margin-right: 4px;
 }
 
-.popover-footer .btn-group .btn+.btn {
+.popover-footer .btn-group .btn + .btn {
     margin-right: -1px;
 }
 
-.popover-footer .btn-block+.btn-block {
+.popover-footer .btn-block + .btn-block {
     margin-right: 0;
 }
 
-.popover.has-footer.left-bottom>.arrow:after {
+.popover.has-footer.left-bottom > .arrow:after {
     border-right-color: #fbfbfb;
 }
 
-.popover.has-footer.right-bottom>.arrow:after {
+.popover.has-footer.right-bottom > .arrow:after {
     border-lrft-color: #fbfbfb;
 }
 
@@ -273,32 +273,34 @@ ul.suggestSceneUl {
 
 
 .beensa_clone_btn {
-	position: absolute;
-	left: 22px;
-	top: 10px;
-	cursor: pointer;
-	color: #16ad68 !important;
+    position: absolute;
+    left: 22px;
+    top: 10px;
+    cursor: pointer;
+    color: #16ad68 !important;
 }
 
 .beensa_clone_btn:hover {
     color: #188955 !important;
 }
 
-.beensa_moveup_btn ,.beensa_movedown_btn{
-	font-size: 10px;
-	color: #939393 !important;
-	background: #fff;
+.beensa_moveup_btn, .beensa_movedown_btn {
+    font-size: 10px;
+    color: #939393 !important;
+    background: #fff;
 }
-.beensa_moveup_btn:hover ,.beensa_movedown_btn:hover{
-	font-size: 10px;
-	color: #777 !important;
-	background: #fff;
+
+.beensa_moveup_btn:hover, .beensa_movedown_btn:hover {
+    font-size: 10px;
+    color: #777 !important;
+    background: #fff;
 }
 
 
 .tab-content .optGroup:first-of-type .beensa_moveup_btn {
     display: none;
 }
+
 .tab-content .optGroup:last-of-type .beensa_movedown_btn {
     display: none;
 }
@@ -314,13 +316,14 @@ ul.suggestSceneUl {
 }
 
 .beensa_unclone_btn:hover {
-    color: #c00  !important;;
+    color: #c00 !important;;
 }
+
 .move_btn {
-	position: absolute;
-	left: 26px;
-	top: -11px;
-	cursor: pointer;
+    position: absolute;
+    left: 26px;
+    top: -11px;
+    cursor: pointer;
 }
 
 .move_btn i {
@@ -580,16 +583,19 @@ ul.suggestSceneUl {
 .invalid-feedback {
     color: #f00;
 }
-.popover.mds-bootstrap-persian-datetime-picker-popover{
-    min-width:300px;
+
+.popover.mds-bootstrap-persian-datetime-picker-popover {
+    min-width: 300px;
 }
 
 [dir="rtl"] .float-start, html:not([dir="rtl"]) .float-end {
-	float: right !important;
+    float: right !important;
 }
+
 [dir="rtl"] .float-end, html:not([dir="rtl"]) .float-start {
-	float: left !important;
+    float: left !important;
 }
+
 .rabint_clone_btn {
     position: absolute;
     top: 40px;
@@ -597,6 +603,7 @@ ul.suggestSceneUl {
     color: #00DF96 !important;
     cursor: pointer;
 }
+
 .rabint_unclone_btn {
     position: absolute;
     left: -11px;
@@ -662,40 +669,41 @@ alert style
     top: 50%;
     transform: translate(0, -50%);
     height: 20px;
-  }
+}
 
 .blink-anime {
     -webkit-animation: blink-1 3s infinite both;
     animation: blink-1 3s infinite both;
-  }
-  
+}
+
 /**
 =====================================
 animation blink-1
 =====================================
 */
-  @-webkit-keyframes blink-1 {
+@-webkit-keyframes blink-1 {
     0%,
     50%,
     100% {
-      opacity: 1;
+        opacity: 1;
     }
     25%,
     75% {
-      opacity: 0;
+        opacity: 0;
     }
-  }
-  @keyframes blink-1 {
+}
+
+@keyframes blink-1 {
     0%,
     50%,
     100% {
-      opacity: 1;
+        opacity: 1;
     }
     25%,
     75% {
-      opacity: 0;
+        opacity: 0;
     }
-  }
+}
 
 /**
 =====================================
@@ -814,3 +822,4 @@ responsive
         border-bottom: 0 !important;
     }
 }
+

@@ -16,6 +16,7 @@ use yii\base\BaseObject;
 abstract class AbstractAnalyzer extends BaseObject
 {
     static $colorOffset = 0;
+
     abstract static function analyze($dataset, $type, $pluginOptions, $theme);
 
     public static function doAnalyze($dataset, $type = ChartWidget::TYPE_BAR, $pluginOptions = [], $theme = "default")
@@ -29,7 +30,7 @@ abstract class AbstractAnalyzer extends BaseObject
                 return LineAnalyzer::analyze($dataset, $type, $pluginOptions, $theme);
                 break;
             case ChartWidget::TYPE_PIE:
-                return PieAnalyzer::analyze($dataset,  $type, $pluginOptions, $theme);
+                return PieAnalyzer::analyze($dataset, $type, $pluginOptions, $theme);
                 break;
             case ChartWidget::TYPE_POINT:
                 return BarAnalyzer::analyze($dataset, $type, $pluginOptions, $theme);
@@ -117,6 +118,28 @@ abstract class AbstractAnalyzer extends BaseObject
                 '#67dc98',
                 '#67dcbb',
                 '#67dadc',
+            ],
+            'default_3' => [
+                '#67dcbb',
+                '#67B7DC',
+                '#DC67AB',
+                '#67dc98',
+                '#DCD267',
+                '#8067DC',
+                '#67DC75',
+                '#DC6967',
+                '#C3DC67',
+                '#67dadc',
+                '#DC8C67',
+                '#A367DC',
+                '#7DDC67',
+                '#DC6788',
+                '#6794DC',
+                '#DCAF67',
+                '#C767DC',
+                '#A0DC67',
+                '#6771DC',
+                '#DC67CE'
             ],
             'default-bg' => [
                 '#f44336',
