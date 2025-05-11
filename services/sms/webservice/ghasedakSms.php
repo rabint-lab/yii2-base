@@ -28,8 +28,10 @@ class ghasedakSms extends \rabint\services\sms\ServiceAbstract
                 message: $message
             ));
         } catch (GhasedakSMSException $e) {
-            echo $e->getMessage();
-            die('---');
+            Yii::error($e->getMessage(), 'GhasedakSms');
+            return false;
+//            echo $e->getMessage();
+//            die('---');
         }
     }
 
@@ -55,8 +57,10 @@ class ghasedakSms extends \rabint\services\sms\ServiceAbstract
             ));
             return true;
         } catch (GhasedakSMSException $e) {
-            var_dump($e->getMessage());
-            die('---');
+            Yii::error($e->getMessage(), 'GhasedakSms');
+            return false;
+//            var_dump($e->getMessage());
+//            die('---');
         }
     }
 

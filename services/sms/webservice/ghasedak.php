@@ -16,11 +16,15 @@ class ghasedak extends \rabint\services\sms\ServiceAbstract
             $api = new \Ghasedak\GhasedakApi($this->api_key);
             return $api->SendSimple($receptor, $message, $lineNumber);
         } catch (\Ghasedak\Exceptions\ApiException $e) {
-            echo $e->errorMessage();
-            die('---');
+            Yii::error($e->errorMessage(), 'ghasedak');
+            return false;
+//            echo $e->errorMessage();
+//            die('---');
         } catch (\Ghasedak\Exceptions\HttpException $e) {
-            echo $e->errorMessage();
-            die('---');
+            Yii::error($e->errorMessage(), 'ghasedak');
+            return false;
+//            echo $e->errorMessage();
+//            die('---');
         }
     }
 
@@ -31,11 +35,15 @@ class ghasedak extends \rabint\services\sms\ServiceAbstract
             $template = empty($template) ? $this->verifyTemplete : $template;
             return $api->Verify($to, $template, $param1, $param2 = null, $param3 = null);
         } catch (\Ghasedak\Exceptions\ApiException $e) {
-            echo $e->errorMessage();
-            die('---');
+            Yii::error($e->errorMessage(), 'ghasedak');
+            return false;
+//            echo $e->errorMessage();
+//            die('---');
         } catch (\Ghasedak\Exceptions\HttpException $e) {
-            echo $e->errorMessage();
-            die('---');
+            Yii::error($e->errorMessage(), 'ghasedak');
+            return false;
+//            echo $e->errorMessage();
+//            die('---');
         }
     }
 
@@ -51,5 +59,3 @@ class ghasedak extends \rabint\services\sms\ServiceAbstract
     }
 
 }
-
-?>
