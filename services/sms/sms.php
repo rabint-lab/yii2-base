@@ -55,6 +55,9 @@ class sms extends BaseObject
         $service = static::getService();
 //        var_dump($service);
 //        die('---');
+        if(empty($service)){
+            return FALSE;
+        }
         try {
             return $service->sendVerifySms($to, $param1, $param2, $param3, $template);
         } catch (\Exception $ex) {
